@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:ptr="http://schemas.android.com/apk/res/com.doubisanyou.appcenter"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+	
+<include
+        android:layout_alignParentTop="true"
+        layout="@layout/titlebar_default" /> 
+		
+       <com.doubisanyou.appcenter.widget.PullToRefreshListView
+            android:id="@+id/task_list"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginTop="20dp"
+            android:cacheColorHint="@null"
+            android:divider="@null"
+            android:dividerHeight="0.1dip"
+            ptr:mode="both" />
+       
+</LinearLayout>

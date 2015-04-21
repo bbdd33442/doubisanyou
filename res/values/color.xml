@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+
+    <color name="bg_color">#666666</color>
+    <color name="orange">#ff6600</color>
+    <color name="white">#ffffffff</color>
+    <color name="black">#000000</color>
+    <color name="red">#FF0033</color>  
+    <color name="selection">#b1dce2ff</color> 
+    <color name="event_center">#ff6bd697</color> 
+     <color name="lightgrey">#ff888888</color>
+</resources>
