@@ -29,5 +29,5 @@ public class AppInfoActivity extends NearByPeopleActivity {
 		
 		}
 	
-	
+	//1111
 }
