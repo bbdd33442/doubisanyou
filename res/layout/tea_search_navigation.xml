@@ -9,12 +9,11 @@
         android:id="@+id/id_switch_tab_ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
         android:baselineAligned="false"
         android:orientation="horizontal" >
 
         <LinearLayout
-            android:id="@+id/id_tab_teaKnowledge"
+            android:id="@+id/id_tab_tea_knowledge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -24,7 +23,7 @@
             android:padding="10dip" >
 
             <TextView
-                android:id="@+id/id_teaKnowledgeText"
+                android:id="@+id/id_tea_knowledge_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -34,7 +33,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/id_tab_teaHistory"
+            android:id="@+id/id_tab_tea_history"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -46,7 +45,7 @@
             android:saveEnabled="false" >
 
             <TextView
-                android:id="@+id/id_teaHistoryText"
+                android:id="@+id/id_tea_history_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -56,7 +55,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/id_tab_teaGeneral"
+            android:id="@+id/id_tab_tea_general"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -67,7 +66,7 @@
             android:padding="10dip" >
 
             <TextView
-                android:id="@+id/id_teaGeneral"
+                android:id="@+id/id_tea_general_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -88,7 +87,7 @@
             android:padding="10dip" >
 
             <TextView
-                android:id="@+id/id_teaset"
+                android:id="@+id/id_teaset_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -102,7 +101,7 @@
         android:id="@+id/id_tab_line_iv"
         android:layout_width="70dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/www"
+        android:background="@drawable/navigate_underline"
         android:contentDescription="tab" >
     </ImageView>
 

@@ -20,6 +20,10 @@ import android.widget.TextView;
 import com.doubisanyou.appcenter.R;
 import com.doubisanyou.appcenter.adapter.FragmentAdapter;
 import com.doubisanyou.appcenter.date.Config;
+import com.doubisanyou.appcenter.fragment.TeaGeneralFragment;
+import com.doubisanyou.appcenter.fragment.TeaHistoryFragment;
+import com.doubisanyou.appcenter.fragment.TeaKnowledgeFragment;
+import com.doubisanyou.appcenter.fragment.TeaSetFragment;
 import com.doubisanyou.appcenter.widget.LoadingDialog;
 import com.doubisanyou.baseproject.base.BaseActivity;
 import com.doubisanyou.baseproject.network.ConnectMethd;
@@ -43,7 +47,7 @@ public class DouLiaoActivity extends BaseActivity implements OnClickListener {
 	/**
 	 * Tab显示内容TextView
 	 */
-	private TextView mTabChatTv, mTabContactsTv, mTabFriendTv, mTabFouth;
+	private TextView teaKowledgeTilte, teaHistoryTitle, teaGeralTitle, teaSetTitle;
 	/**
 	 * Tab的那个引导线
 	 */
@@ -51,10 +55,10 @@ public class DouLiaoActivity extends BaseActivity implements OnClickListener {
 	/**
 	 * Fragment
 	 */
-	private TeaKnowledge mChatFg;
-	private TeaHistory mFriendFg;
-	private TeaGeneral mContactsFg;
-	private TeaSet x4;
+	private TeaKnowledgeFragment teaKnowledgeFg;
+	private TeaHistoryFragment teaHistoryFg;
+	private TeaGeneralFragment teaGeralFg;
+	private TeaSetFragment teaSetfg;
 	/**
 	 * ViewPager的当前选中页
 	 */
@@ -74,32 +78,32 @@ public class DouLiaoActivity extends BaseActivity implements OnClickListener {
 		initTabLineWidth();
 
 	}
-
+	
 	private void findById() {
 		carLoadingDialog = new LoadingDialog(this);
-		mTabContactsTv = (TextView) this.findViewById(R.id.id_teaKnowledgeText);
-		mTabChatTv = (TextView) this.findViewById(R.id.id_teaGeneral);
-		mTabFriendTv = (TextView) this.findViewById(R.id.id_teaGeneral);
-		mTabFriendTv.setOnClickListener(this);
-		mTabFouth = (TextView) this.findViewById(R.id.id_teaset);
-
-		mTabFouth.setOnClickListener(this);
-		mTabChatTv.setOnClickListener(this);
-		mTabContactsTv.setOnClickListener(this);
+		teaKowledgeTilte = (TextView) this.findViewById(R.id.id_tea_knowledge_text);
+		teaHistoryTitle = (TextView) this.findViewById(R.id.id_tea_history_text);
+		teaGeralTitle = (TextView) this.findViewById(R.id.id_tea_general_text);
+		teaSetTitle = (TextView) this.findViewById(R.id.id_teaset_text);
+		
+		teaGeralTitle.setOnClickListener(this);
+		teaSetTitle.setOnClickListener(this);
+		teaKowledgeTilte.setOnClickListener(this);
+		teaHistoryTitle.setOnClickListener(this);
 		mTabLineIv = (ImageView) this.findViewById(R.id.id_tab_line_iv);
 
 		mPageVp = (ViewPager) this.findViewById(R.id.id_page_vp);
 	}
 
 	private void init() {
-		mChatFg = new TeaKnowledge();
-		mFriendFg = new TeaHistory();
-		mContactsFg = new TeaGeneral();
-		x4 = new TeaSet();
-		mFragmentList.add(mChatFg);
-		mFragmentList.add(mFriendFg);
-		mFragmentList.add(mContactsFg);
-		mFragmentList.add(x4);
+		teaKnowledgeFg = new TeaKnowledgeFragment();
+		teaHistoryFg = new TeaHistoryFragment();
+		teaGeralFg = new TeaGeneralFragment();
+		teaSetfg = new TeaSetFragment();
+		mFragmentList.add(teaKnowledgeFg);
+		mFragmentList.add(teaHistoryFg);
+		mFragmentList.add(teaGeralFg);
+		mFragmentList.add(teaSetfg);
 		mFragmentAdapter = new FragmentAdapter(
 				this.getSupportFragmentManager(), mFragmentList);
 		mPageVp.setAdapter(mFragmentAdapter);
@@ -170,16 +174,16 @@ public class DouLiaoActivity extends BaseActivity implements OnClickListener {
 				resetTextView();
 				switch (position) {
 				case 0:
-					mTabChatTv.setTextColor(Color.BLUE);
+					teaKowledgeTilte.setTextColor(Color.BLUE);
 					break;
 				case 1:
-					mTabFriendTv.setTextColor(Color.BLUE);
+					teaGeralTitle.setTextColor(Color.BLUE);
 					break;
 				case 2:
-					mTabContactsTv.setTextColor(Color.BLUE);
+					teaHistoryTitle.setTextColor(Color.BLUE);
 					break;
 				case 3:
-					mTabFouth.setTextColor(Color.BLUE);
+					teaSetTitle.setTextColor(Color.BLUE);
 					break;
 				}
 				currentIndex = position;
@@ -191,16 +195,16 @@ public class DouLiaoActivity extends BaseActivity implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-		case R.id.id_teaKnowledgeText:
-			mPageVp.setCurrentItem(2);
-			break;
-		case R.id.id_teaHistoryText:
-			mPageVp.setCurrentItem(1);
-			break;
-		case R.id.id_teaGeneral:
+		case R.id.id_tea_knowledge_text:
 			mPageVp.setCurrentItem(0);
 			break;
-		case R.id.id_teaset:
+		case R.id.id_tea_history_text:
+			mPageVp.setCurrentItem(1);
+			break;
+		case R.id.id_tea_general_text:
+			mPageVp.setCurrentItem(2);
+			break;
+		case R.id.id_teaset_text:
 			mPageVp.setCurrentItem(3);
 			break;
 		default:
@@ -221,10 +225,10 @@ public class DouLiaoActivity extends BaseActivity implements OnClickListener {
 	}
 
 	private void resetTextView() {
-		mTabChatTv.setTextColor(Color.BLACK);
-		mTabFriendTv.setTextColor(Color.BLACK);
-		mTabContactsTv.setTextColor(Color.BLACK);
-		mTabFouth.setTextColor(Color.BLACK);
+		teaKowledgeTilte.setTextColor(Color.BLACK);
+		teaGeralTitle.setTextColor(Color.BLACK);
+		teaHistoryTitle.setTextColor(Color.BLACK);
+		teaSetTitle.setTextColor(Color.BLACK);
 	}
 
 }
