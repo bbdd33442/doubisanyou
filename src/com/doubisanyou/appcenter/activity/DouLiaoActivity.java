@@ -18,6 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.doubisanyou.appcenter.R;
+import com.doubisanyou.appcenter.adapter.FragmentAdapter;
 import com.doubisanyou.appcenter.date.Config;
 import com.doubisanyou.appcenter.widget.LoadingDialog;
 import com.doubisanyou.baseproject.base.BaseActivity;
@@ -42,7 +43,7 @@ public class DouLiaoActivity extends BaseActivity implements OnClickListener {
 	/**
 	 * Tab显示内容TextView
 	 */
-	private TextView mTabChatTv, mTabContactsTv, mTabFriendTv;
+	private TextView mTabChatTv, mTabContactsTv, mTabFriendTv, mTabFouth;
 	/**
 	 * Tab的那个引导线
 	 */
@@ -50,9 +51,10 @@ public class DouLiaoActivity extends BaseActivity implements OnClickListener {
 	/**
 	 * Fragment
 	 */
-	private x mChatFg;
-	private x2 mFriendFg;
-	private x3 mContactsFg;
+	private TeaKnowledge mChatFg;
+	private TeaHistory mFriendFg;
+	private TeaGeneral mContactsFg;
+	private TeaSet x4;
 	/**
 	 * ViewPager的当前选中页
 	 */
@@ -66,7 +68,7 @@ public class DouLiaoActivity extends BaseActivity implements OnClickListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_home);
-		
+
 		findById();
 		init();
 		initTabLineWidth();
@@ -75,10 +77,13 @@ public class DouLiaoActivity extends BaseActivity implements OnClickListener {
 
 	private void findById() {
 		carLoadingDialog = new LoadingDialog(this);
-		mTabContactsTv = (TextView) this.findViewById(R.id.id_contacts_tv);
-		mTabChatTv = (TextView) this.findViewById(R.id.id_chat_tv);
-		mTabFriendTv = (TextView) this.findViewById(R.id.id_friend_tv);
+		mTabContactsTv = (TextView) this.findViewById(R.id.id_teaKnowledgeText);
+		mTabChatTv = (TextView) this.findViewById(R.id.id_teaGeneral);
+		mTabFriendTv = (TextView) this.findViewById(R.id.id_teaGeneral);
 		mTabFriendTv.setOnClickListener(this);
+		mTabFouth = (TextView) this.findViewById(R.id.id_teaset);
+
+		mTabFouth.setOnClickListener(this);
 		mTabChatTv.setOnClickListener(this);
 		mTabContactsTv.setOnClickListener(this);
 		mTabLineIv = (ImageView) this.findViewById(R.id.id_tab_line_iv);
@@ -87,13 +92,14 @@ public class DouLiaoActivity extends BaseActivity implements OnClickListener {
 	}
 
 	private void init() {
-		mFriendFg = new x2();
-		mContactsFg = new x3();
-		mChatFg = new x();
+		mChatFg = new TeaKnowledge();
+		mFriendFg = new TeaHistory();
+		mContactsFg = new TeaGeneral();
+		x4 = new TeaSet();
 		mFragmentList.add(mChatFg);
 		mFragmentList.add(mFriendFg);
 		mFragmentList.add(mContactsFg);
-
+		mFragmentList.add(x4);
 		mFragmentAdapter = new FragmentAdapter(
 				this.getSupportFragmentManager(), mFragmentList);
 		mPageVp.setAdapter(mFragmentAdapter);
@@ -128,24 +134,33 @@ public class DouLiaoActivity extends BaseActivity implements OnClickListener {
 
 				if (currentIndex == 0 && position == 0)// 0->1
 				{
-					lp.leftMargin = (int) (offset * (screenWidth * 1.0 / 3) + currentIndex
-							* (screenWidth / 3));
+					lp.leftMargin = (int) (offset * (screenWidth * 1.0 / 4) + currentIndex
+							* (screenWidth / 4));
 
 				} else if (currentIndex == 1 && position == 0) // 1->0
 				{
 					lp.leftMargin = (int) (-(1 - offset)
-							* (screenWidth * 1.0 / 3) + currentIndex
-							* (screenWidth / 3));
+							* (screenWidth * 1.0 / 4) + currentIndex
+							* (screenWidth / 4));
 
 				} else if (currentIndex == 1 && position == 1) // 1->2
 				{
-					lp.leftMargin = (int) (offset * (screenWidth * 1.0 / 3) + currentIndex
-							* (screenWidth / 3));
+					lp.leftMargin = (int) (offset * (screenWidth * 1.0 / 4) + currentIndex
+							* (screenWidth / 4));
 				} else if (currentIndex == 2 && position == 1) // 2->1
 				{
 					lp.leftMargin = (int) (-(1 - offset)
-							* (screenWidth * 1.0 / 3) + currentIndex
-							* (screenWidth / 3));
+							* (screenWidth * 1.0 / 4) + currentIndex
+							* (screenWidth / 4));
+				} else if (currentIndex == 2 && position == 2) // 2->3
+				{
+					lp.leftMargin = (int) (offset * (screenWidth * 1.0 / 4) + currentIndex
+							* (screenWidth / 4));
+				} else if (currentIndex == 3 && position == 2) // 3->2
+				{
+					lp.leftMargin = (int) (-(1 - offset)
+							* (screenWidth * 1.0 / 4) + currentIndex
+							* (screenWidth / 4));
 				}
 				mTabLineIv.setLayoutParams(lp);
 			}
@@ -163,6 +178,9 @@ public class DouLiaoActivity extends BaseActivity implements OnClickListener {
 				case 2:
 					mTabContactsTv.setTextColor(Color.BLUE);
 					break;
+				case 3:
+					mTabFouth.setTextColor(Color.BLUE);
+					break;
 				}
 				currentIndex = position;
 			}
@@ -173,22 +191,24 @@ public class DouLiaoActivity extends BaseActivity implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-		case R.id.id_contacts_tv:
+		case R.id.id_teaKnowledgeText:
 			mPageVp.setCurrentItem(2);
 			break;
-		case R.id.id_friend_tv:
+		case R.id.id_teaHistoryText:
 			mPageVp.setCurrentItem(1);
 			break;
-		case R.id.id_chat_tv:
+		case R.id.id_teaGeneral:
 			mPageVp.setCurrentItem(0);
+			break;
+		case R.id.id_teaset:
+			mPageVp.setCurrentItem(3);
 			break;
 		default:
 			break;
 		}
 
 	}
-	
-	
+
 	private void initTabLineWidth() {
 		DisplayMetrics dpMetrics = new DisplayMetrics();
 		getWindow().getWindowManager().getDefaultDisplay()
@@ -196,7 +216,7 @@ public class DouLiaoActivity extends BaseActivity implements OnClickListener {
 		screenWidth = dpMetrics.widthPixels;
 		LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) mTabLineIv
 				.getLayoutParams();
-		lp.width = screenWidth / 3;
+		lp.width = screenWidth / 4;
 		mTabLineIv.setLayoutParams(lp);
 	}
 
@@ -204,10 +224,7 @@ public class DouLiaoActivity extends BaseActivity implements OnClickListener {
 		mTabChatTv.setTextColor(Color.BLACK);
 		mTabFriendTv.setTextColor(Color.BLACK);
 		mTabContactsTv.setTextColor(Color.BLACK);
+		mTabFouth.setTextColor(Color.BLACK);
 	}
 
-
-	
-
-	
 }

@@ -28,7 +28,4 @@ public class AppInfoActivity extends NearByPeopleActivity {
 		this.setContentView(R.layout.app_detail);
 		
 		}
-	
-	//1111
-	//222
 }
