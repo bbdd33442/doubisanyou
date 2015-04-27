@@ -36,7 +36,7 @@ public class NearByPeopleActivity extends Activity  {
 		appinfs.add(a1);
 
 		app_list = (ListView) findViewById(R.id.app_list);
-		app_list_title = (TextView) findViewById(R.id.life_default_title);
+		app_list_title = (TextView) findViewById(R.id.default_title);
 		app_list_title.setText("应用列表");
 		final ArrayList<HashMap<String, Object>> appItem = new ArrayList<HashMap<String, Object>>();
 

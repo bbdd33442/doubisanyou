@@ -10,65 +10,41 @@
     android:paddingRight="8.0dip"
     android:paddingTop="16.0dip" >
 
-   <!--  <ListView
-        android:id="@+id/pop_menu_listview"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:focusableInTouchMode="true"
-        android:focusable="true"
-        android:divider="@android:color/transparent"
-        android:listSelector="@android:color/transparent"
-        android:cacheColorHint="@android:color/transparent"
-        android:scrollbars="none" >
-    </ListView> -->
     <TextView
-        android:id="@+id/pop_menu_1"
+        android:id="@+id/pop_menu_only_text"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_pop_item"
-        android:textColor="@color/popup_menu_text"
         android:clickable="true"
         android:drawablePadding="3.0dip"
         android:gravity="center"
         android:padding="7.0dip"
-        android:text="发布"
+        android:text="纯文"
+        android:textColor="@color/popup_menu_text"
         android:textSize="18.0sp" />
-		<View
-            android:layout_width="match_parent"
-            android:layout_height="2px"
-            android:background="#EEEEEE" />
-		
-		    <TextView
-        android:id="@+id/pop_menu_2"
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="#EEEEEE" />
+
+    <TextView
+        android:id="@+id/pop_menu_with_image"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_pop_item"
-        android:textColor="@color/popup_menu_text"
         android:clickable="true"
         android:drawablePadding="3.0dip"
         android:gravity="center"
         android:padding="7.0dip"
-        android:text="发布"
-        android:textSize="18.0sp" />
-		<View
-            android:layout_width="match_parent"
-            android:layout_height="2px"
-            android:background="#EEEEEE" />
-		
-		    <TextView
-        android:id="@+id/pop_menu_3"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bg_pop_item"
+        android:text="带图"
         android:textColor="@color/popup_menu_text"
-        android:clickable="true"
-        android:drawablePadding="3.0dip"
-        android:gravity="center"
-        android:padding="7.0dip"
-        android:text="发布"
         android:textSize="18.0sp" />
-		<View
-            android:layout_width="match_parent"
-            android:layout_height="2px"
-            android:background="#EEEEEE" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="#EEEEEE" />
+
+
 </LinearLayout>

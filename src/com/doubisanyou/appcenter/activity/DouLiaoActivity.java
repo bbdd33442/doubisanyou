@@ -177,10 +177,10 @@ public class DouLiaoActivity extends BaseActivity implements OnClickListener {
 					teaKowledgeTilte.setTextColor(Color.BLUE);
 					break;
 				case 1:
-					teaGeralTitle.setTextColor(Color.BLUE);
+					teaHistoryTitle.setTextColor(Color.BLUE);
 					break;
 				case 2:
-					teaHistoryTitle.setTextColor(Color.BLUE);
+					teaGeralTitle.setTextColor(Color.BLUE);
 					break;
 				case 3:
 					teaSetTitle.setTextColor(Color.BLUE);

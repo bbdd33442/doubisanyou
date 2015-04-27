@@ -2,13 +2,13 @@ package com.doubisanyou.appcenter.activity;
 
 import java.util.ArrayList;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.doubisanyou.appcenter.R;
 import com.doubisanyou.appcenter.adapter.TeaSayAdaptor;
@@ -18,15 +18,13 @@ import com.doubisanyou.appcenter.widget.PopMenu;
 import com.doubisanyou.appcenter.widget.PullToRefreshBase.OnRefreshListener;
 import com.doubisanyou.appcenter.widget.PullToRefreshListView;
 import com.doubisanyou.baseproject.base.BaseActivity;
-
-public class TeaSayActivity extends BaseActivity implements OnClickListener,OnItemClickListener{
+/**
+ * 茶说模块
+ * @author xy 2015/04/22
+ *
+ */
+public class TeaSayActivity extends BaseActivity implements OnClickListener{
 	
-	private PullToRefreshListView mPullRefreshListView;
-	private ListView mListView;
-	private ArrayList<TeaSay> tys;
-	private PopMenu popMenu;
-	private TeaSayAdaptor tsa;
-	public ImageButton rightBtn;
 	private int mLoadingTpye = LOAGDING_NORMAL;
 	private final static int LOAGDING_NORMAL = 0;
 	private final static int LOAGDING_REFRESH = 1;
@@ -37,49 +35,56 @@ public class TeaSayActivity extends BaseActivity implements OnClickListener,OnIt
 	
 	
 	
+	private PullToRefreshListView mPullRefreshListView;
+	private ListView mListView;
+	private ArrayList<TeaSay> tys;
+	private PopMenu popMenu;
+	private TeaSayAdaptor tsa;
+	private ImageButton rightBtn;
+	private TextView titleBar;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_tea_say);
+		iniView();
+	}
+	
+	void iniView(){
 		carLoadingDialog = new LoadingDialog(this);
-		
 		tys = new ArrayList<TeaSay>();
-		
-		tsa=new TeaSayAdaptor(getApplicationContext(), TeaSayActivity.this, tys);
-	    mPullRefreshListView = (PullToRefreshListView) findViewById(R.id.task_list);
-		mPullRefreshListView.setOnRefreshListener(mOnrefreshListener);
-		
-		mListView = mPullRefreshListView.getRefreshableView();
-		
-		mListView.setOnItemClickListener(this);
-		
-		mPullRefreshListView.setUpRefreshEnabled(true);
-		mListView.setAdapter(tsa);
-
+		tsa=new TeaSayAdaptor(getApplicationContext(),tys);
 		popMenu = new PopMenu(TeaSayActivity.this);
+		
+	    mPullRefreshListView = (PullToRefreshListView) findViewById(R.id.tea_say_list);
+	    mPullRefreshListView.setOnRefreshListener(mOnrefreshListener);
+	    mPullRefreshListView.setUpRefreshEnabled(true);
+	    mListView = mPullRefreshListView.getRefreshableView();
+		mListView.setAdapter(tsa);
+	    
+	    titleBar = (TextView) findViewById(R.id.default_title);
+	    titleBar.setText("茶说");
 	
 		rightBtn = (ImageButton)findViewById(R.id.btn_right);
-	
+		rightBtn.setVisibility(View.VISIBLE);
 	
 		rightBtn.setOnClickListener(this);
-		/*carLoadingDialog.show();*/
 		
 	}
-
+	
 	@Override
 	public void onClick(View v) {
+		Intent i = new Intent(this,PublishTeaSayActivity.class);
 		switch (v.getId()) {
-		case R.id.btn_left:
-			  this.finish();
-			break;
 		case R.id.btn_right:
 			popMenu.showAsDropDown(v);
 			break;
-		case R.id.pop_menu_1:
+		case R.id.pop_menu_only_text:
+			i.putExtra(PublishTeaSayActivity.PUBLISHTYPE, PublishTeaSayActivity.TEXT);
+			startActivity(i);
 			popMenu.dismiss();
-		case R.id.pop_menu_2:
-			popMenu.dismiss();
-		case R.id.pop_menu_3:
+		case R.id.pop_menu_with_image:
+			i.putExtra(PublishTeaSayActivity.PUBLISHTYPE, PublishTeaSayActivity.IMAGE);
 			popMenu.dismiss();
 		default:
 			break;
@@ -110,13 +115,5 @@ public class TeaSayActivity extends BaseActivity implements OnClickListener,OnIt
 		}
 	};
 	
-	@Override
-	public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
-		Bundle bundle = new Bundle();
-	System.out.println(position);
-	/*	bundle.putString(TaskDetailAcitivity.TASK_ID, mTasks.get(position-1).getObjectId());
-		Intent intent = new Intent(this,TaskDetailAcitivity.class);
-		intent.putExtra(TaskDetailAcitivity.Bundle_ID, bundle);
-		startActivity(intent);*/
-	}
+	
 }

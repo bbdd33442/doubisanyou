@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" 
+    android:background="#ebedf0" >
+
+    <include
+        android:id="@+id/include_titlebar"
+        android:layout_alignParentTop="true"
+        layout="@layout/titlebar_default" />
+  
+
+	    <EditText
+	        android:id="@+id/tea_say_publish_content"
+	        android:layout_width="match_parent"
+	        android:layout_height="120dp"
+	        android:layout_margin="10dp"
+	        android:ems="10"
+	        android:gravity="top"
+	        android:layout_below="@+d/include_titlebar"
+	        android:hint="输入你想说的话...."
+	        android:singleLine="false"
+	        android:textColor="#6D6D6D"
+	        android:textSize="14sp" >
+	    </EditText>
+		
+	    <ImageView 
+	        android:id="@+id/tea_say_add_image"
+	        android:layout_marginLeft="10dp"
+	        android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_below="@id/tea_say_publish_content"
+            android:src="@drawable/tea_say_publish_add_image"
+	        />
+<!-- 	    <TextView 
+	        android:id="@+id/remender_who_look"
+	        android:layout_width="fill_parent"
+	        android:layout_height="40dp"
+	        android:layout_margin="10dp"
+	        android:layout_below="@id/tea_say_image"
+	        android:background="@color/common_color_background"
+	        android:hint=" @  提醒看"
+	        android:textAppearance="@android:style/TextAppearance.Large"
+	        android:gravity="center_vertical"
+	        /> -->
+</RelativeLayout>

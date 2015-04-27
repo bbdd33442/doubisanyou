@@ -1,13 +1,18 @@
 package com.doubisanyou.appcenter.widget;
 
+
+
+import android.graphics.Bitmap;
 import android.util.SparseArray;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 
 
 
 public class ViewHolder {
-    // I added a generic return type to reduce the casting noise in client code
+
     @SuppressWarnings("unchecked")
     public static <T extends View> T get(View view, int id) {
         SparseArray<View> viewHolder = (SparseArray<View>) view.getTag();
@@ -22,6 +27,64 @@ public class ViewHolder {
         }
         return (T) childView;
     }
+    
+
+	/**
+	 * 为TextView设置字符串
+	 * 
+	 * @param viewId
+	 * @param text
+	 * @return
+	 */
+	public ViewHolder setText(View view,int viewId, String text)
+	{
+		TextView textView = get(view,viewId);
+		textView.setText(text);
+		return this;
+	}
+
+	/**
+	 * 为ImageView设置图片
+	 * 
+	 * @param viewId
+	 * @param drawableId
+	 * @return
+	 */
+	public ViewHolder setImageResource(View view,int viewId, int drawableId)
+	{
+		ImageView imageView = get(view,viewId);
+		imageView.setImageResource(drawableId);
+
+		return this;
+	}
+
+	/**
+	 * 为ImageView设置图片
+	 * 
+	 * @param viewId
+	 * @param drawableId
+	 * @return
+	 */
+	public ViewHolder setImageBitmap(View view,int viewId, Bitmap bm)
+	{
+		ImageView imageView = get(view,viewId);
+		imageView.setImageBitmap(bm);
+		return this;
+	}
+
+	/**
+	 * 为ImageView设置图片
+	 * 
+	 * @param viewId
+	 * @param drawableId
+	 * @return
+	 */
+	public ViewHolder setImageByUrl(View view,int viewId, String url)
+	{
+		//ImageLoader.getInstance(3,Type.LIFO).loadImage(url, (ImageView) get(view,viewId));
+		return this;
+	}
+
 }
 
 

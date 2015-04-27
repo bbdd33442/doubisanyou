@@ -24,9 +24,8 @@ public class PopMenu {
 		this.context = context;
 		
 		View view = LayoutInflater.from(context).inflate(R.layout.popmenu, null);
-		view.findViewById(R.id.pop_menu_1).setOnClickListener((OnClickListener) context);
-		view.findViewById(R.id.pop_menu_2).setOnClickListener((OnClickListener) context);
-		view.findViewById(R.id.pop_menu_3).setOnClickListener((OnClickListener) context);
+		view.findViewById(R.id.pop_menu_only_text).setOnClickListener((OnClickListener) context);
+		view.findViewById(R.id.pop_menu_with_image).setOnClickListener((OnClickListener) context);
         popupWindow = new PopupWindow(view, 100, LayoutParams.WRAP_CONTENT);
         popupWindow = new PopupWindow(view, 
         		context.getResources().getDimensionPixelSize(R.dimen.popmenu_width), 
