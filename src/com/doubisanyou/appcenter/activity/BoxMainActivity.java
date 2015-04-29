@@ -20,19 +20,19 @@ public class BoxMainActivity extends TabActivity {
 
 	public static TabHost tabHost;
 	// 各tab的标题
-	private String[] itemsName = new String[] { "逗聊", "附近的人", "叨比", "好友", "设置" };
+	private String[] itemsName = new String[] { "茶知识", "聊茶", "茶说", "设置" };
 	// 各个tab对应的activity页面
 	private Class[] classes = new Class[] { DouLiaoActivity.class,
-			NearByPeopleActivity.class, TeaSayActivity.class, FriendActivity.class,
+			NearByPeopleActivity.class, TeaSayActivity.class,
 			ManagerActivity.class };
 	// tab选中时显示的图片
 	private int[] tab_sel_png = new int[] { R.drawable.ic_launcher,
 			R.drawable.ic_launcher, R.drawable.ic_launcher,
-			R.drawable.ic_launcher, R.drawable.ic_launcher };
+			R.drawable.ic_launcher };
 	// tab未选中时显示的图片
 	private int[] tab_unsel_png = new int[] { R.drawable.ic_launcher,
 			R.drawable.ic_launcher, R.drawable.ic_launcher,
-			R.drawable.ic_launcher, R.drawable.ic_launcher };
+			 R.drawable.ic_launcher };
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
