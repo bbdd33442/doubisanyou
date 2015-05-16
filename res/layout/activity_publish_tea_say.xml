@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent" 
-    android:background="#ebedf0" >
+    android:background="#ffffff" >
 
     <include
         android:id="@+id/include_titlebar"
@@ -17,21 +17,25 @@
 	        android:layout_margin="10dp"
 	        android:ems="10"
 	        android:gravity="top"
-	        android:layout_below="@+d/include_titlebar"
+	        android:layout_below="@id/include_titlebar"
 	        android:hint="输入你想说的话...."
 	        android:singleLine="false"
 	        android:textColor="#6D6D6D"
 	        android:textSize="14sp" >
 	    </EditText>
 		
-	    <ImageView 
-	        android:id="@+id/tea_say_add_image"
-	        android:layout_marginLeft="10dp"
-	        android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_below="@id/tea_say_publish_content"
-            android:src="@drawable/tea_say_publish_add_image"
-	        />
+	    <GridView 
+	        android:layout_below="@id/tea_say_publish_content"
+	        android:id="@+id/tea_say_publish_image_gridview"
+	        android:layout_width="match_parent"
+            android:layout_height="490dp"
+            android:layout_margin="8dp"
+            android:horizontalSpacing="8dp"
+            android:numColumns="3"
+            android:scrollbars="none"
+            android:verticalSpacing="8dp"
+	        >
+	    </GridView>
 <!-- 	    <TextView 
 	        android:id="@+id/remender_who_look"
 	        android:layout_width="fill_parent"
