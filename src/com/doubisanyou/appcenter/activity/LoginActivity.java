@@ -1,6 +1,7 @@
 package com.doubisanyou.appcenter.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -45,7 +46,8 @@ public class LoginActivity extends Activity implements OnClickListener {
 			 finish();
 			break;
 		case R.id.btn_register:
-			
+			 Intent i = new Intent(this,RegisterActivity.class);
+			 startActivity(i);
 			break;
 			
 		default:

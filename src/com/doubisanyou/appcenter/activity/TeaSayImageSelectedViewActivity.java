@@ -31,6 +31,7 @@ public class TeaSayImageSelectedViewActivity extends Activity implements OnClick
 	private TextView imageViewFinish;
 	private Button back;
 	private ImageListAdapter ila;
+	private String type;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -49,14 +50,22 @@ public class TeaSayImageSelectedViewActivity extends Activity implements OnClick
 		imageViewFinish = (TextView) findViewById(R.id.image_view_finish);
 		imageViewFinish.setOnClickListener(this);
 		Intent i = getIntent();
+		
 		folderDir = i.getCharSequenceExtra(FOLDER_DIR).toString();
 		selectedImagePath = i.getStringArrayListExtra(SELECTED_IMAGE_PATH);
 		folderImageName = i.getStringArrayListExtra(FOLDER_IMAGE_NAME);
+		type = i.getStringExtra(TeaSayPublushImageFolderListActivity.ACTIVITYTYPE);
+		int num = 0;
+		if(type.equals(TeaSayPublushImageFolderListActivity.TEASYPUBLISH)){
+			num=9;
+		}else if(type.equals(TeaSayPublushImageFolderListActivity.USERAVATARS)){
+			num = 1;
+		}
 		if(selectedImagePath!=null){
 			imageViewFinish.setText("完成(已选择"+selectedImagePath.size()+"张)");
 		}
 		ila= new ImageListAdapter(getApplicationContext(),folderImageName,
-					   folderDir,selectedImagePath,TeaSayImageSelectedViewActivity.this,mHandler);
+					   folderDir,selectedImagePath,TeaSayImageSelectedViewActivity.this,mHandler,num);
 		mGirdView.setAdapter(ila);
 	};
 	
@@ -82,9 +91,14 @@ public class TeaSayImageSelectedViewActivity extends Activity implements OnClick
 			finish();
 			break;
 		case R.id.image_view_finish:
-			Intent i1 = new Intent(TeaSayImageSelectedViewActivity.this,PublishTeaSayActivity.class);
+			Intent i1 = null ;
+			if(type.equals(TeaSayPublushImageFolderListActivity.TEASYPUBLISH)){
+				i1 = new Intent(TeaSayImageSelectedViewActivity.this,TeaSayPublishActivity.class);
+			}else if(type.equals(TeaSayPublushImageFolderListActivity.USERAVATARS)){
+				i1 = new Intent(TeaSayImageSelectedViewActivity.this,RegisterActivity.class);
+			}
 			i1.putStringArrayListExtra(SELECTED_IMAGE_PATH, selectedImagePath);
-			i1.putExtra(PublishTeaSayActivity.PUBLISHTYPE, PublishTeaSayActivity.IMAGE);
+			i1.putExtra(TeaSayPublishActivity.PUBLISHTYPE, TeaSayPublishActivity.IMAGE);
 			startActivity(i1);
 			setResult(1, i);
 			finish();

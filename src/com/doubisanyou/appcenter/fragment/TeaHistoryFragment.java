@@ -1,3 +1,4 @@
+
 package com.doubisanyou.appcenter.fragment;
 
 import java.util.ArrayList;
@@ -132,4 +133,5 @@ public class TeaHistoryFragment extends Fragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 	}
+
 }

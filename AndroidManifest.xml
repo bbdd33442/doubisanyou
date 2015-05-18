@@ -34,11 +34,12 @@
         <activity android:name=".activity.NearByPeopleActivity" />
         <activity android:name=".activity.TeaSayActivity" />
         <activity android:name=".activity.FriendActivity" />
-        <activity android:name=".activity.PublishTeaSayActivity" />
+  		<activity android:name=".activity.TeaSayPublishActivity" />
         <activity android:name=".activity.TeaSayImageSelectedViewActivity" />
         <activity android:name=".activity.TeaSayPublushImageFolderListActivity" />
         <activity android:name=".activity.TeaSayReplyActivity" />
         <activity android:name=".activity.LoginActivity" />
+         <activity android:name=".activity.RegisterActivity" />
         <activity android:name=".activity.HistorySecondActivity" />
         
     </application>

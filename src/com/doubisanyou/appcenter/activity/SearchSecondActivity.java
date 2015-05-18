@@ -1,3 +1,4 @@
+
 package com.doubisanyou.appcenter.activity;
 
 import java.util.ArrayList;
@@ -22,7 +23,11 @@ import com.doubisanyou.appcenter.bean.TeaKnowledge;
 import com.doubisanyou.appcenter.widget.LoadingDialog;
 import com.doubisanyou.appcenter.widget.PullToRefreshBase.OnRefreshListener;
 import com.doubisanyou.appcenter.widget.PullToRefreshListView;
-
+/* carLoadingDialog.show(); */
+// TODO Auto-generated method stub
+// map.put("", xxx.cccc);
+// 重写选项被选中事件的处理方法
+// 重写选项被单击事件的处理方法
 public class SearchSecondActivity extends Activity {
 
 	HashMap<String, Object> map;
@@ -134,5 +139,7 @@ public class SearchSecondActivity extends Activity {
 
 		}
 	};
+
+
 
 }
