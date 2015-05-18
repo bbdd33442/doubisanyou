@@ -36,17 +36,17 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int mode=0x7f010000;
     }
     public static final class color {
-        public static final int bg_color=0x7f060000;
-        public static final int black=0x7f060003;
-        public static final int btn_text_title=0x7f060009;
-        public static final int common_color_background=0x7f060008;
-        public static final int event_center=0x7f060006;
-        public static final int lightgrey=0x7f060007;
-        public static final int orange=0x7f060001;
-        public static final int popup_menu_text=0x7f06000a;
-        public static final int red=0x7f060004;
-        public static final int selection=0x7f060005;
-        public static final int white=0x7f060002;
+        public static final int bg_color=0x7f050000;
+        public static final int black=0x7f050003;
+        public static final int btn_text_title=0x7f050009;
+        public static final int common_color_background=0x7f050008;
+        public static final int event_center=0x7f050006;
+        public static final int lightgrey=0x7f050007;
+        public static final int orange=0x7f050001;
+        public static final int popup_menu_text=0x7f05000a;
+        public static final int red=0x7f050004;
+        public static final int selection=0x7f050005;
+        public static final int white=0x7f050002;
     }
     public static final class dimen {
         /**  Default screen margins, per the Android Design guidelines. 
@@ -55,16 +55,16 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
          screen margins) for sw720dp devices (e.g. 10" tablets) in landscape here.
     
          */
-        public static final int activity_horizontal_margin=0x7f070000;
-        public static final int activity_vertical_margin=0x7f070001;
-        public static final int popmenu_width=0x7f070008;
-        public static final int popmenu_yoff=0x7f070009;
-        public static final int text_size_10=0x7f070007;
-        public static final int text_size_12=0x7f070006;
-        public static final int text_size_14=0x7f070005;
-        public static final int text_size_16=0x7f070003;
-        public static final int text_size_18=0x7f070002;
-        public static final int text_size_21=0x7f070004;
+        public static final int activity_horizontal_margin=0x7f060000;
+        public static final int activity_vertical_margin=0x7f060001;
+        public static final int popmenu_width=0x7f060008;
+        public static final int popmenu_yoff=0x7f060009;
+        public static final int text_size_10=0x7f060007;
+        public static final int text_size_12=0x7f060006;
+        public static final int text_size_14=0x7f060005;
+        public static final int text_size_16=0x7f060003;
+        public static final int text_size_18=0x7f060002;
+        public static final int text_size_21=0x7f060004;
     }
     public static final class drawable {
         public static final int background_border=0x7f020000;
@@ -105,120 +105,124 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int white_big_background=0x7f020023;
     }
     public static final class id {
-        public static final int app_cate=0x7f050032;
-        public static final int app_description=0x7f050030;
-        public static final int app_detail_name=0x7f05002a;
-        public static final int app_download=0x7f05002b;
-        public static final int app_list=0x7f050003;
-        public static final int app_name=0x7f050031;
-        public static final int app_org=0x7f050033;
-        public static final int app_size=0x7f05002d;
-        public static final int app_summary=0x7f05002e;
-        public static final int app_type=0x7f05002c;
-        public static final int app_ver=0x7f05002f;
-        public static final int bn=0x7f05005e;
-        public static final int both=0x7f050002;
-        public static final int btn_clear_catche=0x7f050017;
-        public static final int btn_left=0x7f050067;
-        public static final int btn_log_out=0x7f050018;
-        public static final int btn_register=0x7f05000b;
-        public static final int btn_right=0x7f050069;
-        public static final int btn_signin=0x7f05000a;
-        public static final int default_title=0x7f050068;
-        public static final int dir_item_count=0x7f05003b;
-        public static final int dir_item_image=0x7f050039;
-        public static final int dir_item_name=0x7f05003a;
-        public static final int hometabs=0x7f050049;
-        public static final int id1=0x7f050065;
-        public static final int id_bottom_image_view=0x7f05004f;
-        public static final int id_page_vp=0x7f050004;
-        public static final int id_switch_tab_ll=0x7f050053;
-        public static final int id_tab_line_iv=0x7f05005c;
-        public static final int id_tab_tea_general=0x7f050058;
-        public static final int id_tab_tea_history=0x7f050056;
-        public static final int id_tab_tea_knowledge=0x7f050054;
-        public static final int id_tab_teaset=0x7f05005a;
-        public static final int id_tea_general_text=0x7f050059;
-        public static final int id_tea_history_text=0x7f050057;
-        public static final int id_tea_knowledge_text=0x7f050055;
-        public static final int id_teaset_text=0x7f05005b;
-        public static final int image_view_finish=0x7f050050;
-        public static final int image_view_gridview=0x7f05004e;
-        public static final int include_titlebar=0x7f050019;
-        public static final int intro=0x7f050066;
-        public static final int item_TabImg=0x7f05004c;
-        public static final int item_TabName=0x7f05004d;
-        public static final int item_image=0x7f05003c;
-        public static final int item_select=0x7f05003d;
-        public static final int label=0x7f050060;
-        public static final int loading_progressbar=0x7f050034;
-        public static final int loadingdialog_message_textview=0x7f050035;
-        public static final int login_div=0x7f050005;
-        public static final int login_pass_word=0x7f050009;
-        public static final int login_password_input=0x7f050008;
-        public static final int login_user_input=0x7f050006;
-        public static final int login_user_name=0x7f050007;
-        public static final int manager_every_day_task=0x7f050016;
-        public static final int manager_user_avatars=0x7f05000c;
-        public static final int manager_user_id=0x7f05000f;
-        public static final int manager_user_id_label=0x7f05000e;
-        public static final int manager_user_lv=0x7f050013;
-        public static final int manager_user_my_publish_tea_say=0x7f050015;
-        public static final int manager_user_name=0x7f050011;
-        public static final int manager_user_name_label=0x7f050010;
-        public static final int manager_user_signature=0x7f050014;
-        public static final int pop_menu_only_text=0x7f050043;
-        public static final int pop_menu_with_image=0x7f050044;
-        public static final int popup_view_cont=0x7f050042;
-        public static final int previous=0x7f05005f;
-        public static final int progressBar1=0x7f050012;
-        public static final int pullDownFromTop=0x7f050000;
-        public static final int pullUpFromBottom=0x7f050001;
-        public static final int pull_to_refresh_image=0x7f050047;
-        public static final int pull_to_refresh_progress=0x7f050046;
-        public static final int pull_to_refresh_text=0x7f050045;
-        public static final int relativelayout=0x7f05004a;
-        public static final int reply_panel=0x7f050026;
-        public static final int tabimg_back_=0x7f05004b;
-        public static final int task_list=0x7f050048;
-        public static final int tea_knowledge_gridview=0x7f050052;
-        public static final int tea_knowledge_item_image=0x7f050037;
-        public static final int tea_knowledge_item_text=0x7f050038;
-        public static final int tea_say_comment_btn=0x7f050028;
-        public static final int tea_say_comment_content=0x7f050027;
-        public static final int tea_say_content=0x7f05001e;
-        public static final int tea_say_image=0x7f050022;
-        public static final int tea_say_image_dir_list=0x7f050051;
-        public static final int tea_say_list=0x7f05001c;
-        public static final int tea_say_list_delete=0x7f05003f;
-        public static final int tea_say_list_reply=0x7f05003e;
-        public static final int tea_say_praise_img=0x7f050025;
-        public static final int tea_say_publish_content=0x7f05001a;
-        public static final int tea_say_publish_date=0x7f050023;
-        public static final int tea_say_publish_image=0x7f050036;
-        public static final int tea_say_publish_image_gridview=0x7f05001b;
-        public static final int tea_say_publisher_avatar=0x7f050020;
-        public static final int tea_say_publisher_id=0x7f05001d;
-        public static final int tea_say_publisher_name=0x7f050021;
-        public static final int tea_say_reply_content=0x7f050041;
-        public static final int tea_say_reply_listview=0x7f050029;
-        public static final int tea_say_reply_user_avatars=0x7f050040;
-        public static final int tea_say_time=0x7f050024;
-        public static final int test=0x7f05005d;
-        public static final int top=0x7f05000d;
-        public static final int top_list_layout=0x7f05001f;
-        public static final int tv01=0x7f050061;
-        public static final int tv02=0x7f050062;
-        public static final int tv03=0x7f050063;
-        public static final int tv04=0x7f050064;
+        public static final int app_cate=0x7f090032;
+        public static final int app_description=0x7f090030;
+        public static final int app_detail_name=0x7f09002a;
+        public static final int app_download=0x7f09002b;
+        public static final int app_list=0x7f090003;
+        public static final int app_name=0x7f090031;
+        public static final int app_org=0x7f090033;
+        public static final int app_size=0x7f09002d;
+        public static final int app_summary=0x7f09002e;
+        public static final int app_type=0x7f09002c;
+        public static final int app_ver=0x7f09002f;
+        public static final int bn=0x7f090061;
+        public static final int both=0x7f090000;
+        public static final int brew=0x7f090067;
+        public static final int brewinfo=0x7f090068;
+        public static final int btn_clear_catche=0x7f090016;
+        public static final int btn_left=0x7f09006b;
+        public static final int btn_log_out=0x7f090017;
+        public static final int btn_register=0x7f09000a;
+        public static final int btn_right=0x7f09006d;
+        public static final int btn_signin=0x7f090009;
+        public static final int content=0x7f090051;
+        public static final int default_title=0x7f09006c;
+        public static final int dir_item_count=0x7f09003b;
+        public static final int dir_item_image=0x7f090039;
+        public static final int dir_item_name=0x7f09003a;
+        public static final int hometabs=0x7f09004c;
+        public static final int id1=0x7f090066;
+        public static final int id_bottom_image_view=0x7f090053;
+        public static final int id_page_vp=0x7f09001b;
+        public static final int id_switch_tab_ll=0x7f090057;
+        public static final int id_tab_line_iv=0x7f090060;
+        public static final int id_tab_tea_general=0x7f09005c;
+        public static final int id_tab_tea_history=0x7f09005a;
+        public static final int id_tab_tea_knowledge=0x7f090058;
+        public static final int id_tab_teaset=0x7f09005e;
+        public static final int id_tea_general_text=0x7f09005d;
+        public static final int id_tea_history_text=0x7f09005b;
+        public static final int id_tea_knowledge_text=0x7f090059;
+        public static final int id_teaset_text=0x7f09005f;
+        public static final int image_view_finish=0x7f090054;
+        public static final int image_view_gridview=0x7f090052;
+        public static final int include_titlebar=0x7f090018;
+        public static final int item_TabImg=0x7f09004f;
+        public static final int item_TabName=0x7f090050;
+        public static final int item_image=0x7f09003c;
+        public static final int item_select=0x7f09003d;
+        public static final int loading_progressbar=0x7f090034;
+        public static final int loadingdialog_message_textview=0x7f090035;
+        public static final int login_div=0x7f090004;
+        public static final int login_pass_word=0x7f090008;
+        public static final int login_password_input=0x7f090007;
+        public static final int login_user_input=0x7f090005;
+        public static final int login_user_name=0x7f090006;
+        public static final int manager_every_day_task=0x7f090015;
+        public static final int manager_user_avatars=0x7f09000b;
+        public static final int manager_user_id=0x7f09000e;
+        public static final int manager_user_id_label=0x7f09000d;
+        public static final int manager_user_lv=0x7f090012;
+        public static final int manager_user_my_publish_tea_say=0x7f090014;
+        public static final int manager_user_name=0x7f090010;
+        public static final int manager_user_name_label=0x7f09000f;
+        public static final int manager_user_signature=0x7f090013;
+        public static final int pop_menu_only_text=0x7f090046;
+        public static final int pop_menu_with_image=0x7f090047;
+        public static final int popup_view_cont=0x7f090045;
+        public static final int progressBar1=0x7f090011;
+        public static final int pullDownFromTop=0x7f090001;
+        public static final int pullUpFromBottom=0x7f090002;
+        public static final int pull_to_refresh_image=0x7f09004a;
+        public static final int pull_to_refresh_progress=0x7f090049;
+        public static final int pull_to_refresh_text=0x7f090048;
+        public static final int quality=0x7f090069;
+        public static final int qualityinfo=0x7f09006a;
+        public static final int relativelayout=0x7f09004d;
+        public static final int reply_panel=0x7f090026;
+        public static final int tabimg_back_=0x7f09004e;
+        public static final int task_list=0x7f09004b;
+        public static final int tea_history_content=0x7f09003e;
+        public static final int tea_knowledge_gridview=0x7f090056;
+        public static final int tea_knowledge_item_image=0x7f090037;
+        public static final int tea_knowledge_item_text=0x7f090038;
+        public static final int tea_say_comment_btn=0x7f090028;
+        public static final int tea_say_comment_content=0x7f090027;
+        public static final int tea_say_content=0x7f09001e;
+        public static final int tea_say_image=0x7f090022;
+        public static final int tea_say_image_dir_list=0x7f090055;
+        public static final int tea_say_list=0x7f09001c;
+        public static final int tea_say_list_delete=0x7f090040;
+        public static final int tea_say_list_reply=0x7f09003f;
+        public static final int tea_say_praise_img=0x7f090025;
+        public static final int tea_say_publish_content=0x7f090019;
+        public static final int tea_say_publish_date=0x7f090023;
+        public static final int tea_say_publish_image=0x7f090036;
+        public static final int tea_say_publish_image_gridview=0x7f09001a;
+        public static final int tea_say_publisher_avatar=0x7f090020;
+        public static final int tea_say_publisher_id=0x7f09001d;
+        public static final int tea_say_publisher_name=0x7f090021;
+        public static final int tea_say_reply_content=0x7f090042;
+        public static final int tea_say_reply_listview=0x7f090029;
+        public static final int tea_say_reply_user_avatars=0x7f090041;
+        public static final int tea_say_time=0x7f090024;
+        public static final int tea_search_second_content=0x7f090044;
+        public static final int tea_search_second_image=0x7f090043;
+        public static final int top=0x7f09000c;
+        public static final int top_list_layout=0x7f09001f;
+        public static final int tv01=0x7f090062;
+        public static final int tv02=0x7f090063;
+        public static final int tv03=0x7f090064;
+        public static final int tv04=0x7f090065;
     }
     public static final class layout {
         public static final int activity_app=0x7f030000;
-        public static final int activity_home=0x7f030001;
-        public static final int activity_login=0x7f030002;
-        public static final int activity_manager=0x7f030003;
-        public static final int activity_message=0x7f030004;
-        public static final int activity_publish_tea_say=0x7f030005;
+        public static final int activity_login=0x7f030001;
+        public static final int activity_manager=0x7f030002;
+        public static final int activity_message=0x7f030003;
+        public static final int activity_publish_tea_say=0x7f030004;
+        public static final int activity_tea_knowledge=0x7f030005;
         public static final int activity_tea_say=0x7f030006;
         public static final int activity_tea_say_reply=0x7f030007;
         public static final int app_detail=0x7f030008;
@@ -228,46 +232,50 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int griditem_tea_knowledge=0x7f03000c;
         public static final int griditem_tea_say_folder_list=0x7f03000d;
         public static final int griditem_tea_say_publish_image_view=0x7f03000e;
-        public static final int listitem_tea_say=0x7f03000f;
-        public static final int listitem_tea_say_repley=0x7f030010;
-        public static final int popmenu=0x7f030011;
-        public static final int pull_to_refresh_header=0x7f030012;
-        public static final int pull_to_refresh_test=0x7f030013;
-        public static final int tab_home_main=0x7f030014;
-        public static final int tab_indicator=0x7f030015;
-        public static final int tea_say_folder_image_view=0x7f030016;
-        public static final int tea_say_image_list_dir=0x7f030017;
-        public static final int tea_search_fragment=0x7f030018;
-        public static final int tea_search_navigation=0x7f030019;
-        public static final int tea_search_second=0x7f03001a;
-        public static final int tea_search_third=0x7f03001b;
-        public static final int titlebar_default=0x7f03001c;
+        public static final int listitem_tea_history=0x7f03000f;
+        public static final int listitem_tea_say=0x7f030010;
+        public static final int listitem_tea_say_repley=0x7f030011;
+        public static final int listitem_tea_search_second=0x7f030012;
+        public static final int popmenu=0x7f030013;
+        public static final int pull_to_refresh_header=0x7f030014;
+        public static final int pull_to_refresh_test=0x7f030015;
+        public static final int tab_home_main=0x7f030016;
+        public static final int tab_indicator=0x7f030017;
+        public static final int tea_history_list=0x7f030018;
+        public static final int tea_history_second=0x7f030019;
+        public static final int tea_say_folder_image_view=0x7f03001a;
+        public static final int tea_say_image_list_dir=0x7f03001b;
+        public static final int tea_search_fragment=0x7f03001c;
+        public static final int tea_search_navigation=0x7f03001d;
+        public static final int tea_search_second=0x7f03001e;
+        public static final int tea_search_third=0x7f03001f;
+        public static final int titlebar_default=0x7f030020;
     }
     public static final class string {
-        public static final int action_settings=0x7f080003;
-        public static final int app_name=0x7f080000;
-        public static final int cancel=0x7f080004;
-        public static final int hello=0x7f080001;
-        public static final int hello_world=0x7f080002;
-        public static final int login_label_password=0x7f080011;
-        public static final int login_label_signin=0x7f080012;
-        public static final int login_label_username=0x7f080010;
-        public static final int login_register_link=0x7f080015;
-        public static final int login_status_logging_in=0x7f080013;
-        public static final int login_username_hint=0x7f080014;
-        public static final int network_tips=0x7f080006;
+        public static final int action_settings=0x7f070003;
+        public static final int app_name=0x7f070000;
+        public static final int cancel=0x7f070004;
+        public static final int hello=0x7f070001;
+        public static final int hello_world=0x7f070002;
+        public static final int login_label_password=0x7f070011;
+        public static final int login_label_signin=0x7f070012;
+        public static final int login_label_username=0x7f070010;
+        public static final int login_register_link=0x7f070015;
+        public static final int login_status_logging_in=0x7f070013;
+        public static final int login_username_hint=0x7f070014;
+        public static final int network_tips=0x7f070006;
         /**  pull 2 refresh 
          */
-        public static final int pull_to_refresh_pull_down_label=0x7f080005;
-        public static final int pull_to_refresh_pull_label=0x7f080007;
-        public static final int pull_to_refresh_refreshing_label=0x7f080008;
-        public static final int pull_to_refresh_release_label=0x7f080009;
-        public static final int xlistview_footer_hint_normal=0x7f08000e;
-        public static final int xlistview_footer_hint_ready=0x7f08000f;
-        public static final int xlistview_header_hint_loading=0x7f08000c;
-        public static final int xlistview_header_hint_normal=0x7f08000a;
-        public static final int xlistview_header_hint_ready=0x7f08000b;
-        public static final int xlistview_header_last_time=0x7f08000d;
+        public static final int pull_to_refresh_pull_down_label=0x7f070005;
+        public static final int pull_to_refresh_pull_label=0x7f070007;
+        public static final int pull_to_refresh_refreshing_label=0x7f070008;
+        public static final int pull_to_refresh_release_label=0x7f070009;
+        public static final int xlistview_footer_hint_normal=0x7f07000e;
+        public static final int xlistview_footer_hint_ready=0x7f07000f;
+        public static final int xlistview_header_hint_loading=0x7f07000c;
+        public static final int xlistview_header_hint_normal=0x7f07000a;
+        public static final int xlistview_header_hint_ready=0x7f07000b;
+        public static final int xlistview_header_last_time=0x7f07000d;
     }
     public static final class style {
         /** 
@@ -282,23 +290,23 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
         
          */
-        public static final int AppBaseTheme=0x7f090000;
+        public static final int AppBaseTheme=0x7f080000;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f090002;
-        public static final int ProgressBar_Mini=0x7f09000a;
-        public static final int layout_width_height_ff=0x7f090005;
-        public static final int layout_width_height_fw=0x7f090004;
-        public static final int layout_width_height_wf=0x7f090007;
-        public static final int layout_width_height_ww=0x7f090006;
-        public static final int layout_width_height_ww_color_orange=0x7f090008;
-        public static final int normalText=0x7f090001;
+        public static final int AppTheme=0x7f080002;
+        public static final int ProgressBar_Mini=0x7f08000a;
+        public static final int layout_width_height_ff=0x7f080005;
+        public static final int layout_width_height_fw=0x7f080004;
+        public static final int layout_width_height_wf=0x7f080007;
+        public static final int layout_width_height_ww=0x7f080006;
+        public static final int layout_width_height_ww_color_orange=0x7f080008;
+        public static final int normalText=0x7f080001;
         /**  popwidnow 显示消失动画 
  指定消失的动画xml 
          */
-        public static final int popwindow_delete_btn_anim_style=0x7f090003;
-        public static final int text_color_size=0x7f090009;
+        public static final int popwindow_delete_btn_anim_style=0x7f080003;
+        public static final int text_color_size=0x7f080009;
     }
     public static final class styleable {
         /** Attributes that can be used with a PullToRefresh.
@@ -331,7 +339,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <tr><td><code>pullUpFromBottom</code></td><td>0x2</td><td></td></tr>
 <tr><td><code>both</code></td><td>0x3</td><td></td></tr>
 </table>
-          @attr name android:mode
+          @attr name com.doubisanyou.appcenter:mode
         */
         public static final int PullToRefresh_mode = 0;
     };
