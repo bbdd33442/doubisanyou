@@ -15,7 +15,7 @@ public class TeaSetFragment extends Fragment {
   public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState){
     super.onCreateView(inflater, container, savedInstanceState);
     View chatView = inflater.inflate(R.layout.tea_search_fragment, container,false);
-    final TextView  x= (TextView) chatView.findViewById(R.id.test);
+    
 /*    
     new NetConnect(Config.SERVICE_URL, ConnectMethd.GET, new SuccessCallBack() {
 		

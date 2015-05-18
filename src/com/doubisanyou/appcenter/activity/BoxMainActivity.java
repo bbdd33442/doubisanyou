@@ -23,7 +23,7 @@ public class BoxMainActivity extends TabActivity {
 	// 各tab的标题
 	private String[] itemsName = new String[] { "茶知识", "聊茶", "茶说", "设置" };
 	// 各个tab对应的activity页面
-	private Class[] classes = new Class[] { DouLiaoActivity.class,
+	private Class[] classes = new Class[] { TeaKnowledgeActivity.class,
 			NearByPeopleActivity.class, TeaSayActivity.class,
 			ManagerActivity.class };
 	// tab选中时显示的图片

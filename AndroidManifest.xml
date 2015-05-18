@@ -30,7 +30,7 @@
         <activity android:name=".activity.SearchThirdActivity"/>
         <activity android:name=".activity.ManagerActivity" />
         <activity android:name=".activity.AppInfoActivity" />
-        <activity android:name=".activity.DouLiaoActivity" />
+        <activity android:name=".activity.TeaKnowledgeActivity" />
         <activity android:name=".activity.NearByPeopleActivity" />
         <activity android:name=".activity.TeaSayActivity" />
         <activity android:name=".activity.FriendActivity" />
