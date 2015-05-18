@@ -18,7 +18,7 @@ import com.doubisanyou.appcenter.R;
 import com.doubisanyou.appcenter.adapter.TeaSayPublishImageGridAdapter;
 import com.doubisanyou.baseproject.base.BaseActivity;
 
-public class PublishTeaSayActivity extends BaseActivity implements OnClickListener,OnItemClickListener{
+public class TeaSayPublishActivity extends BaseActivity implements OnClickListener,OnItemClickListener{
 	
 	public static final String TEXT="text";
 	public static final String IMAGE="image";
@@ -87,19 +87,19 @@ public class PublishTeaSayActivity extends BaseActivity implements OnClickListen
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, final int arg2, long arg3) {
 		if(selectedImage.get(arg2).equals(String.valueOf(R.drawable.tea_say_publish_add_image))){
-			Intent i = new Intent(PublishTeaSayActivity.this,TeaSayPublushImageFolderListActivity.class);
+			Intent i = new Intent(TeaSayPublishActivity.this,TeaSayPublushImageFolderListActivity.class);
 			selectedImage.remove(arg2);
 			i.putStringArrayListExtra(TeaSayImageSelectedViewActivity.SELECTED_IMAGE_PATH, selectedImage);
+			i.putExtra(TeaSayPublushImageFolderListActivity.ACTIVITYTYPE,TeaSayPublushImageFolderListActivity.TEASYPUBLISH);
 			startActivity(i);
 			finish();
 		}else{
-			Builder b = new Builder(PublishTeaSayActivity.this);
+			Builder b = new Builder(TeaSayPublishActivity.this);
 			b.setMessage("删除图片？");
 			b.setPositiveButton("确定", new DialogInterface.OnClickListener(){
-
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					if(selectedImage.size()==9){
+					if(selectedImage.size()==9&&!selectedImage.contains(String.valueOf(R.drawable.tea_say_publish_add_image))){
 						selectedImage.add(String.valueOf(R.drawable.tea_say_publish_add_image));
 					}
 					selectedImage.remove(arg2);

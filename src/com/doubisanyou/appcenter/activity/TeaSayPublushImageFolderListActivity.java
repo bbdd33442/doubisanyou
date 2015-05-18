@@ -47,6 +47,14 @@ public class TeaSayPublushImageFolderListActivity extends Activity implements On
 	
 	ListView folderDirList ;
 	
+	public static final String TEASYPUBLISH = "teasaypublish";
+	
+	public static final String USERAVATARS = "useravatars";
+	
+	public static final String ACTIVITYTYPE = "activtytype";
+	
+	String type;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -54,13 +62,13 @@ public class TeaSayPublushImageFolderListActivity extends Activity implements On
 		setContentView(R.layout.tea_say_image_list_dir);
 		Intent i = getIntent();
 		selcetedImageName = i.getStringArrayListExtra(TeaSayImageSelectedViewActivity.SELECTED_IMAGE_PATH);
+		type = i.getStringExtra(ACTIVITYTYPE);
 		folderDirList = (ListView) findViewById(R.id.tea_say_image_dir_list);
 		folderDirList.setOnItemClickListener(this);
 		getImages();
 	}
 	
 	Handler mHandler = new Handler(){
-
 		@Override
 		public void handleMessage(Message msg) {
 			switch (msg.what) {
@@ -193,6 +201,7 @@ public class TeaSayPublushImageFolderListActivity extends Activity implements On
 		i.putExtra(TeaSayImageSelectedViewActivity.FOLDER_DIR,mImageFloders.get(position).getDir());
 		i.putStringArrayListExtra(TeaSayImageSelectedViewActivity.FOLDER_IMAGE_NAME, new ArrayList<String>(imageName));
 		i.putStringArrayListExtra(TeaSayImageSelectedViewActivity.SELECTED_IMAGE_PATH, selcetedImageName);
+		i.putExtra(ACTIVITYTYPE, type);
 		startActivityForResult(i, 1);
 	}
 

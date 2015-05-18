@@ -74,17 +74,17 @@ public class TeaSayActivity extends BaseActivity implements OnClickListener{
 	
 	@Override
 	public void onClick(View v) {
-		Intent i = new Intent(this,PublishTeaSayActivity.class);
+		Intent i = new Intent(this,TeaSayPublishActivity.class);
 		switch (v.getId()) {
 		case R.id.btn_right:
 			popMenu.showAsDropDown(v);
 			break;
 		case R.id.pop_menu_only_text:
-			i.putExtra(PublishTeaSayActivity.PUBLISHTYPE, PublishTeaSayActivity.TEXT);
+			i.putExtra(TeaSayPublishActivity.PUBLISHTYPE, TeaSayPublishActivity.TEXT);
 			startActivity(i);
 			popMenu.dismiss();
 		case R.id.pop_menu_with_image:
-			i.putExtra(PublishTeaSayActivity.PUBLISHTYPE, PublishTeaSayActivity.IMAGE);
+			i.putExtra(TeaSayPublishActivity.PUBLISHTYPE, TeaSayPublishActivity.IMAGE);
 			startActivity(i);
 			popMenu.dismiss();
 		default:

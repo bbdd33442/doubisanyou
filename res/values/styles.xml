@@ -43,7 +43,7 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
-
+	
     <style name="layout_width_height_wf">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">fill_parent</item>
@@ -51,6 +51,11 @@
     
    <style name="layout_width_height_ww_color_orange" parent="layout_width_height_ww">
       <item name="android:textColor">@color/orange</item> 
+    </style>
+    
+    <style name="label_text_view" parent="layout_width_height_ww">
+      <item name="android:textColor">@color/black</item>
+      <item name="android:textAppearance">?android:attr/textAppearanceSmall</item> 
     </style>
     
     <style name="text_color_size"  parent="@style/layout_width_height_ww"> 

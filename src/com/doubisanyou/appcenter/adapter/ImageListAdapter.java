@@ -23,14 +23,15 @@ public class ImageListAdapter extends ActivityBaseAdapter<String>{
 	String dir;
 	Activity ac;
 	Handler mHandler;
-	
+	int canSelcetNum;
 	public ImageListAdapter(Context context,List<String> imageNames,
-			  String dir,List<String> selectedImagePath,Activity ac,Handler mHandler){
+			  String dir,List<String> selectedImagePath,Activity ac,Handler mHandler,int canSelcetNum){
 		super(context,imageNames);
 		this.dir = dir;
 		this.selectedImagePath = selectedImagePath;
 		this.ac = ac;
 		this.mHandler = mHandler;
+		this.canSelcetNum = canSelcetNum;
 	}
 	
 	@Override
@@ -52,10 +53,10 @@ public class ImageListAdapter extends ActivityBaseAdapter<String>{
 				//选择，则将图片变暗，反之则反之
 				@Override
 				public void onClick(View v)
-				{   
-					if(selectedImagePath.size()>=9&&!selectedImagePath.contains(dir + "/" + imageName)){
+				{   //&&!selectedImagePath.contains(dir + "/" + imageName)
+					if(selectedImagePath.size()==canSelcetNum){
 						Builder builder = new Builder(ac);
-						builder.setMessage("照片不能超过九张！");
+						builder.setMessage("照片不能超过"+canSelcetNum+"张！");
 						builder.setTitle("提示");
 						builder.setPositiveButton("我知道了", new DialogInterface.OnClickListener() {						
 							@Override

@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_login"
+    android:orientation="vertical" >
+
+    <include layout="@layout/titlebar_default" />
+
+    <ImageView
+        android:id="@+id/registe_user_avartar"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="8dp"
+        android:src="@drawable/user_default_avatars" />
+
+    <RelativeLayout
+        style="@style/layout_width_height_fw"
+        android:layout_margin="8dp"
+        android:background="@drawable/background_login_div_bg"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/registe_phone_number_label"
+            style="@style/label_text_view"
+            android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true"
+            android:text="手机号：" />
+
+        <EditText
+            android:id="@+id/registe_phone_number"
+            style="@style/layout_width_height_ww"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/get_check_code"
+            android:layout_toRightOf="@id/registe_phone_number_label"
+            android:hint="请输入手机号..."
+            android:singleLine="true" />
+
+        <Button
+            android:id="@+id/get_check_code"
+            style="@style/layout_width_height_ww"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            android:background="@drawable/mm_title_btn_right"
+            android:text="获取验证码"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        style="@style/layout_width_height_fw"
+        android:layout_margin="8dp"
+        android:background="@drawable/background_login_div_bg"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/registe_check_code_label"
+            style="@style/label_text_view"
+            android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true"
+            android:text="验证码：" />
+
+        <EditText
+            android:id="@+id/registe_check_code"
+            style="@style/layout_width_height_fw"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/registe_check_code_label"
+            android:hint="请输入验证码..."
+            android:singleLine="true" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        style="@style/layout_width_height_fw"
+        android:layout_margin="8dp"
+        android:background="@drawable/background_login_div_bg"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/registe_nick_name_label"
+            style="@style/label_text_view"
+            android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true"
+            android:text="昵    称：" />
+
+        <EditText
+            android:id="@+id/registe_nick_name"
+            style="@style/layout_width_height_fw"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/registe_nick_name_label"
+            android:singleLine="true" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        style="@style/layout_width_height_fw"
+        android:layout_margin="8dp"
+        android:background="@drawable/background_login_div_bg"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/registe_pass_label"
+            style="@style/label_text_view"
+            android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true"
+            android:text="密    码：" />
+
+        <EditText
+            android:id="@+id/registe_pass"
+            style="@style/layout_width_height_fw"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/registe_pass_label"
+            android:singleLine="true" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        style="@style/layout_width_height_fw"
+        android:layout_margin="8dp"
+        android:background="@drawable/background_login_div_bg"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/registe_pass_check_label"
+            style="@style/label_text_view"
+            android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true"
+            android:text="密码确认：" />
+
+        <EditText
+            android:id="@+id/registe_pass_check"
+            style="@style/layout_width_height_fw"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/registe_pass_check_label"
+            android:singleLine="true" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        style="@style/layout_width_height_fw"
+        android:layout_margin="8dp"
+        android:background="@drawable/background_login_div_bg"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/registe_signatrue_label"
+            style="@style/label_text_view"
+            android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true"
+            android:text="个性签名：" />
+
+        <EditText
+            android:id="@+id/registe_signatrue"
+            style="@style/layout_width_height_fw"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/registe_signatrue_label"
+            android:singleLine="true" />
+    </RelativeLayout>
+    
+    <LinearLayout style="@style/layout_width_height_ff">
+       
+        <Button 
+    	android:id="@+id/btn_registe_ok"
+    	android:layout_width="fill_parent"
+    	android:layout_height="wrap_content"
+    	android:text="注册"
+    	android:layout_marginTop="8dp"
+    	android:background="@drawable/green_button"
+    	android:layout_gravity="bottom"
+    	
+    />
+    </LinearLayout>
+
+</LinearLayout>
