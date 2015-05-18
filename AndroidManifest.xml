@@ -39,6 +39,8 @@
         <activity android:name=".activity.TeaSayPublushImageFolderListActivity" />
         <activity android:name=".activity.TeaSayReplyActivity" />
         <activity android:name=".activity.LoginActivity" />
+        <activity android:name=".activity.HistorySecondActivity" />
+        
     </application>
 
     

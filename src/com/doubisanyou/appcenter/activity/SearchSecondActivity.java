@@ -104,7 +104,7 @@ public class SearchSecondActivity extends Activity {
 		lv.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {// 重写选项被单击事件的处理方法
-				TeaKnowledge c = teaKnowledges.get(arg2);
+				TeaKnowledge c = teaKnowledges.get(arg2-1);
 				Intent intent = new Intent(SearchSecondActivity.this,
 						SearchThirdActivity.class);
 				intent.putExtra(SearchThirdActivity.TEAKNOWLEDGE, c);
