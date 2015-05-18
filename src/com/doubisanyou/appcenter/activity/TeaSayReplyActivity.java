@@ -17,12 +17,13 @@ import com.doubisanyou.appcenter.adapter.SimpleAdapter;
 import com.doubisanyou.appcenter.bean.TeaSay;
 import com.doubisanyou.baseproject.base.BaseActivity;
 
-public class TeaSayReplyActivity extends BaseActivity implements OnClickListener{
-	
-	public static final String TEASAYINFO="teasayinfo";
-	
+public class TeaSayReplyActivity extends BaseActivity implements
+		OnClickListener {
+
+	public static final String TEASAYINFO = "teasayinfo";
+
 	TeaSay ts;
-	
+
 	TextView replyTitle;
 	Button back;
 	ListView replyListView;
@@ -31,6 +32,7 @@ public class TeaSayReplyActivity extends BaseActivity implements OnClickListener
 	HashMap<String, Object> map;
 	ArrayList<HashMap<String, Object>> replyItem;
 	EditText commentText;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -39,11 +41,11 @@ public class TeaSayReplyActivity extends BaseActivity implements OnClickListener
 		ts = (TeaSay) i.getSerializableExtra(TEASAYINFO);
 		iniView();
 	}
-	
-	void iniView(){
+
+	void iniView() {
 		replyItem = new ArrayList<HashMap<String, Object>>();
 		map = new HashMap<String, Object>();
-		map.put("useravatars",R.drawable.user_default_avatars);
+		map.put("useravatars", R.drawable.user_default_avatars);
 		map.put("replycontent", "12345上山打老虎,老虎不在家");
 		replyItem.add(map);
 		replyItem.add(map);
@@ -58,9 +60,10 @@ public class TeaSayReplyActivity extends BaseActivity implements OnClickListener
 		replyItem.add(map);
 		replyItem.add(map);
 		sla = new SimpleAdapter(getApplicationContext(), replyItem,
-				                R.layout.listitem_tea_say_repley,
-				                new String[] { "useravatars", "replycontent"},
-				                new int[]{R.id.tea_say_reply_user_avatars,R.id.tea_say_reply_content});
+				R.layout.listitem_tea_say_repley, new String[] { "useravatars",
+						"replycontent" }, new int[] {
+						R.id.tea_say_reply_user_avatars,
+						R.id.tea_say_reply_content });
 		replyTitle = (TextView) findViewById(R.id.default_title);
 		replyTitle.setText("回复");
 		back = (Button) findViewById(R.id.btn_left);
@@ -81,7 +84,7 @@ public class TeaSayReplyActivity extends BaseActivity implements OnClickListener
 			break;
 		case R.id.tea_say_comment_btn:
 			map = new HashMap<String, Object>();
-			map.put("useravatars",R.drawable.user_default_avatars);
+			map.put("useravatars", R.drawable.user_default_avatars);
 			map.put("replycontent", commentText.getText());
 			replyItem.add(map);
 			sla.notifyDataSetChanged();
@@ -91,6 +94,6 @@ public class TeaSayReplyActivity extends BaseActivity implements OnClickListener
 		default:
 			break;
 		}
-		
+
 	}
 }

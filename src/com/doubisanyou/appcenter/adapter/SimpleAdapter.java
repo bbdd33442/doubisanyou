@@ -168,6 +168,5 @@ public class SimpleAdapter extends android.widget.SimpleAdapter {
     	((ImageView) v).setImageBitmap(bitmap);
     }
     
-    
 
 }

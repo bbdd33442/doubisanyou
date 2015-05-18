@@ -38,7 +38,7 @@ import com.doubisanyou.baseproject.network.NetConnect.SuccessCallBack;
  * @date 2015-04-11
  * 
  */
-public class DouLiaoActivity extends BaseActivity implements OnClickListener {
+public class TeaKnowledgeActivity extends BaseActivity implements OnClickListener {
 
 	private List<Fragment> mFragmentList = new ArrayList<Fragment>();
 	private FragmentAdapter mFragmentAdapter;
@@ -48,6 +48,7 @@ public class DouLiaoActivity extends BaseActivity implements OnClickListener {
 	 * Tab显示内容TextView
 	 */
 	private TextView teaKowledgeTilte, teaHistoryTitle, teaGeralTitle, teaSetTitle;
+	private TextView title;
 	/**
 	 * Tab的那个引导线
 	 */
@@ -71,7 +72,7 @@ public class DouLiaoActivity extends BaseActivity implements OnClickListener {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_home);
+		setContentView(R.layout.activity_tea_knowledge);
 
 		findById();
 		init();
@@ -85,6 +86,10 @@ public class DouLiaoActivity extends BaseActivity implements OnClickListener {
 		teaHistoryTitle = (TextView) this.findViewById(R.id.id_tea_history_text);
 		teaGeralTitle = (TextView) this.findViewById(R.id.id_tea_general_text);
 		teaSetTitle = (TextView) this.findViewById(R.id.id_teaset_text);
+		
+		title = (TextView) this.findViewById(R.id.default_title);
+		
+		title.setText("茶知识");
 		
 		teaGeralTitle.setOnClickListener(this);
 		teaSetTitle.setOnClickListener(this);
