@@ -2,6 +2,9 @@ package com.doubisanyou.appcenter.widget;
 
 
 
+import com.doubisanyou.baseproject.utilsResource.ImageLoader;
+import com.doubisanyou.baseproject.utilsResource.ImageLoader.Type;
+
 import android.graphics.Bitmap;
 import android.util.SparseArray;
 import android.view.View;
@@ -36,11 +39,11 @@ public class ViewHolder {
 	 * @param text
 	 * @return
 	 */
-	public ViewHolder setText(View view,int viewId, String text)
+	public static ViewHolder setText(View view,int viewId, String text)
 	{
 		TextView textView = get(view,viewId);
 		textView.setText(text);
-		return this;
+		return null;
 	}
 
 	/**
@@ -50,12 +53,12 @@ public class ViewHolder {
 	 * @param drawableId
 	 * @return
 	 */
-	public ViewHolder setImageResource(View view,int viewId, int drawableId)
+	public static ViewHolder setImageResource(View view,int viewId, int drawableId)
 	{
 		ImageView imageView = get(view,viewId);
 		imageView.setImageResource(drawableId);
 
-		return this;
+		return null;
 	}
 
 	/**
@@ -65,11 +68,11 @@ public class ViewHolder {
 	 * @param drawableId
 	 * @return
 	 */
-	public ViewHolder setImageBitmap(View view,int viewId, Bitmap bm)
+	public static ViewHolder setImageBitmap(View view,int viewId, Bitmap bm)
 	{
 		ImageView imageView = get(view,viewId);
 		imageView.setImageBitmap(bm);
-		return this;
+		return null;
 	}
 
 	/**
@@ -79,10 +82,10 @@ public class ViewHolder {
 	 * @param drawableId
 	 * @return
 	 */
-	public ViewHolder setImageByUrl(View view,int viewId, String url)
+	public static ViewHolder setImageByUrl(View view,int viewId, String url)
 	{
-		//ImageLoader.getInstance(3,Type.LIFO).loadImage(url, (ImageView) get(view,viewId));
-		return this;
+		ImageLoader.getInstance(3,Type.LIFO).loadImage(url, (ImageView) get(view,viewId));
+		return null;
 	}
 
 }

@@ -1,38 +1,42 @@
+
 package com.doubisanyou.appcenter.activity;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.doubisanyou.appcenter.R;
+import com.doubisanyou.appcenter.adapter.SimpleAdapter;
+import com.doubisanyou.appcenter.bean.TeaKnowledge;
+import com.doubisanyou.appcenter.widget.LoadingDialog;
 import com.doubisanyou.appcenter.widget.PullToRefreshBase.OnRefreshListener;
-import com.doubisanyou.appcenter.widget.*;
-
+import com.doubisanyou.appcenter.widget.PullToRefreshListView;
+/* carLoadingDialog.show(); */
+// TODO Auto-generated method stub
+// map.put("", xxx.cccc);
+// 重写选项被选中事件的处理方法
+// 重写选项被单击事件的处理方法
 public class SearchSecondActivity extends Activity {
 
-	int[] drawableIds = { R.drawable.ic_launcher, R.drawable.ic_launcher,
-			R.drawable.ic_launcher, R.drawable.ic_launcher };
-	int[] msgIds = { R.string.hello, R.string.hello, R.string.hello,
-			R.string.hello };
-
+	HashMap<String, Object> map;
+	ArrayList<HashMap<String, Object>> replyItem;
 	private PullToRefreshListView mPullRefreshListView;
+	SimpleAdapter sla;
 	private ListView mListView;
 	LoadingDialog carLoadingDialog;
+	List<TeaKnowledge> teaKnowledges = new ArrayList<TeaKnowledge>();;
 	private int mLoadingTpye = LOAGDING_LOADING_MORE;
 	private final static int LOAGDING_NORMAL = 0;
 	private final static int LOAGDING_REFRESH = 1;
@@ -40,6 +44,8 @@ public class SearchSecondActivity extends Activity {
 
 	private int pagesize = 10;
 	private int pageNumber = 1;
+
+	private TextView title;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -52,8 +58,12 @@ public class SearchSecondActivity extends Activity {
 		/* carLoadingDialog.show(); */
 		mPullRefreshListView.setUpRefreshEnabled(true);
 
-		Button previous = (Button) findViewById(R.id.previous);
+		title = (TextView) this.findViewById(R.id.default_title);
+
+		title.setText("茶知识界面");
+
 		Button back = (Button) findViewById(R.id.btn_left);
+		back.setVisibility(View.VISIBLE);
 		back.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -64,43 +74,30 @@ public class SearchSecondActivity extends Activity {
 		});
 
 		ListView lv = mPullRefreshListView.getRefreshableView();
-		BaseAdapter ba = new BaseAdapter() {
-			@Override
-			public long getItemId(int position) {
-				return 0;
-			}
+		TeaKnowledge tk = new TeaKnowledge();
+		tk.tea_knowledge_name = "红茶";
+		TeaKnowledge gt = new TeaKnowledge();
+		gt.tea_knowledge_name = "绿茶";
+		teaKnowledges.add(gt);
+		teaKnowledges.add(tk);
+		replyItem = new ArrayList<HashMap<String, Object>>();
+		for (int i = 0; i < teaKnowledges.size(); i++) {
+			map = new HashMap<String, Object>();
+			map.put("searchImage", R.drawable.user_default_avatars);
+			map.put("searchContent", teaKnowledges.get(i).tea_knowledge_name);
+			replyItem.add(map);
+		}
 
-			@Override
-			public Object getItem(int position) {
-				return null;
-			}
+		// map.put("", xxx.cccc);
 
-			@Override
-			public int getCount() {
-				return drawableIds.length;
-			}
+		sla = new SimpleAdapter(getApplicationContext(), replyItem,
+				R.layout.listitem_tea_search_second, new String[] {
+						"searchImage", "searchContent" }, new int[] {
+						R.id.tea_search_second_image,
+						R.id.tea_search_second_content });
 
-			@Override
-			public View getView(int arg0, View arg1, ViewGroup arg2) {
+		lv.setAdapter(sla);
 
-				LinearLayout ll = new LinearLayout(SearchSecondActivity.this);
-				ll.setOrientation(LinearLayout.HORIZONTAL); // 设置朝向
-				ll.setPadding(3, 3, 3, 3);// 设置四周留白
-				ImageView ii = new ImageView(SearchSecondActivity.this);
-				ii.setImageDrawable(getResources().getDrawable(
-						drawableIds[arg0]));// 设置图片
-				ii.setScaleType(ImageView.ScaleType.FIT_XY);
-				ll.addView(ii);// 添加到LinearLayout中
-				TextView tv = new TextView(SearchSecondActivity.this);
-				tv.setText(getResources().getText(msgIds[arg0]));// 设置内容
-				tv.setTextSize(24);// 设置字体大小
-				tv.setPadding(5, 5, 5, 5);// 设置四周留白
-				tv.setGravity(Gravity.LEFT);
-				ll.addView(tv);// 添加到LinearLayout中
-				return ll;
-			}
-		};
-		lv.setAdapter(ba);// 为ListView设置内容适配器
 		lv.setOnItemSelectedListener(new OnItemSelectedListener() {
 			public void onItemSelected(AdapterView<?> arg0, View arg1,
 					int arg2, long arg3) {// 重写选项被选中事件的处理方法
@@ -112,8 +109,10 @@ public class SearchSecondActivity extends Activity {
 		lv.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {// 重写选项被单击事件的处理方法
+				TeaKnowledge c = teaKnowledges.get(arg2-1);
 				Intent intent = new Intent(SearchSecondActivity.this,
 						SearchThirdActivity.class);
+				intent.putExtra(SearchThirdActivity.TEAKNOWLEDGE, c);
 				startActivity(intent);
 			}
 		});
@@ -140,5 +139,7 @@ public class SearchSecondActivity extends Activity {
 
 		}
 	};
+
+
 
 }

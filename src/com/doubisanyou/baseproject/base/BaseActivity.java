@@ -45,8 +45,6 @@ public abstract class BaseActivity extends FragmentActivity implements
 	
 	String rs;
 	
-	
-	
 	public NetConnect task;
 	
 	protected LoadingDialog carLoadingDialog;

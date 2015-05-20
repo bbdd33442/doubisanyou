@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" 
+    android:orientation="vertical">
+ 	
+<include
+        layout="@layout/titlebar_default" /> 
+   
+   <GridView
+       android:id="@+id/image_view_gridview"
+       android:layout_width="match_parent"
+       android:layout_height="0dp"
+       android:layout_weight="2"
+       android:layout_margin="8dp"
+       android:cacheColorHint="@android:color/transparent"
+       android:horizontalSpacing="8dp"
+       android:listSelector="@android:color/transparent"
+       android:numColumns="3"
+       android:scrollbars="none"
+       android:stretchMode="columnWidth"
+       android:verticalSpacing="8dp" >
+
+    </GridView>
+
+    <LinearLayout
+        android:id="@+id/id_bottom_image_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.20"
+        android:background="#e0000000" >     
+        <TextView
+            android:id="@+id/image_view_finish"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="完成"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+
+</LinearLayout>
+
+

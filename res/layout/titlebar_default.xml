@@ -7,7 +7,7 @@
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/black" >
+         >
    
       <Button
         android:visibility="invisible"
@@ -33,9 +33,10 @@
             android:layout_centerInParent="true"
             android:layout_centerVertical="true"
             android:gravity="center"
+            
             android:text="标题"
             android:textAppearance="@android:style/TextAppearance.Large"
-            android:textColor="#ffffffff"
+            android:textColor="@color/red"
             android:textSize="22sp" >
         </TextView>
 
@@ -53,5 +54,8 @@
 	       
 	        />
     </RelativeLayout>
-
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="2dp"
+        android:background="@color/black"/>
 </LinearLayout>

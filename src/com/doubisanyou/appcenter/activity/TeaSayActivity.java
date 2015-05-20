@@ -11,7 +11,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.doubisanyou.appcenter.R;
-import com.doubisanyou.appcenter.adapter.TeaSayAdaptor;
+import com.doubisanyou.appcenter.adapter.TeaSayAdapter;
 import com.doubisanyou.appcenter.bean.TeaSay;
 import com.doubisanyou.appcenter.widget.LoadingDialog;
 import com.doubisanyou.appcenter.widget.PopMenu;
@@ -39,7 +39,7 @@ public class TeaSayActivity extends BaseActivity implements OnClickListener{
 	private ListView mListView;
 	private ArrayList<TeaSay> tys;
 	private PopMenu popMenu;
-	private TeaSayAdaptor tsa;
+	private TeaSayAdapter tsa;
 	private ImageButton rightBtn;
 	private TextView titleBar;
 	
@@ -53,7 +53,7 @@ public class TeaSayActivity extends BaseActivity implements OnClickListener{
 	void iniView(){
 		carLoadingDialog = new LoadingDialog(this);
 		tys = new ArrayList<TeaSay>();
-		tsa=new TeaSayAdaptor(getApplicationContext(),tys);
+		tsa=new TeaSayAdapter(getApplicationContext(),tys,TeaSayActivity.this);
 		popMenu = new PopMenu(TeaSayActivity.this);
 		
 	    mPullRefreshListView = (PullToRefreshListView) findViewById(R.id.tea_say_list);
@@ -74,17 +74,18 @@ public class TeaSayActivity extends BaseActivity implements OnClickListener{
 	
 	@Override
 	public void onClick(View v) {
-		Intent i = new Intent(this,PublishTeaSayActivity.class);
+		Intent i = new Intent(this,TeaSayPublishActivity.class);
 		switch (v.getId()) {
 		case R.id.btn_right:
 			popMenu.showAsDropDown(v);
 			break;
 		case R.id.pop_menu_only_text:
-			i.putExtra(PublishTeaSayActivity.PUBLISHTYPE, PublishTeaSayActivity.TEXT);
+			i.putExtra(TeaSayPublishActivity.PUBLISHTYPE, TeaSayPublishActivity.TEXT);
 			startActivity(i);
 			popMenu.dismiss();
 		case R.id.pop_menu_with_image:
-			i.putExtra(PublishTeaSayActivity.PUBLISHTYPE, PublishTeaSayActivity.IMAGE);
+			i.putExtra(TeaSayPublishActivity.PUBLISHTYPE, TeaSayPublishActivity.IMAGE);
+			startActivity(i);
 			popMenu.dismiss();
 		default:
 			break;

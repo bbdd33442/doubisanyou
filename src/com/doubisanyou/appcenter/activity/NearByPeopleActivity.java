@@ -187,3 +187,4 @@ public class NearByPeopleActivity extends BaseActivity implements
 		Log.i(TAG, from);
 	}
 }
+

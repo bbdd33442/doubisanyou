@@ -3,10 +3,245 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
+	
+    <include
+        layout="@layout/titlebar_default" /> 
+    
+    <RelativeLayout
+        android:background="@drawable/background_border"
+        android:layout_margin="8dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+        
+        <ImageView
+            android:id="@+id/manager_user_avatars"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_margin="8dp"
+            android:src="@drawable/user_default_avatars" />
+        
+		<LinearLayout
+		    android:id="@+id/top"  
+		    android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp"
+            android:layout_toRightOf="@id/manager_user_avatars">
+            
+		   <TextView
+            android:id="@+id/manager_user_id_label"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="ID号："
+             />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="manager" />
+        <TextView
+            android:id="@+id/manager_user_id"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="xx"
+            android:layout_toRightOf="@id/manager_user_id_label" />
 
+        <TextView
+            android:id="@+id/manager_user_name_label"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="昵称：" 
+            android:layout_toRightOf="@id/manager_user_id"/>
+
+        <TextView
+            android:id="@+id/manager_user_name"
+           android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="xx" 
+            android:layout_toRightOf="@id/manager_user_name_label"/>
+		</LinearLayout>
+   			
+		<LinearLayout  
+		    android:layout_toRightOf="@id/manager_user_avatars"
+		    android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp"
+            android:layout_below="@id/top"
+           >
+		   <TextView
+            android:id="@+id/manager_user_id_label"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="被赞："
+             />
+
+        <TextView
+            android:id="@+id/manager_user_id"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="xx"
+            android:layout_toRightOf="@id/manager_user_id_label" />
+
+        <TextView
+            android:id="@+id/manager_user_name_label"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="积分：" 
+            android:layout_toRightOf="@id/manager_user_id"/>
+
+        <TextView
+            android:id="@+id/manager_user_name"
+           android:layout_weight="1"
+           android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="xx" 
+            android:layout_toRightOf="@id/manager_user_name_label"/>
+		</LinearLayout>
+    </RelativeLayout>
+	
+    <LinearLayout 
+        android:layout_margin="8dp"
+        style="@style/layout_width_height_fw"
+        android:background="@drawable/background_border"
+        android:orientation="horizontal">
+     <TextView
+            style="?android:attr/textAppearanceSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:layout_gravity="center"
+            android:layout_margin="8dp"
+            android:text="等级：" />
+        <com.doubisanyou.appcenter.widget.TextProgressBar
+            android:id="@+id/progressBar1"
+            style="@style/ProgressBar_Mini"
+            android:layout_margin="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:max="100"
+            android:progress="20" />
+
+        <TextView
+            android:id="@+id/manager_user_lv"
+            style="?android:attr/textAppearanceSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:layout_gravity="center"
+            android:layout_margin="8dp"
+            android:text="lv.8" />
+    </LinearLayout>
+    
+     <LinearLayout 
+        android:layout_margin="8dp"
+        style="@style/layout_width_height_fw"
+        android:background="@drawable/background_border"
+        android:orientation="horizontal">
+     <TextView
+            style="?android:attr/textAppearanceSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:layout_gravity="center"
+            android:layout_margin="8dp"
+            android:text="个性签名：" />
+      
+        <TextView
+            android:id="@+id/manager_user_signature"
+            style="?android:attr/textAppearanceSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_margin="8dp"
+            android:text="贵以贱为本，高以下为基" />
+    </LinearLayout>
+  	
+    <RelativeLayout 
+        android:layout_margin="8dp"
+        style="@style/layout_width_height_fw"
+        android:background="@drawable/background_border"
+       >
+     <TextView
+            style="?android:attr/textAppearanceSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:layout_centerInParent="true"
+            android:layout_alignParentLeft="true"
+            android:layout_margin="8dp"
+            android:text="我发布的茶说" />
+
+     <TextView
+         android:id="@+id/manager_user_my_publish_tea_say"
+         android:layout_alignParentRight="true"
+         style="?android:attr/textAppearanceLarge"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_margin="8dp"
+         android:layout_centerInParent="true"
+         android:text=">"
+         android:textColor="@color/black" />
+    </RelativeLayout>
+    
+    <RelativeLayout 
+        android:layout_margin="8dp"
+        style="@style/layout_width_height_fw"
+        android:background="@drawable/background_border"
+      >
+     <TextView
+            style="?android:attr/textAppearanceSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:layout_centerInParent="true"
+            android:layout_alignParentLeft="true"
+            android:layout_margin="8dp"
+            android:text="每日任务" />
+
+     <TextView
+         android:id="@+id/manager_every_day_task"
+         android:layout_alignParentRight="true"
+         style="?android:attr/textAppearanceLarge"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_margin="8dp"
+         android:layout_centerInParent="true"
+         android:text=">"
+         android:textColor="@color/black" />
+
+    </RelativeLayout>
+        <LinearLayout 
+        android:layout_margin="8dp"
+        style="@style/layout_width_height_ff"
+        android:gravity="bottom"
+        android:orientation="vertical">
+     <Button 
+    	android:id="@+id/btn_clear_catche"
+    	android:layout_width="fill_parent"
+    	android:layout_height="wrap_content"
+    	android:layout_marginTop="8dp"
+    	android:gravity="center"
+    	android:text="清除缓存"
+    	android:background="@drawable/green_button"
+    	
+    />
+      <Button 
+    	android:id="@+id/btn_log_out"
+    	android:layout_width="fill_parent"
+    	android:layout_height="wrap_content"
+    	android:text="注销"
+    	android:layout_marginTop="8dp"
+    	android:background="@drawable/green_button"
+    	android:layout_gravity="bottom"
+    	
+    />
+      </LinearLayout>
 </LinearLayout>

@@ -41,7 +41,7 @@ public class TeaKnowledgeFragment extends Fragment {
 			map.put("tea_knowledge_item_text", "NO." + String.valueOf(i));// 按序号做ItemText
 			lstImageItem.add(map);
 		}
-		SimpleAdapter saImageItems = new SimpleAdapter(container.getContext(),lstImageItem,R.layout.gridviewitem_tea_knowledge, new String[] { "tea_knowledge_item_image", "tea_knowledge_item_text" },
+		SimpleAdapter saImageItems = new SimpleAdapter(container.getContext(),lstImageItem,R.layout.griditem_tea_knowledge, new String[] { "tea_knowledge_item_image", "tea_knowledge_item_text" },
 				new int[] { R.id.tea_knowledge_item_image, R.id.tea_knowledge_item_text });
 		// 添加并且显示
 		gridview.setAdapter(saImageItems);

@@ -8,27 +8,31 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-public abstract class ActivityBaseAdaptor<T> extends BaseAdapter {
+public abstract class ActivityBaseAdapter<T> extends BaseAdapter {
 	
 	Context mContext;
 	List<T> mDatas;
-	LayoutInflater mInflater;
-	public ActivityBaseAdaptor(Context context, List<T> mDatas, int itemLayoutId)
+	LayoutInflater layoutInflater;
+	public ActivityBaseAdapter(Context context, List<T> mDatas)
 	{
 		this.mContext = context;
-		this.mInflater = LayoutInflater.from(mContext);
+		this.layoutInflater = LayoutInflater.from(mContext);
 		this.mDatas = mDatas;
 	}
 	
 	@Override
 	public int getCount() {
-		// TODO Auto-generated method stub
+		if (mDatas == null||mDatas.size()==0) {
+			return 0;
+		}
 		return mDatas.size();
 	}
 
 	@Override
 	public T getItem(int i) {
-		// TODO Auto-generated method stub
+		if (mDatas == null||mDatas.size()==0) {
+			return null;
+		}
 		return mDatas.get(i);
 	}
 
@@ -39,7 +43,7 @@ public abstract class ActivityBaseAdaptor<T> extends BaseAdapter {
 	}
 
 	
-	public abstract View getView(int arg0, View arg1, ViewGroup arg2);
+	public abstract View getView(int position, View convertView, ViewGroup parent);
 	
 
 }
