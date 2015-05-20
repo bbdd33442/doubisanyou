@@ -24,6 +24,7 @@ public class TeaSayImageSelectedViewActivity extends Activity implements OnClick
 	public static final String SELECTED_IMAGE_PATH="selected_image_path";
 	public static final String FOLDER_IMAGE_NAME="folder_image_name";
 	
+	TextView title;
 	private String folderDir;
 	private ArrayList<String> selectedImagePath;
 	private ArrayList<String> folderImageName;
@@ -46,6 +47,8 @@ public class TeaSayImageSelectedViewActivity extends Activity implements OnClick
 		back  = (Button) findViewById(R.id.btn_left);
 		back.setVisibility(View.VISIBLE);
 		back.setOnClickListener(this);
+		title = (TextView) findViewById(R.id.default_title);
+		
 		mGirdView=(GridView) findViewById(R.id.image_view_gridview);
 		imageViewFinish = (TextView) findViewById(R.id.image_view_finish);
 		imageViewFinish.setOnClickListener(this);
@@ -54,6 +57,7 @@ public class TeaSayImageSelectedViewActivity extends Activity implements OnClick
 		folderDir = i.getCharSequenceExtra(FOLDER_DIR).toString();
 		selectedImagePath = i.getStringArrayListExtra(SELECTED_IMAGE_PATH);
 		folderImageName = i.getStringArrayListExtra(FOLDER_IMAGE_NAME);
+		title.setText(folderDir.subSequence(folderDir.lastIndexOf("/")+1, folderDir.length()));
 		type = i.getStringExtra(TeaSayPublushImageFolderListActivity.ACTIVITYTYPE);
 		int num = 0;
 		if(type.equals(TeaSayPublushImageFolderListActivity.TEASYPUBLISH)){
