@@ -1,4 +1,5 @@
 
+
 package com.doubisanyou.appcenter.fragment;
 
 import java.util.ArrayList;
@@ -11,29 +12,18 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.View.OnClickListener;
 import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import com.doubisanyou.appcenter.R;
 import com.doubisanyou.appcenter.activity.HistorySecondActivity;
-import com.doubisanyou.appcenter.activity.SearchSecondActivity;
-import com.doubisanyou.appcenter.activity.SearchThirdActivity;
 import com.doubisanyou.appcenter.adapter.SimpleAdapter;
 import com.doubisanyou.appcenter.bean.TeaHistory;
-import com.doubisanyou.appcenter.bean.TeaKnowledge;
-import com.doubisanyou.appcenter.date.Config;
-import com.doubisanyou.appcenter.widget.LoadingDialog;
-import com.doubisanyou.appcenter.widget.PullToRefreshListView;
 import com.doubisanyou.appcenter.widget.PullToRefreshBase.OnRefreshListener;
-import com.doubisanyou.baseproject.network.ConnectMethd;
-import com.doubisanyou.baseproject.network.NetConnect;
-import com.doubisanyou.baseproject.network.NetConnect.FailCallBack;
-import com.doubisanyou.baseproject.network.NetConnect.SuccessCallBack;
+import com.doubisanyou.appcenter.widget.PullToRefreshListView;
 
 public class TeaHistoryFragment extends Fragment {
 

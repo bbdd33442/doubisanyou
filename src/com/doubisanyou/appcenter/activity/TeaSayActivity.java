@@ -83,10 +83,12 @@ public class TeaSayActivity extends BaseActivity implements OnClickListener{
 			i.putExtra(TeaSayPublishActivity.PUBLISHTYPE, TeaSayPublishActivity.TEXT);
 			startActivity(i);
 			popMenu.dismiss();
+			break;
 		case R.id.pop_menu_with_image:
 			i.putExtra(TeaSayPublishActivity.PUBLISHTYPE, TeaSayPublishActivity.IMAGE);
 			startActivity(i);
 			popMenu.dismiss();
+			break;
 		default:
 			break;
 		}

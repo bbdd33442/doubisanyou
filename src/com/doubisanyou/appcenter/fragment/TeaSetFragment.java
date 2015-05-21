@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,22 +11,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.GridView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView.OnItemSelectedListener;
 
 import com.doubisanyou.appcenter.R;
-import com.doubisanyou.appcenter.activity.HistorySecondActivity;
-import com.doubisanyou.appcenter.activity.SearchSecondActivity;
 import com.doubisanyou.appcenter.activity.SetSecondActivity;
-import com.doubisanyou.appcenter.bean.TeaHistory;
 import com.doubisanyou.appcenter.bean.TeaSet;
-import com.doubisanyou.appcenter.fragment.TeaKnowledgeFragment.ItemClickListener;
-import com.doubisanyou.appcenter.widget.PullToRefreshListView;
 import com.doubisanyou.appcenter.widget.PullToRefreshBase.OnRefreshListener;
+import com.doubisanyou.appcenter.widget.PullToRefreshListView;
 
 public class TeaSetFragment extends Fragment {
 	HashMap<String, Object> map;

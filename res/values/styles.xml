@@ -1,9 +1,5 @@
 <resources>
 
-    <!--
-        Base application theme, dependent on API level. This theme is replaced
-        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
-    -->
     <style name="AppBaseTheme" parent="android:Theme.Light">
         <!--
             Theme customizations available in newer API levels can go in
@@ -11,22 +7,23 @@
             backward-compatibility can go here.
         -->
     </style>
-	<style name="normalText" parent="@android:style/TextAppearance">
-		<item name="android:textColor">#444</item>
-		<item name="android:textSize">14sp</item>
-	</style>
+
+    <style name="normalText" parent="@android:style/TextAppearance">
+        <item name="android:textColor">#444</item>
+        <item name="android:textSize">14sp</item>
+    </style>
     <!-- Application theme. -->
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
 
-      <!-- popwidnow 显示消失动画 -->
+    <!-- popwidnow 显示消失动画 -->
 
     <style name="popwindow_delete_btn_anim_style">
         <item name="android:windowEnterAnimation">@anim/delete_btn_show</item>
- <!-- 指定显示的动画xml -->
+        <!-- 指定显示的动画xml -->
         <item name="android:windowExitAnimation">@anim/delete_btn_hide</item>
- <!-- 指定消失的动画xml -->
+        <!-- 指定消失的动画xml -->
 
     </style>
 
@@ -34,6 +31,7 @@
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
+
     <style name="layout_width_height_ff">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">fill_parent</item>
@@ -43,31 +41,56 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
-	
+
     <style name="layout_width_height_wf">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">fill_parent</item>
     </style>
-    
-   <style name="layout_width_height_ww_color_orange" parent="layout_width_height_ww">
-      <item name="android:textColor">@color/orange</item> 
+
+    <style name="layout_width_height_ww_color_orange" parent="layout_width_height_ww">
+        <item name="android:textColor">@color/orange</item>
     </style>
-    
+
     <style name="label_text_view" parent="layout_width_height_ww">
-      <item name="android:textColor">@color/black</item>
-      <item name="android:textAppearance">?android:attr/textAppearanceSmall</item> 
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
     </style>
-    
-    <style name="text_color_size"  parent="@style/layout_width_height_ww"> 
-         <item name="android:textColor">@color/black</item> 
-            <item name="android:textSize">20sp</item> 
+
+    <style name="text_color_size" parent="@style/layout_width_height_ww">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">20sp</item>
     </style>
-    
-     <style name="ProgressBar_Mini" parent="@android:style/Widget.ProgressBar.Horizontal">  
-       <item name="android:maxHeight">100dip</item>  
-       <item name="android:minHeight">20dip</item>  
-       <item name="android:indeterminateOnly">false</item>  
-       <item name="android:indeterminateDrawable">@android:drawable/progress_indeterminate_horizontal</item>  
-       <item name="android:progressDrawable">@drawable/progressbar_mini</item>  
-   </style> 
+
+    <style name="chat_text_date_style">
+        <item name="android:padding">2dp</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:background">#bfbfbf</item>
+    </style>
+
+    <style name="chat_content_date_style">
+        <item name="android:minHeight">50dp</item>
+        <item name="android:gravity">left|center</item>
+        <item name="android:textColor">#000000</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:lineSpacingExtra">2dp</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:background">#bfbfbf</item>
+    </style>
+
+    <style name="chat_text_name_style">
+        <item name="android:textColor">#818181</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="ProgressBar_Mini" parent="@android:style/Widget.ProgressBar.Horizontal">
+        <item name="android:maxHeight">100dip</item>
+        <item name="android:minHeight">20dip</item>
+        <item name="android:indeterminateOnly">false</item>
+        <item name="android:indeterminateDrawable">@android:drawable/progress_indeterminate_horizontal</item>
+        <item name="android:progressDrawable">@drawable/progressbar_mini</item>
+    </style>
+
 </resources>
