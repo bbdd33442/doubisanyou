@@ -70,7 +70,7 @@ public class TeaHistoryFragment extends Fragment {
 		
 		
 		TeaHistory tk = new TeaHistory();
-		tk.tea_history_origin = "差的起源";
+		tk.tea_history_origin = "茶的起源";
 		teaHistory.add(tk);
 		//replyItem = new ArrayList<HashMap<String, Object>>();
 		for (int i = 0; i < teaHistory.size(); i++) {
