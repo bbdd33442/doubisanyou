@@ -176,7 +176,7 @@ public class TeaChatActivity extends BaseActivity implements OnClickListener {
 			mViewPager.setCurrentItem(1);
 			break;
 		case R.id.btn_right:
-//			startActivity(new Intent(this, AddFriendActivity.class));
+			// startActivity(new Intent(this, AddFriendActivity.class));
 			showAddFriendDialog(this);
 			break;
 		default:
@@ -201,26 +201,28 @@ public class TeaChatActivity extends BaseActivity implements OnClickListener {
 		String from = receiveChatMsgEvent.getChatMsgTransferEntity().getFrom();
 		Log.i(TAG, from);
 	}
-	
-	private void showAddFriendDialog(Context context){
+
+	private void showAddFriendDialog(Context context) {
 		LayoutInflater inflater = LayoutInflater.from(this);
 		View v = inflater.inflate(R.layout.dialog_add_friend, null);
-		final EditText jidEt = (EditText) v.findViewById(R.id.add_friend_jid_et);
+		final EditText jidEt = (EditText) v
+				.findViewById(R.id.add_friend_jid_et);
 		AlertDialog.Builder dialog = new AlertDialog.Builder(context);
 		dialog.setTitle("加好友");
 		dialog.setView(v);
 		dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-			
+
 			@Override
 			public void onClick(DialogInterface dialog, int whichButton) {
 				Log.i(TAG, "确定");
-				EBEvents.AddFriendEvent addFriendEvent = EBEvents.instanceAddFriendEvent();
+				EBEvents.AddFriendEvent addFriendEvent = EBEvents
+						.instanceAddFriendEvent();
 				addFriendEvent.setJid(jidEt.getText().toString());
 				EventBus.getDefault().post(addFriendEvent);
 			}
 		});
 		dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-			
+
 			@Override
 			public void onClick(DialogInterface arg0, int arg1) {
 				Log.i(TAG, "取消");

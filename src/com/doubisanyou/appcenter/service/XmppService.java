@@ -25,7 +25,6 @@ import org.jivesoftware.smack.chat.ChatMessageListener;
 import org.jivesoftware.smack.packet.Message;
 import org.jivesoftware.smack.packet.Presence;
 import org.jivesoftware.smack.roster.Roster;
-import org.jivesoftware.smack.roster.Roster.SubscriptionMode;
 import org.jivesoftware.smack.roster.RosterEntry;
 import org.jivesoftware.smack.roster.RosterGroup;
 import org.jivesoftware.smack.roster.RosterListener;
@@ -87,7 +86,7 @@ public class XmppService extends Service {
 		TeaChatActivity.ACCOUNT_NAME = "blook";
 		loginThread = new Thread() {
 			String result = "failed connected";
- 
+
 			@Override
 			public void run() {
 				if (conn == null) {
