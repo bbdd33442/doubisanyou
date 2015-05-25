@@ -44,6 +44,8 @@
             <activity android:name=".activity.HistorySecondActivity" />
 			<activity android:name=".activity.TeaChatRoomActivity"></activity>
 			<activity android:name=".activity.AddFriendActivity"></activity>
+            <activity android:name=".activity.GeneralSecondActivity" />
+            <activity android:name=".activity.SetSecondActivity" />
             <service android:name=".service.XmppService" />
         </application>
     </manifest>
