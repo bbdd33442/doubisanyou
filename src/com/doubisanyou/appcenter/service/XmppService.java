@@ -35,7 +35,6 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.nfc.cardemulation.OffHostApduService;
 import android.os.Binder;
 import android.os.IBinder;
 import android.util.Log;
@@ -84,7 +83,7 @@ public class XmppService extends Service {
 		NearByPeopleActivity.ACCOUNT_NAME = "blook";
 		loginThread = new Thread() {
 			String result = "failed connected";
-
+ 
 			@Override
 			public void run() {
 				if (conn == null) {
