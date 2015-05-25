@@ -11,13 +11,16 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.GridView;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.doubisanyou.appcenter.R;
 import com.doubisanyou.appcenter.adapter.TeaSayPublishImageGridAdapter;
+import com.doubisanyou.appcenter.bean.TeaSay;
+import com.doubisanyou.appcenter.db.TeaSayDBManager;
 import com.doubisanyou.baseproject.base.BaseActivity;
+import com.doubisanyou.baseproject.utilCommon.DateUtil;
 
 public class TeaSayPublishActivity extends BaseActivity implements OnClickListener,OnItemClickListener{
 	
@@ -25,6 +28,8 @@ public class TeaSayPublishActivity extends BaseActivity implements OnClickListen
 	public static final String IMAGE="image";
 	public static final String PUBLISHTYPE="publishtype";
 	
+	TeaSay ts;
+	private TeaSayDBManager tsdb;
 	private String publishType;
 	private Button backBtn;
 	private TextView titleBar;
@@ -32,27 +37,28 @@ public class TeaSayPublishActivity extends BaseActivity implements OnClickListen
 	private TeaSayPublishImageGridAdapter tpiAdapter;
 	private ArrayList<String> selectedImage = new ArrayList<String>();
 	private Button publishBtn;
+	private EditText teaSayContent;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		this.setContentView(R.layout.activity_publish_tea_say);
+		iniView();
+	}
+	
+
+	void iniView(){
+		ts = new TeaSay();
 		publishType = getIntent().getStringExtra(PUBLISHTYPE);
-		
 		if(getIntent().getStringArrayListExtra(TeaSayImageSelectedViewActivity.SELECTED_IMAGE_PATH)!=null){
 			selectedImage.clear();
 			selectedImage = getIntent().getStringArrayListExtra(TeaSayImageSelectedViewActivity.SELECTED_IMAGE_PATH);
+			ts.tea_say_images=selectedImage;
 		}		
 		if(selectedImage.size()<9){
 			selectedImage.add(String.valueOf(R.drawable.tea_say_publish_add_image));
 		}
 		tpiAdapter = new TeaSayPublishImageGridAdapter(getApplicationContext(),selectedImage);
-
 		tpiAdapter.notifyDataSetChanged();
-		iniView();
-	}
-
-	
-	void iniView(){
 		backBtn = (Button) findViewById(R.id.btn_left);
 		backBtn.setOnClickListener(this);
 		backBtn.setVisibility(View.VISIBLE);
@@ -70,13 +76,27 @@ public class TeaSayPublishActivity extends BaseActivity implements OnClickListen
 		}else if(publishType.equals(IMAGE)){
 			
 		}
+		teaSayContent = (EditText) findViewById(R.id.tea_say_publish_content);
+		tsdb = new TeaSayDBManager(getApplicationContext());
 	}
 	
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-		case R.id.tea_say_publish_image:
-			 
+		case R.id.btn_right_btn:
+			//进行网络通讯，返回一个ID
+			ts.tea_say_id="1121";
+			ts.tea_say_publisher_id="1234";
+			ts.tea_say_publisher_name="xxx111";
+			ts.tea_say_time=String.valueOf(System.currentTimeMillis());
+			ts.tea_say_publish_date=DateUtil.getCurDate();
+			ts.tea_say_content=teaSayContent.getText().toString();
+			ts.tea_say_publisher_avatar="";
+			if(ts.tea_say_images.contains(String.valueOf(R.drawable.tea_say_publish_add_image))){
+				ts.tea_say_images.remove(String.valueOf(R.drawable.tea_say_publish_add_image));
+			}
+			tsdb.addTeaSay(ts);
+			finish();
 			break;
 		case R.id.btn_left:
 			finish();

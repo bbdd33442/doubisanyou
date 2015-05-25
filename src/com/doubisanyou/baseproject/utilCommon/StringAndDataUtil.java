@@ -1,9 +1,6 @@
 package com.doubisanyou.baseproject.utilCommon;
 
 import java.math.BigDecimal;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.regex.Matcher;
@@ -159,4 +156,20 @@ public class StringAndDataUtil
 		double   f1   =   b.setScale(newScale,   BigDecimal.ROUND_HALF_UP).doubleValue(); 
 		return f1;
 	}
+	/**
+	 * 字符串之间用,号隔开
+	 * @param string
+	 * @return
+	 */
+	public static String List2String(String[] string){
+		StringBuffer sb = new StringBuffer();
+		String s = new String();
+		for(int i = 0; i < string.length; i++) {
+			sb.append(string[i]+",");
+		}
+        sb.deleteCharAt(sb.length()-1);
+		s=sb.toString();
+		return s;
+	}
+	
 }
