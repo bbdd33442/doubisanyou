@@ -13,14 +13,17 @@
         android:layout_centerInParent="true"
         android:layout_margin="10dp"
         android:src="@drawable/user_default_avatars" />
-    
+
     <TextView
         android:id="@+id/tea_set_content"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_toRightOf="@+id/tea_search_second_image"
+        android:layout_toRightOf="@+id/tea_set_image"
         android:singleLine="false"
-        android:text="xxxxx" />
+        android:text="xxxxx"
+        android:gravity="center"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/black" />
 
 </RelativeLayout>

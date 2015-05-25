@@ -70,7 +70,7 @@
             android:layout_below="@id/top"
            >
 		   <TextView
-            android:id="@+id/manager_user_id_label"
+            android:id="@+id/manager_user_praise_label"
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -78,15 +78,15 @@
              />
 
         <TextView
-            android:id="@+id/manager_user_id"
+            android:id="@+id/manager_user_praise"
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:text="xx"
-            android:layout_toRightOf="@id/manager_user_id_label" />
+            android:layout_toRightOf="@id/manager_user_praise_label" />
 
         <TextView
-            android:id="@+id/manager_user_name_label"
+            android:id="@+id/manager_user_integral_label"
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
@@ -94,12 +94,12 @@
             android:layout_toRightOf="@id/manager_user_id"/>
 
         <TextView
-            android:id="@+id/manager_user_name"
+            android:id="@+id/manager_user_integral"
            android:layout_weight="1"
            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="xx" 
-            android:layout_toRightOf="@id/manager_user_name_label"/>
+            android:layout_toRightOf="@id/manager_user_integral_label"/>
 		</LinearLayout>
     </RelativeLayout>
 	

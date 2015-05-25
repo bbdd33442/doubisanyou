@@ -25,7 +25,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:editable="false"
-                android:text="  中国茶文化源远流长，巴蜀常被称为中国茶业和茶文化的摇篮。六朝以前的茶史资料表明，中国的茶业最初兴起于巴蜀。茶叶文化的形成，与巴蜀地区早期的政治、风俗及茶叶饮用有着密切的关系。" />
+                android:text="  中国茶文化源远流长，巴蜀常被称为中国茶业和茶文化的摇篮。六朝以前的茶史资料表明，中国的茶业最初兴起于巴蜀。茶叶文化的形成，与巴蜀地区早期的政治、风俗及茶叶饮用有着密切的关系。"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/black" />
         </LinearLayout>
     </ScrollView>
 

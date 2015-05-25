@@ -5,7 +5,6 @@ import java.util.List;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
@@ -19,17 +18,12 @@ import android.widget.TextView;
 
 import com.doubisanyou.appcenter.R;
 import com.doubisanyou.appcenter.adapter.FragmentAdapter;
-import com.doubisanyou.appcenter.date.Config;
 import com.doubisanyou.appcenter.fragment.TeaGeneralFragment;
 import com.doubisanyou.appcenter.fragment.TeaHistoryFragment;
 import com.doubisanyou.appcenter.fragment.TeaKnowledgeFragment;
 import com.doubisanyou.appcenter.fragment.TeaSetFragment;
 import com.doubisanyou.appcenter.widget.LoadingDialog;
 import com.doubisanyou.baseproject.base.BaseActivity;
-import com.doubisanyou.baseproject.network.ConnectMethd;
-import com.doubisanyou.baseproject.network.NetConnect;
-import com.doubisanyou.baseproject.network.NetConnect.FailCallBack;
-import com.doubisanyou.baseproject.network.NetConnect.SuccessCallBack;
 
 /**
  * @Title 首页
