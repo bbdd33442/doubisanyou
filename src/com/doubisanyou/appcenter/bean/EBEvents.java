@@ -37,11 +37,22 @@ public class EBEvents {
 		EBEvents events = new EBEvents();
 		return events.new GetChatHistoryEvent();
 	}
-	
-	public static RefreshChatHistoryEvent instanceRefreshChatHistoryEvent(){
+
+	public static RefreshChatHistoryEvent instanceRefreshChatHistoryEvent() {
 		EBEvents events = new EBEvents();
 		return events.new RefreshChatHistoryEvent();
 	}
+
+	public static AddFriendEvent instanceAddFriendEvent() {
+		EBEvents events = new EBEvents();
+		return events.new AddFriendEvent();
+	}
+
+	public static DeleteFriendEvent instanceDeleteFriendEvent() {
+		EBEvents events = new EBEvents();
+		return events.new DeleteFriendEvent();
+	}
+
 	/**
 	 * @author Blook
 	 * @Description 获取通信录
@@ -148,6 +159,39 @@ public class EBEvents {
 
 		public void setChatMsgViews(List<ChatMsgViewEntity> chatMsgViews) {
 			this.chatMsgViews = chatMsgViews;
+		}
+	}
+
+	/**
+	 * @author Blook
+	 * @Description 添加好友事件
+	 */
+	public class AddFriendEvent {
+		private String jid;
+
+		public String getJid() {
+			return jid;
+		}
+
+		public void setJid(String jid) {
+			this.jid = jid;
+		}
+
+	}
+
+	/**
+	 * @author Blook
+	 * @Description 删除好友事件
+	 */
+	public class DeleteFriendEvent {
+		private String jid;
+
+		public String getJid() {
+			return jid;
+		}
+
+		public void setJid(String jid) {
+			this.jid = jid;
 		}
 	}
 }

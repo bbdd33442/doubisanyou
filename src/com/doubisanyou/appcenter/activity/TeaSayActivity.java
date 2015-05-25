@@ -1,6 +1,6 @@
 package com.doubisanyou.appcenter.activity;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.doubisanyou.appcenter.R;
 import com.doubisanyou.appcenter.adapter.TeaSayAdapter;
 import com.doubisanyou.appcenter.bean.TeaSay;
+import com.doubisanyou.appcenter.db.TeaSayDBManager;
 import com.doubisanyou.appcenter.widget.LoadingDialog;
 import com.doubisanyou.appcenter.widget.PopMenu;
 import com.doubisanyou.appcenter.widget.PullToRefreshBase.OnRefreshListener;
@@ -24,7 +25,7 @@ import com.doubisanyou.baseproject.base.BaseActivity;
  *
  */
 public class TeaSayActivity extends BaseActivity implements OnClickListener{
-	
+ 
 	private int mLoadingTpye = LOAGDING_NORMAL;
 	private final static int LOAGDING_NORMAL = 0;
 	private final static int LOAGDING_REFRESH = 1;
@@ -34,10 +35,10 @@ public class TeaSayActivity extends BaseActivity implements OnClickListener{
 	private	int	pageNumber	=1;
 	
 	
-	
+	private TeaSayDBManager tsdb;
 	private PullToRefreshListView mPullRefreshListView;
 	private ListView mListView;
-	private ArrayList<TeaSay> tys;
+	private List<TeaSay> tys;
 	private PopMenu popMenu;
 	private TeaSayAdapter tsa;
 	private ImageButton rightBtn;
@@ -52,19 +53,17 @@ public class TeaSayActivity extends BaseActivity implements OnClickListener{
 	
 	void iniView(){
 		carLoadingDialog = new LoadingDialog(this);
-		tys = new ArrayList<TeaSay>();
+		tsdb = new TeaSayDBManager(getApplicationContext());
+		tys = tsdb.getTeaSayList();
 		tsa=new TeaSayAdapter(getApplicationContext(),tys,TeaSayActivity.this);
 		popMenu = new PopMenu(TeaSayActivity.this);
-		
 	    mPullRefreshListView = (PullToRefreshListView) findViewById(R.id.tea_say_list);
 	    mPullRefreshListView.setOnRefreshListener(mOnrefreshListener);
 	    mPullRefreshListView.setUpRefreshEnabled(true);
 	    mListView = mPullRefreshListView.getRefreshableView();
 		mListView.setAdapter(tsa);
-	    
 	    titleBar = (TextView) findViewById(R.id.default_title);
 	    titleBar.setText("茶说");
-	
 		rightBtn = (ImageButton)findViewById(R.id.btn_right);
 		rightBtn.setVisibility(View.VISIBLE);
 	
@@ -72,6 +71,15 @@ public class TeaSayActivity extends BaseActivity implements OnClickListener{
 		
 	}
 	
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		tys.clear();
+		tys.addAll(tsdb.getTeaSayList());
+		tsa.notifyDataSetChanged();
+	}
+
 	@Override
 	public void onClick(View v) {
 		Intent i = new Intent(this,TeaSayPublishActivity.class);
@@ -95,7 +103,7 @@ public class TeaSayActivity extends BaseActivity implements OnClickListener{
 		
 	} 
 	
-	
+
 	OnRefreshListener mOnrefreshListener = new OnRefreshListener() {
 		public void onRefresh() {
 			switch (mPullRefreshListView.getRefreshType()) {

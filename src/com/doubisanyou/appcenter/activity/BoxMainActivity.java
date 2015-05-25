@@ -1,11 +1,8 @@
 package com.doubisanyou.appcenter.activity;
  
-import com.doubisanyou.appcenter.R;
-
 import android.app.TabActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
@@ -13,9 +10,15 @@ import android.widget.AbsoluteLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TabHost;
+import android.widget.TabHost.TabSpec;
 import android.widget.TabWidget;
 import android.widget.TextView;
-import android.widget.TabHost.TabSpec;
+
+import com.doubisanyou.appcenter.R;
+import com.doubisanyou.appcenter.activity.ManagerActivity;
+import com.doubisanyou.appcenter.activity.TeaChatActivity;
+import com.doubisanyou.appcenter.activity.TeaKnowledgeActivity;
+import com.doubisanyou.appcenter.activity.TeaSayActivity;
 
 public class BoxMainActivity extends TabActivity {
 
@@ -24,7 +27,7 @@ public class BoxMainActivity extends TabActivity {
 	private String[] itemsName = new String[] { "茶知识", "聊茶", "茶说", "设置" };
 	// 各个tab对应的activity页面
 	private Class[] classes = new Class[] { TeaKnowledgeActivity.class,
-			NearByPeopleActivity.class, TeaSayActivity.class,
+			TeaChatActivity.class, TeaSayActivity.class,
 			ManagerActivity.class };
 	// tab选中时显示的图片
 	private int[] tab_sel_png = new int[] { R.drawable.ic_launcher,

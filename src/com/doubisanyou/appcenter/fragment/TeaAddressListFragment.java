@@ -7,10 +7,15 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
+import android.widget.PopupMenu;
+import android.widget.PopupMenu.OnMenuItemClickListener;
 
 import com.doubisanyou.appcenter.R;
 import com.doubisanyou.appcenter.activity.TeaChatRoomActivity;
@@ -63,6 +68,36 @@ public class TeaAddressListFragment extends Fragment {
 				return false;
 			}
 		});
+		mExpandableListView
+				.setOnItemLongClickListener(new OnItemLongClickListener() {
+
+					@Override
+					public boolean onItemLongClick(AdapterView<?> arg0,
+							View view, int pos, long id) {
+						
+						PopupMenu addressListMenu = new PopupMenu(
+								TeaAddressListFragment.this.getActivity(), view);
+						addressListMenu.getMenuInflater().inflate(
+								R.menu.ppm_address_list_item,
+								addressListMenu.getMenu());
+						addressListMenu.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+							
+							@Override
+							public boolean onMenuItemClick(MenuItem item) {
+								switch(item.getItemId()){
+								case R.id.ppma_item_delete_friend:
+									EBEvents.DeleteFriendEvent deleteFriendEvent = EBEvents.instanceDeleteFriendEvent();
+//									deleteFriendEvent.setJid(jid);
+									EventBus.getDefault().post(deleteFriendEvent);
+								}
+								return false;
+							}
+						});
+						addressListMenu.show();
+						return true;
+					}
+
+				});
 		return addressListView;
 	}
 

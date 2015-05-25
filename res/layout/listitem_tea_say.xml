@@ -4,20 +4,19 @@
     android:layout_height="wrap_content"
     android:gravity="center_vertical"
     android:orientation="horizontal" >
-	<TextView
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content" 
-	    android:id="@+id/tea_say_publisher_id"
-	    android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/tea_say_publisher_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="8dp"
+        android:layout_margin="8dp"
         android:background="@drawable/white_big_background"
         android:paddingBottom="5dp"
         android:paddingTop="5dp" >
@@ -26,55 +25,83 @@
             android:id="@+id/top_list_layout"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" >
-			
-			<ImageView  
-			    android:id="@+id/tea_say_publisher_avatar"
-			    android:src="@drawable/user_default_avatars"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginBottom="7dp"
-                android:layout_marginLeft="1dp"
-                android:layout_marginTop="8dp"
-                android:textColor="#000000"
-                android:textSize="16sp" />
-			
-            <TextView
-                android:layout_marginTop="8dp"
-                android:id="@+id/tea_say_publisher_name"
+
+            <RelativeLayout
+                android:id="@+id/top"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="4dp"
-                android:layout_toRightOf="@id/tea_say_publisher_avatar"
-                android:text="xxx"
-                android:textColor="#919191"
-                android:textSize="24sp" />
-			<TextView
-                android:layout_marginTop="8dp"
-                android:id="@+id/tea_say_content"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="4dp"
-                android:layout_below="@id/tea_say_publisher_name"
-                android:text="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-                android:textColor="#919191"
-                android:textSize="16sp" />
-            <ImageView
-                android:src="@drawable/ic_launcher"
-                android:id="@+id/tea_say_image"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_below="@id/tea_say_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginBottom="7dp"
-                android:layout_marginLeft="1dp"
-                android:layout_marginTop="8dp"
-                android:textColor="#000000"
-                android:textSize="16sp" />
+                android:layout_height="wrap_content" >
+
+                <ImageView
+                    android:id="@+id/tea_say_publisher_avatar"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginBottom="7dp"
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginTop="8dp"
+                    android:src="@drawable/user_default_avatars"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tea_say_publisher_name"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_toRightOf="@id/tea_say_publisher_avatar"
+                    android:text="xxx"
+                    android:textColor="#919191"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:id="@+id/tea_say_content"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tea_say_publisher_name"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_toRightOf="@id/tea_say_publisher_avatar"
+                    android:text="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                    android:textColor="#919191"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:id="@+id/tea_say_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tea_say_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="7dp"
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_toRightOf="@id/tea_say_publisher_avatar"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    android:visibility="gone" />
+
+                <GridView
+                    android:id="@+id/tea_say_grid"
+                    android:layout_width="fill_parent"
+                    android:layout_height="390dp"
+                    android:layout_below="@id/tea_say_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_margin="8dp"
+                    android:layout_marginBottom="7dp"
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_toRightOf="@id/tea_say_publisher_avatar"
+                    android:horizontalSpacing="8dp"
+                    android:listSelector="#00000000"
+                    android:numColumns="3"
+                    android:scrollbars="none"
+                    android:verticalSpacing="8dp"
+                    android:visibility="gone" />
+            </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="fill_parent"
                 android:layout_height="35dp"
-                android:layout_below="@id/tea_say_image" >
+                android:layout_below="@id/top" >
 
                 <TextView
                     android:id="@+id/tea_say_publish_date"
@@ -86,13 +113,13 @@
                     android:text="2014年11月22日"
                     android:textColor="#919191"
                     android:textSize="14sp" />
-     
+
                 <TextView
                     android:id="@+id/tea_say_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
                     android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
                     android:layout_marginLeft="1dp"
                     android:text="1分钟前"
                     android:textColor="#919191"
@@ -110,29 +137,31 @@
             android:id="@+id/tea_say_praise_img"
             android:layout_width="30dp"
             android:layout_height="30dp"
+            android:layout_alignParentLeft="true"
             android:layout_below="@+id/top_list_layout"
-            android:layout_marginRight="20dp"
-            android:src="@drawable/praise_icon" />
-		  
-		    <Button
-		        android:id="@+id/tea_say_list_reply"
-		        android:layout_width="wrap_content"
-		        android:layout_height="35dp"
-		        android:layout_below="@+id/top_list_layout"
-		        android:layout_marginLeft="17dp"
-		        android:layout_toRightOf="@+id/tea_say_praise_img"
-		        android:text="回复" />
-		    <Button
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp" />
+
+        <ImageView
+            android:id="@+id/tea_say_list_reply"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_below="@+id/top_list_layout"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="8dp"
+            android:layout_toRightOf="@id/tea_say_praise_img"
+            android:src="@drawable/reply" />
+
+        <ImageView
             android:id="@+id/tea_say_list_delete"
-            android:text="删除"
-            android:layout_width="wrap_content"
-            android:layout_height="35dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
             android:layout_below="@+id/top_list_layout"
-            android:layout_marginRight="20dp"
-            android:layout_toRightOf="@id/tea_say_list_reply"
-             />
-
-
+            android:layout_centerInParent="true"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/delete" />
     </RelativeLayout>
-
 </RelativeLayout>

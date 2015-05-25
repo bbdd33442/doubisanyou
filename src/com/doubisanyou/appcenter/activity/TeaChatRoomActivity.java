@@ -43,6 +43,7 @@ public class TeaChatRoomActivity extends Activity implements OnClickListener {
 	/** Called when the activity is first created. */
 	private static final String TAG = TeaChatRoomActivity.class.getSimpleName();
 	public static String CURRENT_CONTACT;
+	public static String CHAT_ID;
 	private Button mBtnSend;
 	private TextView mBtnRcd, mNicknameTv;
 	private Button mBtnBack;
@@ -76,6 +77,7 @@ public class TeaChatRoomActivity extends Activity implements OnClickListener {
 				WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 		Intent intent = getIntent();
 		CURRENT_CONTACT = intent.getStringExtra("nickName");
+		CHAT_ID = intent.getStringExtra("chatId");
 		initView();
 
 		initData();
@@ -87,12 +89,14 @@ public class TeaChatRoomActivity extends Activity implements OnClickListener {
 
 	@Override
 	protected void onStart() {
+		Log.i(TAG, "start");
 		super.onStart();
 		EventBus.getDefault().register(this);
 	}
 
 	@Override
 	protected void onStop() {
+		Log.i(TAG, "stop");
 		EventBus.getDefault().unregister(this);
 		CURRENT_CONTACT = null;
 		super.onStop();
@@ -171,7 +175,10 @@ public class TeaChatRoomActivity extends Activity implements OnClickListener {
 		 * 
 		 * entity.setContent(msgArray[i]); mDataArrays.add(entity); }
 		 */
-		EventBus.getDefault().post(EBEvents.instanceGetChatHistoryEvent());
+		EBEvents.GetChatHistoryEvent getChatHistoryEvent = EBEvents
+				.instanceGetChatHistoryEvent();
+		getChatHistoryEvent.setChatId(CHAT_ID);
+		EventBus.getDefault().post(getChatHistoryEvent);
 		mAdapter = new TeaChatMsgViewAdapter(this, mDataArrays);
 		mListView.setAdapter(mAdapter);
 
@@ -194,7 +201,7 @@ public class TeaChatRoomActivity extends Activity implements OnClickListener {
 		if (contString.length() > 0) {
 			ChatMsgViewEntity entity = new ChatMsgViewEntity();
 			entity.setTime(getDate());
-			entity.setFrom(NearByPeopleActivity.ACCOUNT_NAME);
+			entity.setFrom(TeaChatActivity.ACCOUNT_NAME);
 			entity.setSend(true);
 			entity.setContent(contString);
 			mDataArrays.add(entity);
@@ -203,7 +210,7 @@ public class TeaChatRoomActivity extends Activity implements OnClickListener {
 			mListView.setSelection(mListView.getCount() - 1);
 			ChatMsgTransferEntity cmbe = new ChatMsgTransferEntity();
 			cmbe.setContent(contString);
-			cmbe.setFrom(NearByPeopleActivity.ACCOUNT_NAME);
+			cmbe.setFrom(TeaChatActivity.ACCOUNT_NAME);
 			cmbe.setTo(CURRENT_CONTACT);
 			/*
 			 * Intent intent = new Intent();
@@ -325,7 +332,7 @@ public class TeaChatRoomActivity extends Activity implements OnClickListener {
 					}
 					ChatMsgViewEntity entity = new ChatMsgViewEntity();
 					entity.setTime(getDate());
-					entity.setFrom(NearByPeopleActivity.ACCOUNT_NAME);
+					entity.setFrom(TeaChatActivity.ACCOUNT_NAME);
 					entity.setSend(true);
 					entity.setLength(time + "\"");
 					entity.setContent(voiceName);
