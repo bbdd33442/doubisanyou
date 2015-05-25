@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.doubisanyou.appcenter.R;
@@ -28,8 +29,9 @@ public class TeaSayPublishActivity extends BaseActivity implements OnClickListen
 	private Button backBtn;
 	private TextView titleBar;
 	private GridView publishImageGridview;
-	TeaSayPublishImageGridAdapter tpiAdapter;
-	ArrayList<String> selectedImage = new ArrayList<String>();
+	private TeaSayPublishImageGridAdapter tpiAdapter;
+	private ArrayList<String> selectedImage = new ArrayList<String>();
+	private Button publishBtn;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -54,6 +56,10 @@ public class TeaSayPublishActivity extends BaseActivity implements OnClickListen
 		backBtn = (Button) findViewById(R.id.btn_left);
 		backBtn.setOnClickListener(this);
 		backBtn.setVisibility(View.VISIBLE);
+		publishBtn = (Button) findViewById(R.id.btn_right_btn);
+		publishBtn.setOnClickListener(this);
+		publishBtn.setVisibility(View.VISIBLE);
+		publishBtn.setText("发布");
 		titleBar =  (TextView) findViewById(R.id.default_title);
 		titleBar.setText("新建茶说");
 		publishImageGridview = (GridView) findViewById(R.id.tea_say_publish_image_gridview);

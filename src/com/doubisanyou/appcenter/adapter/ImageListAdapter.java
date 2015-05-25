@@ -53,8 +53,8 @@ public class ImageListAdapter extends ActivityBaseAdapter<String>{
 				//选择，则将图片变暗，反之则反之
 				@Override
 				public void onClick(View v)
-				{   //&&!selectedImagePath.contains(dir + "/" + imageName)
-					if(selectedImagePath.size()==canSelcetNum){
+				{   //并且在9张的时候能解除自己的状态
+					if(selectedImagePath.size()==canSelcetNum&&!selectedImagePath.contains(dir + "/" + imageName)){
 						Builder builder = new Builder(ac);
 						builder.setMessage("照片不能超过"+canSelcetNum+"张！");
 						builder.setTitle("提示");

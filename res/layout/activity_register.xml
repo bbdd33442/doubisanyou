@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/registe_user_avartar"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_gravity="center_horizontal"
         android:layout_margin="8dp"
         android:src="@drawable/user_default_avatars" />
