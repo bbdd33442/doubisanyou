@@ -238,7 +238,7 @@ public class XmppService extends Service {
 							getAddressListEvent
 									.setAddressGroupList(addressGroupList);
 							getAddressListEvent.setContactList(contactList);
-							EventBus.getDefault().post(getAddressListEvent);
+							EventBus.getDefault().post(getAddressListEvent );
 						}
 
 						@Override
