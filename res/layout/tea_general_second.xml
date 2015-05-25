@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_login"
+    android:orientation="vertical" >
+
+    <include layout="@layout/titlebar_default" />
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:background="@drawable/background_border"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:editable="false"
+                android:text="  茶叶命名是茶叶分类的重要程序之一。一种茶叶必须有一个名称以为标志。不论作为分类研究或实际应用，茶叶皆有一专门名称。命名与分类可以联系一起，如工夫红茶，前者是命名，后者是分类；又如白毫银针或岩茶水仙，前者是分类，后者是命名。茶叶名称通常都带有描写性，名称文雅也是其他商品所不及的。" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

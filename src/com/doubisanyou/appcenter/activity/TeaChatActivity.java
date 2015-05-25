@@ -3,6 +3,9 @@ package com.doubisanyou.appcenter.activity;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -11,8 +14,11 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -27,10 +33,8 @@ import com.doubisanyou.baseproject.base.BaseActivity;
 
 import de.greenrobot.event.EventBus;
 
-public class NearByPeopleActivity extends BaseActivity implements
-		OnClickListener {
-	private static final String TAG = NearByPeopleActivity.class
-			.getSimpleName();
+public class TeaChatActivity extends BaseActivity implements OnClickListener {
+	private static final String TAG = TeaChatActivity.class.getSimpleName();
 	public static String JID; // openfire id
 	public static String ACCOUNT_NAME; // 账户名
 	private List<Fragment> mFragmentList = new ArrayList<Fragment>();
@@ -48,6 +52,8 @@ public class NearByPeopleActivity extends BaseActivity implements
 	 */
 	private int screenWidth;
 	private ImageView mTabLineIv;
+	private TextView titile;
+	private ImageButton addFriendBtn;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +61,7 @@ public class NearByPeopleActivity extends BaseActivity implements
 		setContentView(R.layout.activity_tea_chat);
 		startService(new Intent(this, XmppService.class));
 		initView();
-		initTabLineWidth();	
+		initTabLineWidth();
 	}
 
 	@Override
@@ -69,6 +75,11 @@ public class NearByPeopleActivity extends BaseActivity implements
 		teaContactTv = (TextView) findViewById(R.id.tea_contact_tv);
 		mTabLineIv = (ImageView) findViewById(R.id.tea_chat_tabline_iv);
 		mViewPager = (ViewPager) findViewById(R.id.chat_layout_vp);
+		titile = (TextView) findViewById(R.id.default_title);
+		titile.setText("茶聊");
+		addFriendBtn = (ImageButton) findViewById(R.id.btn_right);
+		addFriendBtn.setVisibility(View.VISIBLE);
+		addFriendBtn.setOnClickListener(this);
 		teaChatTv.setOnClickListener(this);
 		teaContactTv.setOnClickListener(this);
 		mChatListFragment = new TeaChatListFragment();
@@ -164,6 +175,10 @@ public class NearByPeopleActivity extends BaseActivity implements
 		case R.id.tea_contact_tv:
 			mViewPager.setCurrentItem(1);
 			break;
+		case R.id.btn_right:
+//			startActivity(new Intent(this, AddFriendActivity.class));
+			showAddFriendDialog(this);
+			break;
 		default:
 			break;
 		}
@@ -186,5 +201,32 @@ public class NearByPeopleActivity extends BaseActivity implements
 		String from = receiveChatMsgEvent.getChatMsgTransferEntity().getFrom();
 		Log.i(TAG, from);
 	}
+	
+	private void showAddFriendDialog(Context context){
+		LayoutInflater inflater = LayoutInflater.from(this);
+		View v = inflater.inflate(R.layout.dialog_add_friend, null);
+		final EditText jidEt = (EditText) v.findViewById(R.id.add_friend_jid_et);
+		AlertDialog.Builder dialog = new AlertDialog.Builder(context);
+		dialog.setTitle("加好友");
+		dialog.setView(v);
+		dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int whichButton) {
+				Log.i(TAG, "确定");
+				EBEvents.AddFriendEvent addFriendEvent = EBEvents.instanceAddFriendEvent();
+				addFriendEvent.setJid(jidEt.getText().toString());
+				EventBus.getDefault().post(addFriendEvent);
+			}
+		});
+		dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface arg0, int arg1) {
+				Log.i(TAG, "取消");
+			}
+		});
+		dialog.create();
+		dialog.show();
+	}
 }
-

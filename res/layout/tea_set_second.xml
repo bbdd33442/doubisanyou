@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_login"
+    android:orientation="vertical" >
+
+    <include layout="@layout/titlebar_default" />
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:src="@drawable/ic_launcher" >
+    </ImageView>
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:background="@drawable/background_border"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:editable="false"
+                android:text="  紫砂壶是中国汉族特有的手工制造陶土工艺品。制作原料为紫砂泥，原产地在江苏宜兴丁蜀镇又名宜兴紫砂壶。从明武宗正德年间以来紫砂开始制成壶，名家辈出，500年间不断有精品传世。据说紫砂壶的创始人是中国明朝的供春。" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

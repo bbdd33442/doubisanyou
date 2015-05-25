@@ -1,12 +1,9 @@
 package com.doubisanyou.appcenter.activity;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.util.LogWriter;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
