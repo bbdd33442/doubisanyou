@@ -11,7 +11,7 @@ import com.doubisanyou.baseproject.network.NetConnect;
 import com.doubisanyou.baseproject.network.NetConnect.FailCallBack;
 import com.doubisanyou.baseproject.network.NetConnect.SuccessCallBack;
 
-public class AppInfoActivity extends NearByPeopleActivity {
+public class AppInfoActivity extends TeaChatActivity {
 	
 	TextView app_detail_name;
 	TextView app_type;

@@ -12,9 +12,12 @@ import java.util.Map;
 import org.jivesoftware.smack.ConnectionConfiguration.SecurityMode;
 import org.jivesoftware.smack.SmackConfiguration;
 import org.jivesoftware.smack.SmackException;
+import org.jivesoftware.smack.SmackException.NoResponseException;
 import org.jivesoftware.smack.SmackException.NotConnectedException;
+import org.jivesoftware.smack.SmackException.NotLoggedInException;
 import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.XMPPException;
+import org.jivesoftware.smack.XMPPException.XMPPErrorException;
 import org.jivesoftware.smack.chat.Chat;
 import org.jivesoftware.smack.chat.ChatManager;
 import org.jivesoftware.smack.chat.ChatManagerListener;
@@ -22,6 +25,7 @@ import org.jivesoftware.smack.chat.ChatMessageListener;
 import org.jivesoftware.smack.packet.Message;
 import org.jivesoftware.smack.packet.Presence;
 import org.jivesoftware.smack.roster.Roster;
+import org.jivesoftware.smack.roster.Roster.SubscriptionMode;
 import org.jivesoftware.smack.roster.RosterEntry;
 import org.jivesoftware.smack.roster.RosterGroup;
 import org.jivesoftware.smack.roster.RosterListener;
@@ -42,7 +46,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.doubisanyou.appcenter.R;
-import com.doubisanyou.appcenter.activity.NearByPeopleActivity;
+import com.doubisanyou.appcenter.activity.TeaChatActivity;
 import com.doubisanyou.appcenter.bean.AddressGroupEntity;
 import com.doubisanyou.appcenter.bean.ChatListFormEntity;
 import com.doubisanyou.appcenter.bean.ChatMsgTransferEntity;
@@ -81,7 +85,7 @@ public class XmppService extends Service {
 		EventBus.getDefault().register(this);
 		teaDatabaseHelper = new TeaDatabaseHelper(this, "teaDatabase.db3", 1);
 		SmackConfiguration.DEBUG = true;
-		NearByPeopleActivity.ACCOUNT_NAME = "blook";
+		TeaChatActivity.ACCOUNT_NAME = "blook";
 		loginThread = new Thread() {
 			String result = "failed connected";
 
@@ -117,6 +121,7 @@ public class XmppService extends Service {
 							Log.i(TAG, "来自陌生人的消息");
 							continue;
 						}
+						// offlineManager.
 						MessageModel mm = new MessageModel();
 						String chatId = isExistChatRoom(fromJid,
 								String.valueOf(1));
@@ -139,6 +144,7 @@ public class XmppService extends Service {
 							Log.i(TAG, "message insert success");
 						}
 					}
+					offlineManager.deleteMessages();
 					conn.sendStanza(new Presence(Presence.Type.available));
 					// 保存用户
 					ContactModel owner = new ContactModel();
@@ -183,7 +189,7 @@ public class XmppService extends Service {
 									// 广播收到的消息
 									ChatMsgTransferEntity cmte = new ChatMsgTransferEntity();
 									cmte.setFrom(msg.getFrom().split("@")[0]);
-									cmte.setTo(NearByPeopleActivity.ACCOUNT_NAME);
+									cmte.setTo(TeaChatActivity.ACCOUNT_NAME);
 									cmte.setContent(msg.getBody());
 									cmte.setType(1);
 									// 向teaChatRoomActivity发送消息
@@ -218,7 +224,7 @@ public class XmppService extends Service {
 					});
 					// 获取通讯录
 					final Roster roster = Roster.getInstanceFor(conn);
-
+					// roster.setSubscriptionMode(SubscriptionMode.manual);
 					// Gson gson = new Gson();
 					roster.addRosterListener(new RosterListener() {
 
@@ -361,6 +367,35 @@ public class XmppService extends Service {
 		EventBus.getDefault().post(refreshChatHistoryEvent);
 	}
 
+	/**
+	 * @Description 添加好友
+	 * @param addFriendEvent
+	 */
+	public void onEventBackgroundThread(EBEvents.AddFriendEvent addFriendEvent) {
+		String jid = addFriendEvent.getJid() + "@" + conn.getServiceName();
+		Roster roster = Roster.getInstanceFor(conn);
+		while (!roster.isLoaded())
+			;
+		if (roster.contains(jid)) {
+			Log.i(TAG, "存在用户" + jid);
+			try {
+				roster.createEntry(jid, jid.split("@")[0],
+						new String[] { "Friends" });
+			} catch (NotLoggedInException e) {
+				e.printStackTrace();
+			} catch (NoResponseException e) {
+				e.printStackTrace();
+			} catch (XMPPErrorException e) {
+				e.printStackTrace();
+			} catch (NotConnectedException e) {
+				e.printStackTrace();
+			}
+		} else {
+			Log.i(TAG, "用户" + jid + "不存在");
+		}
+
+	}
+
 	private String getDatetime() {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		return sdf.format(new Date());
@@ -488,6 +523,11 @@ public class XmppService extends Service {
 	}
 
 	private List<ChatMsgViewEntity> getChatHistory(String chatId) {
+		ArrayList<ChatMsgViewEntity> list = new ArrayList<ChatMsgViewEntity>();
+		if (StringUtils.isNullOrEmpty(chatId)) {
+			Log.i(TAG, "chatId为空");
+			return list;
+		}
 		SQLiteDatabase db = teaDatabaseHelper.getReadableDatabase();
 		Cursor cursor = db
 				.rawQuery(
@@ -495,8 +535,7 @@ public class XmppService extends Service {
 								+ " from tea_message as a, tea_chatroom as b, tea_contact as c"
 								+ " where c._id = a.teme_from"
 								+ " and a.[teme_tech_id] = b.[_id]"
-								+ " and b.[_id] = ?", new String[] { "1" });
-		ArrayList<ChatMsgViewEntity> list = new ArrayList<ChatMsgViewEntity>();
+								+ " and b.[_id] = ?", new String[] { chatId });
 		while (cursor.moveToNext()) {
 			ChatMsgViewEntity cmve = new ChatMsgViewEntity();
 			cmve.setContent(cursor.getString(0));

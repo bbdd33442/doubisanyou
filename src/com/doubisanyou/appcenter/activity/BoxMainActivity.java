@@ -24,7 +24,7 @@ public class BoxMainActivity extends TabActivity {
 	private String[] itemsName = new String[] { "茶知识", "聊茶", "茶说", "设置" };
 	// 各个tab对应的activity页面
 	private Class[] classes = new Class[] { TeaKnowledgeActivity.class,
-			NearByPeopleActivity.class, TeaSayActivity.class,
+			TeaChatActivity.class, TeaSayActivity.class,
 			ManagerActivity.class };
 	// tab选中时显示的图片
 	private int[] tab_sel_png = new int[] { R.drawable.ic_launcher,
