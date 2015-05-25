@@ -478,7 +478,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <tr><td><code>pullUpFromBottom</code></td><td>0x2</td><td></td></tr>
 <tr><td><code>both</code></td><td>0x3</td><td></td></tr>
 </table>
-          @attr name com.doubisanyou.appcenter:mode
+          @attr name android:mode
         */
         public static final int PullToRefresh_mode = 0;
     };
