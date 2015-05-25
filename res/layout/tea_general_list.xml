@@ -18,8 +18,8 @@
             android:layout_height="fill_parent"
             android:layout_margin="5.0dip"
             android:cacheColorHint="@null"
-            android:divider="@null"
-            android:dividerHeight="0.1dip"
+            android:divider="#000"
+        	android:dividerHeight="1px"
             ptr:mode="both" />
     </LinearLayout>
 

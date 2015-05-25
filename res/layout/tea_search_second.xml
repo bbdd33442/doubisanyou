@@ -14,7 +14,9 @@
         android:id="@+id/bn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="红茶属全发酵茶，是以适宜的茶树新牙叶为原料，经萎凋、揉捻（切）、发酵、干燥等一系列工艺过程精制而成的茶。萎凋是红茶初制的重要工艺，红茶在初制时称为“乌茶”。 红茶因其干茶冲泡后的茶汤和叶底色呈红色而得名。" />
+        android:text="红茶属全发酵茶，是以适宜的茶树新牙叶为原料，经萎凋、揉捻（切）、发酵、干燥等一系列工艺过程精制而成的茶。萎凋是红茶初制的重要工艺，红茶在初制时称为“乌茶”。 红茶因其干茶冲泡后的茶汤和叶底色呈红色而得名。"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/black" />
 
     <LinearLayout
         android:layout_width="fill_parent"
