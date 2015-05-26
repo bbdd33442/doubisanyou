@@ -62,6 +62,14 @@ public class TeaKnowledgeFragment extends Fragment {
 		map.put("tea_knowledge_item_image", R.drawable.cyan_tea);// 添加图像资源的ID
 		map.put("tea_knowledge_item_text", "青茶");// 按序号做ItemText
 		lstImageItem.add(map);
+		map = new HashMap<String, Object>();
+		map.put("tea_knowledge_item_image", R.drawable.health_care_tea);// 添加图像资源的ID
+		map.put("tea_knowledge_item_text", "保健茶");// 按序号做ItemText
+		lstImageItem.add(map);
+		map = new HashMap<String, Object>();
+		map.put("tea_knowledge_item_image", R.drawable.flower_tea);// 添加图像资源的ID
+		map.put("tea_knowledge_item_text", "花茶");// 按序号做ItemText
+		lstImageItem.add(map);
 		// }
 		SimpleAdapter saImageItems = new SimpleAdapter(container.getContext(),
 				lstImageItem, R.layout.griditem_tea_knowledge,
