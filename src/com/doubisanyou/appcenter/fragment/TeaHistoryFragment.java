@@ -9,6 +9,7 @@ import java.util.List;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,8 +58,8 @@ public class TeaHistoryFragment extends Fragment {
 		mPullRefreshListView.setUpRefreshEnabled(true);
 
 		ListView lv = mPullRefreshListView.getRefreshableView();
-		
-		
+		teaHistory.clear();
+		replyItem.clear();
 		TeaHistory tk = new TeaHistory();
 		tk.tea_history_origin = "茶的起源";
 		teaHistory.add(tk);
@@ -68,7 +69,6 @@ public class TeaHistoryFragment extends Fragment {
 			map.put("searchContent", teaHistory.get(i).tea_history_origin);
 			replyItem.add(map);
 		}
-
 		sla = new SimpleAdapter(container.getContext(), replyItem,
 				R.layout.listitem_tea_history,
 				new String[] { "searchContent" },

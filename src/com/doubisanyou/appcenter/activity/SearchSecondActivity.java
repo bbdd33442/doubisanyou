@@ -74,6 +74,7 @@ public class SearchSecondActivity extends Activity {
 		});
 
 		ListView lv = mPullRefreshListView.getRefreshableView();
+		//进行网络通讯从服务器获取的 
 		TeaKnowledge tk = new TeaKnowledge();
 		tk.tea_knowledge_name = "红茶";
 //		TeaKnowledge gt = new TeaKnowledge();

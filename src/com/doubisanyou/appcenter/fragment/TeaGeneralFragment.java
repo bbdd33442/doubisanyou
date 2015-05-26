@@ -61,7 +61,8 @@ public class TeaGeneralFragment extends Fragment {
 		mPullRefreshListView.setUpRefreshEnabled(true);
 
 		ListView lv = mPullRefreshListView.getRefreshableView();
-
+		replyItem.clear();
+		teaGeneral.clear();
 		TeaGeneral tg = new TeaGeneral();
 		tg.tea_general_name = "茶叶的命名";
 		teaGeneral.add(tg);

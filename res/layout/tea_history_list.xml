@@ -8,9 +8,7 @@
     android:background="@drawable/background_login"
     android:orientation="vertical" >
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" >
+  
 
         <com.doubisanyou.appcenter.widget.PullToRefreshListView
             android:id="@+id/task_list"
@@ -22,6 +20,6 @@
         	android:dividerHeight="1px"
             ptr:mode="both" />
        
-    </LinearLayout>
+  
 
 </LinearLayout>
