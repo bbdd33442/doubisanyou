@@ -86,7 +86,7 @@ public class RegisterActivity extends BaseActivity implements OnClickListener{
 				default:
 					break;
 				}
-				Log.i("x", user.user_type);
+				
 				
 			}
 		});

@@ -54,8 +54,8 @@ public class TeaSetFragment extends Fragment {
 		mPullRefreshListView.setUpRefreshEnabled(true);
 
 		ListView lv = mPullRefreshListView.getRefreshableView();
-		
-		
+		replyItem.clear();
+		teaSet.clear();
 		TeaSet tk = new TeaSet();
 		tk.tea_set_name = "紫砂壶";
 		teaSet.add(tk);
