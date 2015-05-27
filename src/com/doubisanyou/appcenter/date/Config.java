@@ -7,6 +7,8 @@ import android.content.Context;
 import android.content.SharedPreferences.Editor;
 import android.graphics.Bitmap;
 
+import com.doubisanyou.appcenter.bean.User;
+
 public class Config {
 	
 	public static final String DIR_NAME = null;
@@ -14,6 +16,8 @@ public class Config {
 	public static String CHARSET_UTF8 = "utf-8";
 
 	public static String TOKEN="token";
+	
+	public static User user;
 	
 	public static String PROJECT_ID="com.doubisanyou.tea";
 	

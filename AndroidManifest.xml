@@ -46,6 +46,7 @@
 			<activity android:name=".activity.AddFriendActivity"></activity>
             <activity android:name=".activity.GeneralSecondActivity" />
             <activity android:name=".activity.SetSecondActivity" />
+            <activity android:name=".activity.UserInfoEditeActivity"></activity>
             <service android:name=".service.XmppService" />
         </application>
     </manifest>

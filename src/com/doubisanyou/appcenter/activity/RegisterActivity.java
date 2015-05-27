@@ -6,14 +6,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioGroup;
+import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
 
 import com.doubisanyou.appcenter.R;
-import com.doubisanyou.appcenter.widget.ViewHolder;
+import com.doubisanyou.appcenter.bean.User;
+import com.doubisanyou.appcenter.date.Config;
 import com.doubisanyou.baseproject.base.BaseActivity;
 import com.doubisanyou.baseproject.utilsResource.ImageLoader;
 import com.doubisanyou.baseproject.utilsResource.ImageLoader.Type;
@@ -26,6 +31,13 @@ public class RegisterActivity extends BaseActivity implements OnClickListener{
 	TextView title;
 	ImageView userAvatars;
 	int second;
+	EditText registePhoneNumber;
+	EditText registeCheckCode;
+	EditText registeNickName;
+	EditText registePass;
+	EditText registePassCheck;
+	RadioGroup registeUserType;
+	User user;
 	ArrayList<String> selectedImage = new ArrayList<String>();
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -35,6 +47,7 @@ public class RegisterActivity extends BaseActivity implements OnClickListener{
 	}
 
 	private void iniView() {
+		user = new User();
 		getCheckCode =(Button) findViewById(R.id.get_check_code);
 		getCheckCode.setOnClickListener(this);
 		userAvatars = (ImageView) findViewById(R.id.registe_user_avartar);
@@ -49,7 +62,34 @@ public class RegisterActivity extends BaseActivity implements OnClickListener{
 			selectedImage.clear();
 			selectedImage = getIntent().getStringArrayListExtra(TeaSayImageSelectedViewActivity.SELECTED_IMAGE_PATH);
 			ImageLoader.getInstance(3,Type.LIFO).loadImage(selectedImage.get(0),userAvatars);
-		}		
+		}
+		registePhoneNumber = (EditText) findViewById(R.id.registe_phone_number);
+		registeCheckCode = (EditText) findViewById(R.id.registe_check_code);
+		registeNickName = (EditText) findViewById(R.id.registe_nick_name);
+		registePass = (EditText) findViewById(R.id.registe_pass);
+		registePassCheck = (EditText) findViewById(R.id.registe_pass_check);
+		registeUserType = (RadioGroup) findViewById(R.id.registe_user_type);
+		registeUserType.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			
+			@Override
+			public void onCheckedChanged(RadioGroup group, int checkedId) {
+				switch (checkedId) {
+				case R.id.user_type_tea_business:
+					user.user_type = "1";
+					break;
+				case R.id.user_type_tea_company:
+					user.user_type = "2";
+					break;
+				case R.id.user_type_tea_friend:
+					user.user_type = "0";
+					break;
+				default:
+					break;
+				}
+				Log.i("x", user.user_type);
+				
+			}
+		});
 	}
    
 	Handler handler = new Handler(){
@@ -100,10 +140,12 @@ public class RegisterActivity extends BaseActivity implements OnClickListener{
 			break;
 		case R.id.btn_registe_ok:
 			//进行网络通讯，将用户加入到数据库中
+			
+			Config.user = user;
 			finish();
 			break;
 		case R.id.registe_user_avartar:
-			Intent i = new Intent(RegisterActivity.this,TeaSayPublushImageFolderListActivity.class);
+			Intent i = new Intent(this,TeaSayPublushImageFolderListActivity.class);
 			i.putStringArrayListExtra(TeaSayImageSelectedViewActivity.SELECTED_IMAGE_PATH, selectedImage);
 			i.putExtra(TeaSayPublushImageFolderListActivity.ACTIVITYTYPE,TeaSayPublushImageFolderListActivity.USERAVATARS);
 			startActivity(i);
