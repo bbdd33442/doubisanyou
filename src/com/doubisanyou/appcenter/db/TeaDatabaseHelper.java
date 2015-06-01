@@ -15,7 +15,8 @@ public class TeaDatabaseHelper extends SQLiteOpenHelper {
 	final String CREATE_TABLE_TEA_MESSAGE_SQL = "CREATE TABLE tea_message(_id integer primary key autoincrement, teme_content, teme_type, teme_from, teme_to, teme_time, teme_is_read, teme_tech_id)";
 	final String CREATE_TABLE_TEA_CHATROOM_SQL = "CREATE TABLE tea_chatroom(_id integer primary key autoincrement, tech_type, tech_update_time)";
 	final String CREATE_TABLE_TEA_TECO_TECH_SQL = "CREATE TABLE tea_teco_tech(_id integer primary key autoincrement, tett_teco_id, tett_tech_id)";
-
+	public static final String SINGLE_CHATROOM = "1";
+	public static final String MULTI_CHATROOM = "2";
 	// final String CREATE_TABLE_TEA_TECO_TEME_SQL =
 	// "CREATE TABLE tea_teco_teme(tett_id integer primary key autoincrement, teco_id, teme_id)";
 

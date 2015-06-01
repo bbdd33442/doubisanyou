@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import org.jivesoftware.smack.util.StringUtils;
+
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -36,6 +38,7 @@ import com.doubisanyou.appcenter.bean.ChatMsgTransferEntity;
 import com.doubisanyou.appcenter.bean.ChatMsgViewEntity;
 import com.doubisanyou.appcenter.bean.EBEvents;
 import com.doubisanyou.appcenter.bean.SoundMeter;
+import com.doubisanyou.appcenter.db.TeaDatabaseHelper;
 
 import de.greenrobot.event.EventBus;
 
@@ -92,6 +95,15 @@ public class TeaChatRoomActivity extends Activity implements OnClickListener {
 		Log.i(TAG, "start");
 		super.onStart();
 		EventBus.getDefault().register(this);
+		EBEvents.GetChatHistoryEvent getChatHistoryEvent = EBEvents
+				.instanceGetChatHistoryEvent();
+		if (!StringUtils.isNullOrEmpty(CHAT_ID))
+			getChatHistoryEvent.setChatId(CHAT_ID);
+		else {
+			getChatHistoryEvent.setJid(CURRENT_CONTACT);
+			getChatHistoryEvent.setRoomType(TeaDatabaseHelper.SINGLE_CHATROOM);
+		}
+		EventBus.getDefault().post(getChatHistoryEvent);
 	}
 
 	@Override
@@ -99,6 +111,7 @@ public class TeaChatRoomActivity extends Activity implements OnClickListener {
 		Log.i(TAG, "stop");
 		EventBus.getDefault().unregister(this);
 		CURRENT_CONTACT = null;
+		CHAT_ID = null;
 		super.onStop();
 	}
 
@@ -175,13 +188,10 @@ public class TeaChatRoomActivity extends Activity implements OnClickListener {
 		 * 
 		 * entity.setContent(msgArray[i]); mDataArrays.add(entity); }
 		 */
-		EBEvents.GetChatHistoryEvent getChatHistoryEvent = EBEvents
-				.instanceGetChatHistoryEvent();
-		getChatHistoryEvent.setChatId(CHAT_ID);
-		EventBus.getDefault().post(getChatHistoryEvent);
 		mAdapter = new TeaChatMsgViewAdapter(this, mDataArrays);
 		mListView.setAdapter(mAdapter);
-
+		// 变更未读消息状态
+		// EventBus.getDefault().post(event);
 	}
 
 	public void onClick(View v) {

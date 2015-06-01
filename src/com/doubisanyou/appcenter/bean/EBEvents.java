@@ -53,6 +53,11 @@ public class EBEvents {
 		return events.new DeleteFriendEvent();
 	}
 
+	public static DeleteChatRoomEvent instanceDeleteChatRoomEvent() {
+		EBEvents events = new EBEvents();
+		return events.new DeleteChatRoomEvent();
+	}
+
 	/**
 	 * @author Blook
 	 * @Description 获取通信录
@@ -139,6 +144,8 @@ public class EBEvents {
 
 	public class GetChatHistoryEvent {
 		private String chatId;
+		private String jid;
+		private String roomType;
 
 		public String getChatId() {
 			return chatId;
@@ -146,6 +153,22 @@ public class EBEvents {
 
 		public void setChatId(String chatId) {
 			this.chatId = chatId;
+		}
+
+		public String getJid() {
+			return jid;
+		}
+
+		public void setJid(String jid) {
+			this.jid = jid;
+		}
+
+		public String getRoomType() {
+			return roomType;
+		}
+
+		public void setRoomType(String roomType) {
+			this.roomType = roomType;
 		}
 
 	}
@@ -192,6 +215,31 @@ public class EBEvents {
 
 		public void setJid(String jid) {
 			this.jid = jid;
+		}
+	}
+
+	/**
+	 * @author Blook
+	 * @Description 删除聊天室
+	 */
+	public class DeleteChatRoomEvent {
+		private String chatId;
+		private String jid;
+
+		public String getJid() {
+			return jid;
+		}
+
+		public void setJid(String jid) {
+			this.jid = jid;
+		}
+
+		public String getChatId() {
+			return chatId;
+		}
+
+		public void setChatId(String chatId) {
+			this.chatId = chatId;
 		}
 	}
 }

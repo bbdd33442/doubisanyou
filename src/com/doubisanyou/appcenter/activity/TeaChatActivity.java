@@ -184,7 +184,7 @@ public class TeaChatActivity extends BaseActivity implements OnClickListener {
 		}
 	}
 
-	@Override
+/*	@Override
 	protected void onStart() {
 		super.onStart();
 		EventBus.getDefault().register(this);
@@ -194,13 +194,13 @@ public class TeaChatActivity extends BaseActivity implements OnClickListener {
 	protected void onStop() {
 		EventBus.getDefault().unregister(this);
 		super.onStop();
-	}
+	}*/
 
-	public void onEventMainThread(
+/*	public void onEventMainThread(
 			EBEvents.ReceiveChatMsgEvent receiveChatMsgEvent) {
 		String from = receiveChatMsgEvent.getChatMsgTransferEntity().getFrom();
 		Log.i(TAG, from);
-	}
+	}*/
 
 	private void showAddFriendDialog(Context context) {
 		LayoutInflater inflater = LayoutInflater.from(this);

@@ -46,8 +46,12 @@ public class TeaAddressListViewAdapter extends BaseExpandableListAdapter {
 		if (convertView == null) {
 			convertView = inflater.inflate(R.layout.address_list_subitem, null);
 		}
-		convertView.setTag(1, groupPos);
-		convertView.setTag(2, childPos);
+		/*convertView.setTag(1, groupPos);
+		convertView.setTag(2, childPos);*/
+		PosBean pb = new PosBean();
+		pb.groupPos = groupPos;
+		pb.childPos = childPos;
+		convertView.setTag(pb);
 		TextView tv = (TextView) convertView
 				.findViewById(R.id.contact_nickname_tv);
 		ContactEntity ce = (ContactEntity) getChild(groupPos, childPos);
@@ -103,4 +107,8 @@ public class TeaAddressListViewAdapter extends BaseExpandableListAdapter {
 		return true;
 	}
 
+	public class PosBean {
+		public int groupPos;
+		public int childPos;
+	}
 }
