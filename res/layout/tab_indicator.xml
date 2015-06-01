@@ -6,37 +6,34 @@
     android:layout_weight="1"
     android:orientation="vertical" >
 
-    <AbsoluteLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center_horizontal"
-         >
+  
 
-        <ImageView
+       <!--  <ImageView
             android:id="@+id/tabimg_back_"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_x="0dp"
             android:layout_y="0dp"
-            android:src="@drawable/tab_selected_bg"/>
+            android:src="@drawable/tab_selected_bg"/> -->
 
         <ImageView
             android:id="@+id/item_TabImg"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:paddingTop="10dp"
-            android:layout_x="0dp"
-            android:layout_y="0dp" 
+            android:layout_gravity="center"
+            android:src="@drawable/chat_unselected"
             />
         
         <TextView 
             android:id="@+id/item_TabName"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="11"
+            android:layout_height="wrap_content"           
             android:gravity="center"
-            android:layout_y="50dp"
+            android:layout_y="30dp"
+            android:text="1222"
+            android:textColor="@color/orange"
            />
-    </AbsoluteLayout>
+   
 
 </LinearLayout>

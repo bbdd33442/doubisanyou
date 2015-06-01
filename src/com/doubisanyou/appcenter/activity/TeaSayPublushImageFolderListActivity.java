@@ -7,7 +7,6 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
@@ -28,8 +27,9 @@ import android.widget.Toast;
 import com.doubisanyou.appcenter.R;
 import com.doubisanyou.appcenter.adapter.ImageFolderListAdapter;
 import com.doubisanyou.appcenter.bean.ImageFloder;
+import com.doubisanyou.baseproject.base.BaseActivity;
 
-public class TeaSayPublushImageFolderListActivity extends Activity implements OnItemClickListener{
+public class TeaSayPublushImageFolderListActivity extends BaseActivity implements OnItemClickListener{
 	
 	private ImageFolderListAdapter ifl;
 	
@@ -74,6 +74,10 @@ public class TeaSayPublushImageFolderListActivity extends Activity implements On
 			switch (msg.what) {
 			case 1:
 				mProgressDialog.dismiss();
+				if(mPicsSize==0){
+					showToast("暂无图片", Toast.LENGTH_SHORT);
+					finish();
+				}
 				ifl= new ImageFolderListAdapter(mImageFloders,getApplicationContext());
 				folderDirList.setAdapter(ifl);
 				break;

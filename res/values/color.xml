@@ -10,4 +10,6 @@
     <color name="event_center">#ff6bd697</color> 
     <color name="lightgrey">#ff888888</color>
     <color name="common_color_background">#FFFFFF</color>
+    <color name="grey">#a9b7b7</color>
+    <color name="green">#11cd6e</color>
 </resources>

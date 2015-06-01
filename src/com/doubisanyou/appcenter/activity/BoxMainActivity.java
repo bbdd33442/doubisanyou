@@ -30,13 +30,13 @@ public class BoxMainActivity extends TabActivity {
 			TeaChatActivity.class, TeaSayActivity.class,
 			ManagerActivity.class };
 	// tab选中时显示的图片
-	private int[] tab_sel_png = new int[] { R.drawable.ic_launcher,
-			R.drawable.ic_launcher, R.drawable.ic_launcher,
-			R.drawable.ic_launcher };
+	private int[] tab_sel_png = new int[] { R.drawable.tea_knowledge_selected,
+			R.drawable.chat_selected, R.drawable.tea_say_selected,
+			R.drawable.set_selected };
 	// tab未选中时显示的图片
-	private int[] tab_unsel_png = new int[] { R.drawable.ic_launcher,
-			R.drawable.ic_launcher, R.drawable.ic_launcher,
-			 R.drawable.ic_launcher };
+	private int[] tab_unsel_png = new int[] { R.drawable.tea_knowledge_unselected,
+			R.drawable.chat_unselected, R.drawable.tea_say_unselected,
+			 R.drawable.set_unselected };
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -66,18 +66,24 @@ public class BoxMainActivity extends TabActivity {
 				 for (int i =0; i < tabwidget.getChildCount(); i++) {
 					 LinearLayout tabIndicator = (LinearLayout) tabwidget.getChildAt(i);
 					 ImageView iv = (ImageView)tabIndicator.findViewById(R.id.item_TabImg);
-					 ImageView abLayout = (ImageView)tabIndicator.findViewById(R.id.tabimg_back_);
+					 TextView tv = (TextView) tabIndicator.findViewById(R.id.item_TabName);
+					 
+					/* ImageView abLayout = (ImageView)tabIndicator.findViewById(R.id.tabimg_back_);*/
 					 LayoutParams params = iv.getLayoutParams();
 				      if(tabHost.getCurrentTab()==i){
-				    	  abLayout.setVisibility(View.VISIBLE);
+				    	 /* abLayout.setVisibility(View.VISIBLE);*/
+				    	  tv.setTextColor(getResources().getColor(R.color.green));
 				    	  iv.setImageResource(tab_sel_png[i]);
-				    	  AbsoluteLayout.LayoutParams lParams = new AbsoluteLayout.LayoutParams(params.width,params.height,0,0);  
+				    	  LinearLayout.LayoutParams lParams = new LinearLayout.LayoutParams(params.width,params.height);  
+				    	  lParams.gravity = 17;
 							iv.setLayoutParams(lParams); 
 				      }
 				      else {
 				    	  iv.setImageResource(tab_unsel_png[i]);
-				    	  abLayout.setVisibility(View.INVISIBLE);
-				    	  AbsoluteLayout.LayoutParams lParams = new AbsoluteLayout.LayoutParams(params.width,params.height,0,10);  
+				    	  tv.setTextColor(getResources().getColor(R.color.grey));
+				    /*	  abLayout.setVisibility(View.INVISIBLE);*/
+				    	  LinearLayout.LayoutParams lParams = new LinearLayout.LayoutParams(params.width,params.height);  
+				    	  lParams.gravity = 17;
 				    	  iv.setLayoutParams(lParams);  
 				      }
 				 }     	
@@ -94,18 +100,22 @@ public class BoxMainActivity extends TabActivity {
 			
 			ImageView iv = (ImageView)tabIndicator.findViewById(R.id.item_TabImg);
 			iv.setImageResource(resId);
-			 ImageView abLayout = (ImageView)tabIndicator.findViewById(R.id.tabimg_back_);
+			/* ImageView abLayout = (ImageView)tabIndicator.findViewById(R.id.tabimg_back_);*/
 			 TextView tv = (TextView) tabIndicator.findViewById(R.id.item_TabName);
 			 tv.setText(tag);
 			 LayoutParams params = iv.getLayoutParams();
 			if (index == 0) {
-				abLayout.setVisibility(View.VISIBLE);
-				  AbsoluteLayout.LayoutParams lParams = new AbsoluteLayout.LayoutParams(params.width,params.height,0,0);  
+			/*	abLayout.setVisibility(View.VISIBLE);*/
+				tv.setTextColor(getResources().getColor(R.color.green));
+				LinearLayout.LayoutParams lParams = new LinearLayout.LayoutParams(params.width,params.height);  
+				lParams.gravity = 17;
 					iv.setLayoutParams(lParams); 
 			} else {
-				abLayout.setVisibility(View.INVISIBLE);
-				 AbsoluteLayout.LayoutParams lParams = new AbsoluteLayout.LayoutParams(params.width,params.height,0,0);  
-		    	  iv.setLayoutParams(lParams);
+				/*abLayout.setVisibility(View.INVISIBLE);*/
+				tv.setTextColor(getResources().getColor(R.color.grey));
+				LinearLayout.LayoutParams lParams = new LinearLayout.LayoutParams(params.width,params.height);  
+				lParams.gravity = 17;
+		    	iv.setLayoutParams(lParams);
 			}
 			
 	        TabSpec tabSpec = tabHost.newTabSpec(tag)
