@@ -20,6 +20,7 @@ import android.widget.PopupMenu.OnMenuItemClickListener;
 import com.doubisanyou.appcenter.R;
 import com.doubisanyou.appcenter.activity.TeaChatRoomActivity;
 import com.doubisanyou.appcenter.adapter.TeaAddressListViewAdapter;
+import com.doubisanyou.appcenter.adapter.TeaAddressListViewAdapter.PosBean;
 import com.doubisanyou.appcenter.bean.AddressGroupEntity;
 import com.doubisanyou.appcenter.bean.ContactEntity;
 import com.doubisanyou.appcenter.bean.EBEvents;
@@ -74,26 +75,42 @@ public class TeaAddressListFragment extends Fragment {
 					@Override
 					public boolean onItemLongClick(AdapterView<?> arg0,
 							View view, int pos, long id) {
-						
-						PopupMenu addressListMenu = new PopupMenu(
-								TeaAddressListFragment.this.getActivity(), view);
-						addressListMenu.getMenuInflater().inflate(
-								R.menu.ppm_address_list_item,
-								addressListMenu.getMenu());
-						addressListMenu.setOnMenuItemClickListener(new OnMenuItemClickListener() {
-							
-							@Override
-							public boolean onMenuItemClick(MenuItem item) {
-								switch(item.getItemId()){
-								case R.id.ppma_item_delete_friend:
-									EBEvents.DeleteFriendEvent deleteFriendEvent = EBEvents.instanceDeleteFriendEvent();
-//									deleteFriendEvent.setJid(jid);
-									EventBus.getDefault().post(deleteFriendEvent);
-								}
-								return false;
-							}
-						});
-						addressListMenu.show();
+
+						final TeaAddressListViewAdapter.PosBean pb = (PosBean) view
+								.getTag();
+						if (pb != null) {
+							Log.i(TAG, "groupPos:" + pb.groupPos
+									+ "\tchildPos:" + pb.childPos);
+							PopupMenu addressListMenu = new PopupMenu(
+									TeaAddressListFragment.this.getActivity(),
+									view);
+							addressListMenu.getMenuInflater().inflate(
+									R.menu.ppm_address_list_item,
+									addressListMenu.getMenu());
+							addressListMenu
+									.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+
+										@Override
+										public boolean onMenuItemClick(
+												MenuItem item) {
+											switch (item.getItemId()) {
+											case R.id.ppma_item_delete_friend:
+												EBEvents.DeleteFriendEvent deleteFriendEvent = EBEvents
+														.instanceDeleteFriendEvent();
+												String jid = ((ContactEntity) mTalvAdapter
+														.getChild(pb.groupPos,
+																pb.childPos))
+														.getName();
+												deleteFriendEvent.setJid(jid);
+												EventBus.getDefault().post(
+														deleteFriendEvent);
+											}
+											return false;
+										}
+									});
+							addressListMenu.show();
+						}
+
 						return true;
 					}
 

@@ -32,6 +32,9 @@ import org.jivesoftware.smack.tcp.XMPPTCPConnection;
 import org.jivesoftware.smack.tcp.XMPPTCPConnectionConfiguration;
 import org.jivesoftware.smack.util.StringUtils;
 import org.jivesoftware.smackx.offline.OfflineMessageManager;
+import org.jivesoftware.smackx.search.ReportedData;
+import org.jivesoftware.smackx.search.UserSearchManager;
+import org.jivesoftware.smackx.xdata.Form;
 
 import android.app.Service;
 import android.content.ContentValues;
@@ -156,12 +159,18 @@ public class XmppService extends Service {
 
 						@Override
 						public void chatCreated(Chat chat, boolean isLocally) {
+							Log.i(TAG, "createChat：" + isLocally);
 							if (!isLocally) {
 								Log.i(TAG,
 										chat.getParticipant() + "\t"
 												+ chat.getThreadID());
 								String username = chat.getParticipant().split(
 										"@")[0];
+								if (getContactId(chat.getParticipant().split("/")[0]) == null) {
+									Log.i(TAG, "陌生人来信:" + chat.getParticipant());
+									chat.close();
+									return;
+								}
 								String threadId = chatInfoMap.get(username);
 								// 如果同一用户已存在聊天室，则关闭原聊天室
 								if (threadId != null
@@ -197,7 +206,7 @@ public class XmppService extends Service {
 											.setChatMsgTransferEntity(cmte);
 									EventBus.getDefault().post(
 											receiveChatMsgEvent);
-									// 向teaChatListFragment发送消息
+
 									// ....
 									// 更新chatroom时间
 									// ....
@@ -214,6 +223,13 @@ public class XmppService extends Service {
 									mm.isRead = false; // 默认消息未读
 									if (insertMessage(mm)) {
 										Log.i(TAG, "message insert success");
+										// 向teaChatListFragment发送消息
+										EBEvents.RefreshChatListEvent refreshChatListEvent = EBEvents
+												.instanceRefreshChatListEvent();
+										refreshChatListEvent
+												.setChatListForms(getChatListForms());
+										EventBus.getDefault().post(
+												refreshChatListEvent);
 									}
 								}
 							});
@@ -238,7 +254,7 @@ public class XmppService extends Service {
 							getAddressListEvent
 									.setAddressGroupList(addressGroupList);
 							getAddressListEvent.setContactList(contactList);
-							EventBus.getDefault().post(getAddressListEvent );
+							EventBus.getDefault().post(getAddressListEvent);
 						}
 
 						@Override
@@ -255,6 +271,18 @@ public class XmppService extends Service {
 							for (String e : entries) {
 								System.out.println(e);
 							}
+							loadContact(roster);
+							EBEvents.GetAddressListEvent getAddressListEvent = EBEvents
+									.instanceGetAddressListEvent();
+							getAddressListEvent
+									.setAddressGroupList(addressGroupList);
+							getAddressListEvent.setContactList(contactList);
+							EventBus.getDefault().post(getAddressListEvent);
+							List<ChatListFormEntity> chatlst = getChatListForms();
+							EBEvents.RefreshChatListEvent refreshChatListEvent = EBEvents
+									.instanceRefreshChatListEvent();
+							refreshChatListEvent.setChatListForms(chatlst);
+							EventBus.getDefault().post(refreshChatListEvent);
 						}
 
 						@Override
@@ -263,6 +291,13 @@ public class XmppService extends Service {
 							for (String e : entries) {
 								System.out.println(e);
 							}
+							loadContact(roster);
+							EBEvents.GetAddressListEvent getAddressListEvent = EBEvents
+									.instanceGetAddressListEvent();
+							getAddressListEvent
+									.setAddressGroupList(addressGroupList);
+							getAddressListEvent.setContactList(contactList);
+							EventBus.getDefault().post(getAddressListEvent);
 						}
 					});
 					result = "XmppSever has connected";
@@ -280,6 +315,7 @@ public class XmppService extends Service {
 					EventBus.getDefault().post(refreshChatListEvent);
 				} catch (SmackException e) {
 					e.printStackTrace();
+
 				} catch (IOException e) {
 					e.printStackTrace();
 				} catch (XMPPException e) {
@@ -357,12 +393,19 @@ public class XmppService extends Service {
 
 	public void onEventBackgroundThread(
 			EBEvents.GetChatHistoryEvent getChatHistoryEvent) {
-		List<ChatMsgViewEntity> chatMsgViews = getChatHistory(getChatHistoryEvent
-				.getChatId());
+		String chatId = getChatHistoryEvent.getChatId();
+		String jid = getChatHistoryEvent.getJid() + "@" + conn.getServiceName();
+		// Log.i(TAG, "chatId"+chatId+"\tjid"+jid);
+		if (StringUtils.isNullOrEmpty(chatId)) {
+			chatId = isExistChatRoom(jid, getChatHistoryEvent.getRoomType());
+		}
+		List<ChatMsgViewEntity> chatMsgViews = getChatHistory(chatId);
 		EBEvents.RefreshChatHistoryEvent refreshChatHistoryEvent = EBEvents
 				.instanceRefreshChatHistoryEvent();
 		refreshChatHistoryEvent.setChatMsgViews(chatMsgViews);
 		EventBus.getDefault().post(refreshChatHistoryEvent);
+		int count = changeUnreadMsg(chatId);
+		Log.i(TAG, "将未读消息设为已读：" + count);
 	}
 
 	/**
@@ -372,9 +415,42 @@ public class XmppService extends Service {
 	public void onEventBackgroundThread(EBEvents.AddFriendEvent addFriendEvent) {
 		String jid = addFriendEvent.getJid() + "@" + conn.getServiceName();
 		Roster roster = Roster.getInstanceFor(conn);
-		while (!roster.isLoaded())
-			;
-		if (roster.contains(jid)) {
+		// 加载roster，10次
+		for (int i = 0; i < 10; i++) {
+			if (!roster.isLoaded())
+				try {
+					roster.reload();
+				} catch (NotLoggedInException e) {
+					e.printStackTrace();
+					return;
+				} catch (NotConnectedException e) {
+					e.printStackTrace();
+					return;
+				}
+			else
+				break;
+		}
+		if (!roster.isLoaded()) {
+			Log.i(TAG, "添加好友失败");
+			return;
+		}
+		UserSearchManager usm = new UserSearchManager(conn);
+
+		ReportedData rd = null;
+		try {
+			Form sf = usm.getSearchForm("search." + conn.getServiceName());
+			Form af = sf.createAnswerForm();
+			af.setAnswer("Username", true);
+			af.setAnswer("search", addFriendEvent.getJid());
+			rd = usm.getSearchResults(af, "search." + conn.getServiceName());
+		} catch (NoResponseException e1) {
+			e1.printStackTrace();
+		} catch (XMPPErrorException e1) {
+			e1.printStackTrace();
+		} catch (NotConnectedException e1) {
+			e1.printStackTrace();
+		}
+		if (rd != null && rd.getRows().size() > 0) {
 			Log.i(TAG, "存在用户" + jid);
 			try {
 				roster.createEntry(jid, jid.split("@")[0],
@@ -392,6 +468,80 @@ public class XmppService extends Service {
 			Log.i(TAG, "用户" + jid + "不存在");
 		}
 
+	}
+
+	/**
+	 * @Description 删除好友
+	 * @param deleteFriendEvent
+	 */
+	public void onEventBackgroundThread(
+			EBEvents.DeleteFriendEvent deleteFriendEvent) {
+		String jid = deleteFriendEvent.getJid() + "@" + conn.getServiceName();
+		Roster roster = Roster.getInstanceFor(conn);
+		Log.i(TAG, "删除好友:" + jid);
+		// 加载roster，10次
+		for (int i = 0; i < 10; i++) {
+			if (!roster.isLoaded())
+				try {
+					roster.reload();
+				} catch (NotLoggedInException e) {
+					e.printStackTrace();
+					return;
+				} catch (NotConnectedException e) {
+					e.printStackTrace();
+					return;
+				}
+			else
+				break;
+		}
+		if (!roster.isLoaded()) {
+			Log.i(TAG, "删除好友失败");
+			return;
+		}
+		if (roster.contains(jid)) {
+			try {
+				roster.removeEntry(roster.getEntry(jid));
+				// 删除数据库中的用户数据
+				deleteContact(jid);
+				// 删除聊天室线程
+				String username = deleteFriendEvent.getJid().split("@")[0];
+				String threadId = chatInfoMap.get(username);
+				if (threadId != null) {
+					cm.getThreadChat(threadId).close();
+					chatInfoMap.remove(username);
+				}
+			} catch (NotLoggedInException e) {
+				e.printStackTrace();
+			} catch (NoResponseException e) {
+				e.printStackTrace();
+			} catch (XMPPErrorException e) {
+				e.printStackTrace();
+			} catch (NotConnectedException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	/**
+	 * @Description 删除聊天室
+	 * @param deleteChatRoomEvent
+	 */
+	public void onEventBackgroundThread(
+			EBEvents.DeleteChatRoomEvent deleteChatRoomEvent) {
+		String chatId = deleteChatRoomEvent.getChatId();
+		deleteChatRoom(chatId);
+		// 关闭聊天线程
+		String username = deleteChatRoomEvent.getJid().split("@")[0];
+		String threadId = chatInfoMap.get(username);
+		if (threadId != null) {
+			cm.getThreadChat(threadId).close();
+			chatInfoMap.remove(username);
+		}
+		// 刷新聊天列表
+		EBEvents.RefreshChatListEvent refreshChatListEvent = EBEvents
+				.instanceRefreshChatListEvent();
+		refreshChatListEvent.setChatListForms(getChatListForms());
+		EventBus.getDefault().post(refreshChatListEvent);
 	}
 
 	private String getDatetime() {
@@ -485,6 +635,14 @@ public class XmppService extends Service {
 		return null;
 	}
 
+	/**
+	 * @Description 是否存在聊天室
+	 * @param jid
+	 *            用户jid
+	 * @param roomType
+	 *            聊天室类型
+	 * @return chatId or null
+	 */
 	private String isExistChatRoom(String jid, String roomType) {
 		SQLiteDatabase db = teaDatabaseHelper.getReadableDatabase();
 		Cursor cursor = db
@@ -506,7 +664,7 @@ public class XmppService extends Service {
 								+ "AND c.tett_tech_id = b._id "
 								+ "AND d.teme_tech_id = b._id "
 								+ "GROUP BY b._id "
-								+ "ORDER BY b.tech_update_time", null);
+								+ "ORDER BY b.tech_update_time DESC", null);
 		ArrayList<ChatListFormEntity> list = new ArrayList<ChatListFormEntity>();
 		while (cursor.moveToNext()) {
 			ChatListFormEntity clfe = new ChatListFormEntity();
@@ -514,7 +672,11 @@ public class XmppService extends Service {
 			clfe.setJid(cursor.getString(0));
 			clfe.setShortMsg(cursor.getString(1));
 			clfe.setUpdateTime(cursor.getString(2));
-			clfe.setChatId(cursor.getString(3));
+			String chatId = cursor.getString(3);
+			clfe.setChatId(chatId);
+			int unReadCount = getUnReadMsgCount(chatId);
+			Log.i(TAG, "未读消息数：" + unReadCount);
+			clfe.setAlertCount(unReadCount);
 			list.add(clfe);
 		}
 		return list;
@@ -546,6 +708,73 @@ public class XmppService extends Service {
 			list.add(cmve);
 		}
 		return list;
+	}
+
+	private int changeUnreadMsg(String chatId) {
+		SQLiteDatabase db = teaDatabaseHelper.getWritableDatabase();
+		/*
+		 * Cursor cursor = db .rawQuery(
+		 * "UPDATE tea_message SET teme_is_read = 0 WHERE teme_is_read = 1 AND teme_tech_id = ?"
+		 * , new String[] { chatId });
+		 */
+		ContentValues cv = new ContentValues();
+		cv.put("teme_is_read", 1);
+		return db.update("tea_message", cv,
+				"teme_is_read = 0 AND teme_tech_id = ?",
+				new String[] { chatId });
+	}
+
+	private void deleteContact(String jid) {
+		if (StringUtils.isNullOrEmpty(jid)) {
+			Log.i(TAG, "jid为空");
+			return;
+		}
+		SQLiteDatabase db = teaDatabaseHelper.getWritableDatabase();
+		// 1.查看是否存在聊天室
+		// 2.删除关联表，聊天室表，消息表，和通讯录表中的数据
+		String chatId = isExistChatRoom(jid, TeaDatabaseHelper.SINGLE_CHATROOM);
+		db.beginTransaction();
+		if (!StringUtils.isNullOrEmpty(chatId)) {
+			String[] queryArgs = new String[] { chatId };
+			db.delete("tea_message", "teme_tech_id=?", queryArgs);
+			db.delete("tea_teco_tech", "tett_tech_id=?", queryArgs);
+			db.delete("tea_chatroom", "_id=?", queryArgs);
+		}
+		db.delete("tea_contact", "teco_jid=?", new String[] { jid });
+		db.setTransactionSuccessful();
+		db.endTransaction();
+
+	}
+
+	private void deleteChatRoom(String chatId) {
+		if (StringUtils.isNullOrEmpty(chatId)) {
+			Log.i(TAG, "chatId为空");
+			return;
+		}
+		String[] queryArgs = new String[] { chatId };
+		SQLiteDatabase db = teaDatabaseHelper.getWritableDatabase();
+		db.beginTransaction();
+		db.delete("tea_message", "teme_tech_id=?", queryArgs);
+		db.delete("tea_teco_tech", "tett_tech_id=?", queryArgs);
+		db.delete("tea_chatroom", "_id=?", queryArgs);
+		db.setTransactionSuccessful();
+		db.endTransaction();
+	}
+
+	private int getUnReadMsgCount(String chatId) {
+		if (StringUtils.isNullOrEmpty(chatId)) {
+			Log.i(TAG, "chatId为空");
+			return -1;
+		}
+		Log.i(TAG, "chatId:" + chatId);
+		SQLiteDatabase db = teaDatabaseHelper.getReadableDatabase();
+		Cursor cursor = db.rawQuery("SELECT count(*) FROM tea_message a"
+				+ " WHERE a.[teme_is_read] = 0" + " AND a.[teme_tech_id] = ?",
+				new String[] { chatId });
+		if (cursor.moveToFirst())
+			return cursor.getInt(0);
+		else
+			return -1;
 	}
 
 	private void loadContact(Roster roster) {

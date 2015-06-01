@@ -6,7 +6,8 @@ public class ChatListFormEntity {
 	private int avator;
 	private String shortMsg;
 	private String updateTime;
-
+	private int alertCount;
+	
 	public String getJid() {
 		return jid;
 	}
@@ -47,4 +48,12 @@ public class ChatListFormEntity {
 		this.chatId = chatId;
 	}
 
+	public int getAlertCount() {
+		return alertCount;
+	}
+
+	public void setAlertCount(int alertCount) {
+		this.alertCount = alertCount;
+	}
+		
 }
