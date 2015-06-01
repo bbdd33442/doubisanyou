@@ -199,7 +199,6 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int dir_item_name=0x7f05006b;
         public static final int et_sendmessage=0x7f050037;
         public static final int get_check_code=0x7f05001f;
-        public static final int header_iv=0x7f05005a;
         public static final int hometabs=0x7f050083;
         public static final int id1=0x7f05009d;
         public static final int id_bottom_image_view=0x7f05008a;
@@ -219,6 +218,9 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int image_view_gridview=0x7f050089;
         public static final int img1=0x7f0500aa;
         public static final int include_titlebar=0x7f050019;
+        public static final int itcl_avatar_iv=0x7f05005a;
+        public static final int itcl_nickname_tv=0x7f05005b;
+        public static final int itcl_shortmsg_tv=0x7f05005c;
         public static final int item_TabImg=0x7f050086;
         public static final int item_TabName=0x7f050087;
         public static final int item_image=0x7f05006d;
@@ -243,11 +245,11 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int manager_user_name_label=0x7f050010;
         public static final int manager_user_signature=0x7f050014;
         public static final int nickname_chat_tv=0x7f050031;
-        public static final int nickname_tv=0x7f05005b;
         public static final int pop_menu_only_text=0x7f05007d;
         public static final int pop_menu_with_image=0x7f05007e;
         public static final int popup_view_cont=0x7f05007c;
         public static final int ppma_item_delete_friend=0x7f0500af;
+        public static final int ppmc_item_delete_chat_form=0x7f0500b0;
         public static final int progressBar1=0x7f050012;
         public static final int pullDownFromTop=0x7f050000;
         public static final int pullUpFromBottom=0x7f050001;
@@ -278,7 +280,6 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int sc_img1=0x7f0500ac;
         public static final int search_friend_sv=0x7f050003;
         public static final int seporater=0x7f050046;
-        public static final int shortmsg_tv=0x7f05005c;
         public static final int tabimg_back_=0x7f050085;
         public static final int task_list=0x7f050082;
         public static final int tea_chat_tabline_iv=0x7f05002d;
@@ -391,6 +392,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
     }
     public static final class menu {
         public static final int ppm_address_list_item=0x7f0a0000;
+        public static final int ppm_chat_list_item=0x7f0a0001;
     }
     public static final class string {
         public static final int action_settings=0x7f080003;
