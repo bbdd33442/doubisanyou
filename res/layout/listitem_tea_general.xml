@@ -11,6 +11,9 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:singleLine="false"
-        android:text="xxxxx" />
+        android:text="xxxxx"
+        android:gravity="center"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/black" />
 
 </RelativeLayout>

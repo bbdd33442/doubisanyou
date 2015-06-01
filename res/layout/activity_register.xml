@@ -7,164 +7,196 @@
 
     <include layout="@layout/titlebar_default" />
 
-    <ImageView
-        android:id="@+id/registe_user_avartar"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_margin="8dp"
-        android:src="@drawable/user_default_avatars" />
+            <ImageView
+                android:id="@+id/registe_user_avartar"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="8dp"
+                android:src="@drawable/user_default_avatars" />
 
-    <RelativeLayout
-        style="@style/layout_width_height_fw"
-        android:layout_margin="8dp"
-        android:background="@drawable/background_login_div_bg"
-        android:orientation="horizontal" >
+            <RelativeLayout
+                style="@style/layout_width_height_fw"
+                android:layout_margin="8dp"
+                android:background="@drawable/background_login_div_bg"
+                android:orientation="horizontal" >
 
-        <TextView
-            android:id="@+id/registe_phone_number_label"
-            style="@style/label_text_view"
-            android:layout_alignParentLeft="true"
-            android:layout_centerInParent="true"
-            android:text="手机号：" />
+                <TextView
+                    android:id="@+id/registe_phone_number_label"
+                    style="@style/label_text_view"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerInParent="true"
+                    android:text="手  机  号：" />
 
-        <EditText
-            android:id="@+id/registe_phone_number"
-            style="@style/layout_width_height_ww"
-            android:layout_centerVertical="true"
-            android:layout_toLeftOf="@+id/get_check_code"
-            android:layout_toRightOf="@id/registe_phone_number_label"
-            android:hint="请输入手机号..."
-            android:singleLine="true" />
+                <EditText
+                    android:id="@+id/registe_phone_number"
+                    style="@style/layout_width_height_ww"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/get_check_code"
+                    android:layout_toRightOf="@id/registe_phone_number_label"
+                    android:textColor="@color/black"
+                    android:phoneNumber="true"
+                    android:hint="请输入手机号..."
+                    android:singleLine="true" />
 
-        <Button
-            android:id="@+id/get_check_code"
-            style="@style/layout_width_height_ww"
-            android:layout_alignParentRight="true"
-            android:layout_centerInParent="true"
-            android:background="@drawable/mm_title_btn_right"
-            android:text="获取验证码"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-    </RelativeLayout>
+                <Button
+                    android:id="@+id/get_check_code"
+                    style="@style/layout_width_height_ww"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/mm_title_btn_right"
+                    android:text="获取验证码"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
+            </RelativeLayout>
 
-    <RelativeLayout
-        style="@style/layout_width_height_fw"
-        android:layout_margin="8dp"
-        android:background="@drawable/background_login_div_bg"
-        android:orientation="horizontal" >
+            <RelativeLayout
+                style="@style/layout_width_height_fw"
+                android:layout_margin="8dp"
+                android:background="@drawable/background_login_div_bg"
+                android:orientation="horizontal" >
 
-        <TextView
-            android:id="@+id/registe_check_code_label"
-            style="@style/label_text_view"
-            android:layout_alignParentLeft="true"
-            android:layout_centerInParent="true"
-            android:text="验证码：" />
+                <TextView
+                    android:id="@+id/registe_check_code_label"
+                    style="@style/label_text_view"
+                    android:layout_alignParentLeft="true"
+                  
+                    android:layout_centerInParent="true"
+                    android:text="验  证  码：" />
 
-        <EditText
-            android:id="@+id/registe_check_code"
-            style="@style/layout_width_height_fw"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@id/registe_check_code_label"
-            android:hint="请输入验证码..."
-            android:singleLine="true" />
-    </RelativeLayout>
+                <EditText
+                    android:id="@+id/registe_check_code"
+                    style="@style/layout_width_height_fw"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/registe_check_code_label"
+                    android:textColor="@color/black"
+                    android:phoneNumber="true"
+                    android:hint="请输入验证码..."
+                    android:singleLine="true" />
+            </RelativeLayout>
 
-    <RelativeLayout
-        style="@style/layout_width_height_fw"
-        android:layout_margin="8dp"
-        android:background="@drawable/background_login_div_bg"
-        android:orientation="horizontal" >
+            <RelativeLayout
+                style="@style/layout_width_height_fw"
+                android:layout_margin="8dp"
+                android:background="@drawable/background_login_div_bg"
+                android:orientation="horizontal" >
 
-        <TextView
-            android:id="@+id/registe_nick_name_label"
-            style="@style/label_text_view"
-            android:layout_alignParentLeft="true"
-            android:layout_centerInParent="true"
-            android:text="昵    称：" />
+                <TextView
+                    android:id="@+id/registe_nick_name_label"
+                    style="@style/label_text_view"
+      
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerInParent="true"
+                    android:text="昵        称：" />
 
-        <EditText
-            android:id="@+id/registe_nick_name"
-            style="@style/layout_width_height_fw"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@id/registe_nick_name_label"
-            android:singleLine="true" />
-    </RelativeLayout>
+                <EditText
+                    android:id="@+id/registe_nick_name"
+                    style="@style/layout_width_height_fw"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/registe_nick_name_label"
+                    android:textColor="@color/black"
+                    android:singleLine="true" />
+            </RelativeLayout>
 
-    <RelativeLayout
-        style="@style/layout_width_height_fw"
-        android:layout_margin="8dp"
-        android:background="@drawable/background_login_div_bg"
-        android:orientation="horizontal" >
+            <RelativeLayout
+                style="@style/layout_width_height_fw"
+                android:layout_margin="8dp"
+                android:background="@drawable/background_login_div_bg"
+                android:orientation="horizontal" >
 
-        <TextView
-            android:id="@+id/registe_pass_label"
-            style="@style/label_text_view"
-            android:layout_alignParentLeft="true"
-            android:layout_centerInParent="true"
-            android:text="密    码：" />
+                <TextView
+                    android:id="@+id/registe_pass_label"
+                    style="@style/label_text_view"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerInParent="true"
+      
+                    android:text="密        码：" />
 
-        <EditText
-            android:id="@+id/registe_pass"
-            style="@style/layout_width_height_fw"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@id/registe_pass_label"
-            android:singleLine="true" />
-    </RelativeLayout>
+                <EditText
+                    android:id="@+id/registe_pass"
+                    style="@style/layout_width_height_fw"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/registe_pass_label"
+                    android:password="true"
+                    android:singleLine="true" />
+            </RelativeLayout>
 
-    <RelativeLayout
-        style="@style/layout_width_height_fw"
-        android:layout_margin="8dp"
-        android:background="@drawable/background_login_div_bg"
-        android:orientation="horizontal" >
+            <RelativeLayout
+                style="@style/layout_width_height_fw"
+                android:layout_margin="8dp"
+                android:background="@drawable/background_login_div_bg"
+                android:orientation="horizontal" >
 
-        <TextView
-            android:id="@+id/registe_pass_check_label"
-            style="@style/label_text_view"
-            android:layout_alignParentLeft="true"
-            android:layout_centerInParent="true"
-            android:text="密码确认：" />
+                <TextView
+                    android:id="@+id/registe_pass_check_label"
+                    style="@style/label_text_view"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerInParent="true"
 
-        <EditText
-            android:id="@+id/registe_pass_check"
-            style="@style/layout_width_height_fw"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@id/registe_pass_check_label"
-            android:singleLine="true" />
-    </RelativeLayout>
+                    android:text="密码确认：" />
 
-    <RelativeLayout
-        style="@style/layout_width_height_fw"
-        android:layout_margin="8dp"
-        android:background="@drawable/background_login_div_bg"
-        android:orientation="horizontal" >
+                <EditText
+                    android:id="@+id/registe_pass_check"
+                    style="@style/layout_width_height_fw"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/registe_pass_check_label"
+                    android:singleLine="true" />
+            </RelativeLayout>
 
-        <TextView
-            android:id="@+id/registe_signatrue_label"
-            style="@style/label_text_view"
-            android:layout_alignParentLeft="true"
-            android:layout_centerInParent="true"
-            android:text="个性签名：" />
+            <RelativeLayout
+                style="@style/layout_width_height_fw"
+                android:layout_margin="8dp"
+                android:background="@drawable/background_login_div_bg"
+                android:orientation="horizontal" >
 
-        <EditText
-            android:id="@+id/registe_signatrue"
-            style="@style/layout_width_height_fw"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@id/registe_signatrue_label"
-            android:singleLine="true" />
-    </RelativeLayout>
-    
-    <LinearLayout style="@style/layout_width_height_ff">
-       
-        <Button 
-    	android:id="@+id/btn_registe_ok"
-    	android:layout_width="fill_parent"
-    	android:layout_height="wrap_content"
-    	android:text="注册"
-    	android:layout_marginTop="8dp"
-    	android:background="@drawable/green_button"
-    	android:layout_gravity="bottom"
-    	
-    />
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/registe_user_type_label"
+                    style="@style/label_text_view"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerInParent="true"
+
+                    android:text="我        是：" />
+
+                <RadioGroup
+                    android:id="@+id/registe_user_type"
+                    style="@style/layout_width_height_fw"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/registe_user_type_label"
+                    android:orientation="horizontal"
+                    >
+
+                    <RadioButton
+                        android:id="@+id/user_type_tea_friend"
+                        android:textColor="@color/black"
+                        android:layout_weight="1"
+                        android:text="茶友" />
+
+                    <RadioButton
+                        android:id="@+id/user_type_tea_business"
+                        android:textColor="@color/black"
+                        android:layout_weight="1"
+                        android:text="茶商" />
+
+                    <RadioButton
+                        android:id="@+id/user_type_tea_company"
+                        android:textColor="@color/black"
+                        android:layout_weight="1"
+                        android:text="茶厂" />
+                </RadioGroup>
+            </RelativeLayout>
+
+            <LinearLayout 
+                android:layout_gravity="bottom"
+                style="@style/layout_width_height_ff"
+                android:layout_margin="8dp" >
+
+                <Button
+                    android:id="@+id/btn_registe_ok"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/green_button"
+                    android:text="注册" />
+            </LinearLayout>
 
 </LinearLayout>

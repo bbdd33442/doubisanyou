@@ -94,11 +94,11 @@ public class XmppService extends Service {
 			public void run() {
 				if (conn == null) {
 					XMPPTCPConnectionConfiguration conf = XMPPTCPConnectionConfiguration
-							.builder().setUsernameAndPassword("blook", "1234")
+							.builder().setUsernameAndPassword("xy898956", "xy898956")
 							.setSendPresence(false)
 							.setSecurityMode(SecurityMode.disabled)
 							.setServiceName("localhost")
-							.setHost("192.168.1.118").setPort(5222).build();
+							.setHost("192.168.1.141").setPort(5222).build();
 					conn = new XMPPTCPConnection(conf);
 				}
 				if (conn.isConnected()) {

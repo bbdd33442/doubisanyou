@@ -31,7 +31,7 @@ public class SetSecondActivity extends Activity {
 		TeaSet tk = (TeaSet) getIntent().getSerializableExtra(
 				TEASET);
 		title = (TextView) this.findViewById(R.id.default_title);
-		title.setText(tk.tea_set_introduction);
+		title.setText("紫砂壶");
 
 		tea_set_introduction = (TextView) this.findViewById(R.id.content);
 		tea_set_introduction.setText("中国茶文化源远流长，巴蜀常被称为中国茶业和茶文化的摇篮。六朝以前的茶史资料表明，中国的茶业最初兴起于巴蜀。茶叶文化的形成，与巴蜀地区早期的政治、风俗及茶叶饮用有着密切的关系。");

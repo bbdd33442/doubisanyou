@@ -60,7 +60,7 @@ public class SearchSecondActivity extends Activity {
 
 		title = (TextView) this.findViewById(R.id.default_title);
 
-		title.setText("茶知识界面");
+		title.setText("茶知识");
 
 		Button back = (Button) findViewById(R.id.btn_left);
 		back.setVisibility(View.VISIBLE);
@@ -74,11 +74,12 @@ public class SearchSecondActivity extends Activity {
 		});
 
 		ListView lv = mPullRefreshListView.getRefreshableView();
+		//进行网络通讯从服务器获取的 
 		TeaKnowledge tk = new TeaKnowledge();
 		tk.tea_knowledge_name = "红茶";
-		TeaKnowledge gt = new TeaKnowledge();
-		gt.tea_knowledge_name = "绿茶";
-		teaKnowledges.add(gt);
+//		TeaKnowledge gt = new TeaKnowledge();
+//		gt.tea_knowledge_name = "绿茶";
+//		teaKnowledges.add(gt);
 		teaKnowledges.add(tk);
 		replyItem = new ArrayList<HashMap<String, Object>>();
 		for (int i = 0; i < teaKnowledges.size(); i++) {

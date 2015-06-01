@@ -30,7 +30,6 @@
             
 		   <TextView
             android:id="@+id/manager_user_id_label"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:text="ID号："
@@ -41,24 +40,27 @@
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="xx"
+            android:minEms="5"
+            android:text="12345678"
+            android:gravity="center"
             android:layout_toRightOf="@id/manager_user_id_label" />
 
         <TextView
-            android:id="@+id/manager_user_name_label"
-            android:layout_weight="1"
+            android:id="@+id/manager_user_nick_name_label"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:text="昵称：" 
             android:layout_toRightOf="@id/manager_user_id"/>
 
         <TextView
-            android:id="@+id/manager_user_name"
+            android:id="@+id/manager_user_nick_name"
            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:text="xx" 
-            android:layout_toRightOf="@id/manager_user_name_label"/>
+            android:minEms="5"
+            android:gravity="center"
+            android:text="1123123" 
+            android:layout_toRightOf="@id/manager_user_nick_name_label"/>
 		</LinearLayout>
    			
 		<LinearLayout  
@@ -70,87 +72,57 @@
             android:layout_below="@id/top"
            >
 		   <TextView
-            android:id="@+id/manager_user_id_label"
-            android:layout_weight="1"
+            android:id="@+id/manager_user_praise_label"
+            
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="被赞："
              />
 
         <TextView
-            android:id="@+id/manager_user_id"
+            android:id="@+id/manager_user_praise"
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:text="xx"
-            android:layout_toRightOf="@id/manager_user_id_label" />
+            android:minEms="5"
+            android:gravity="center"
+            android:layout_toRightOf="@id/manager_user_praise_label" />
 
         <TextView
-            android:id="@+id/manager_user_name_label"
-            android:layout_weight="1"
+            android:id="@+id/manager_user_integral_label"
+            
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:text="积分：" 
             android:layout_toRightOf="@id/manager_user_id"/>
 
         <TextView
-            android:id="@+id/manager_user_name"
+            android:id="@+id/manager_user_integral"
            android:layout_weight="1"
            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="xx" 
-            android:layout_toRightOf="@id/manager_user_name_label"/>
+            android:minEms="5"
+            android:gravity="center"
+            android:layout_toRightOf="@id/manager_user_integral_label"/>
 		</LinearLayout>
     </RelativeLayout>
 	
-    <LinearLayout 
+       <LinearLayout 
         android:layout_margin="8dp"
         style="@style/layout_width_height_fw"
         android:background="@drawable/background_border"
         android:orientation="horizontal">
      <TextView
             style="?android:attr/textAppearanceSmall"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
             android:layout_gravity="center"
+            
             android:layout_margin="8dp"
-            android:text="等级：" />
-        <com.doubisanyou.appcenter.widget.TextProgressBar
-            android:id="@+id/progressBar1"
-            style="@style/ProgressBar_Mini"
-            android:layout_margin="8dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:max="100"
-            android:progress="20" />
-
-        <TextView
-            android:id="@+id/manager_user_lv"
-            style="?android:attr/textAppearanceSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:layout_gravity="center"
-            android:layout_margin="8dp"
-            android:text="lv.8" />
-    </LinearLayout>
-    
-     <LinearLayout 
-        android:layout_margin="8dp"
-        style="@style/layout_width_height_fw"
-        android:background="@drawable/background_border"
-        android:orientation="horizontal">
-     <TextView
-            style="?android:attr/textAppearanceSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:layout_gravity="center"
-            android:layout_margin="8dp"
-            android:text="个性签名：" />
+            android:text=" 个 性 签 名：" />
       
         <TextView
             android:id="@+id/manager_user_signature"
@@ -159,12 +131,40 @@
             android:layout_height="wrap_content"
             android:textColor="@color/black"
             android:layout_gravity="center"
-            android:gravity="center"
+            
             android:layout_margin="8dp"
             android:text="贵以贱为本，高以下为基" />
     </LinearLayout>
+    
+       
+      <LinearLayout 
+        android:layout_margin="8dp"
+        style="@style/layout_width_height_fw"
+        android:background="@drawable/background_border"
+        android:orientation="horizontal">
+     <TextView
+            style="?android:attr/textAppearanceSmall"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:layout_gravity="center"
+            android:layout_margin="8dp"
+            android:text="我爱喝的茶：" />
+      
+        <TextView
+            android:id="@+id/manager_user_favorite_tea"
+            style="?android:attr/textAppearanceSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:layout_gravity="center"
+            android:gravity="left"
+            android:layout_margin="8dp"
+            android:text="红茶，绿茶，白茶，黑茶，青茶，黄茶，保健茶，花茶" />
+    </LinearLayout>
   	
     <RelativeLayout 
+        android:id="@+id/my_publish_tea_say"
         android:layout_margin="8dp"
         style="@style/layout_width_height_fw"
         android:background="@drawable/background_border"
@@ -191,33 +191,6 @@
          android:textColor="@color/black" />
     </RelativeLayout>
     
-    <RelativeLayout 
-        android:layout_margin="8dp"
-        style="@style/layout_width_height_fw"
-        android:background="@drawable/background_border"
-      >
-     <TextView
-            style="?android:attr/textAppearanceSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:layout_centerInParent="true"
-            android:layout_alignParentLeft="true"
-            android:layout_margin="8dp"
-            android:text="每日任务" />
-
-     <TextView
-         android:id="@+id/manager_every_day_task"
-         android:layout_alignParentRight="true"
-         style="?android:attr/textAppearanceLarge"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_margin="8dp"
-         android:layout_centerInParent="true"
-         android:text=">"
-         android:textColor="@color/black" />
-
-    </RelativeLayout>
         <LinearLayout 
         android:layout_margin="8dp"
         style="@style/layout_width_height_ff"

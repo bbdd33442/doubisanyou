@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -30,6 +31,7 @@ public class TeaSayActivity extends BaseActivity implements OnClickListener{
 	private final static int LOAGDING_NORMAL = 0;
 	private final static int LOAGDING_REFRESH = 1;
 	private final static int LOAGDING_LOADING_MORE = 2;
+	public static final String USERID = "userid";
 	
 	private	int	pagesize=10;
 	private	int	pageNumber	=1;
@@ -43,7 +45,7 @@ public class TeaSayActivity extends BaseActivity implements OnClickListener{
 	private TeaSayAdapter tsa;
 	private ImageButton rightBtn;
 	private TextView titleBar;
-	
+	private Button backBtn;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -64,10 +66,17 @@ public class TeaSayActivity extends BaseActivity implements OnClickListener{
 		mListView.setAdapter(tsa);
 	    titleBar = (TextView) findViewById(R.id.default_title);
 	    titleBar.setText("茶说");
-		rightBtn = (ImageButton)findViewById(R.id.btn_right);
-		rightBtn.setVisibility(View.VISIBLE);
-	
-		rightBtn.setOnClickListener(this);
+		backBtn = (Button) findViewById(R.id.btn_left);
+		backBtn.setVisibility(View.GONE);
+	    if(getIntent().getStringExtra(USERID)!=null){
+	    	backBtn.setVisibility(View.VISIBLE);
+	    	backBtn.setOnClickListener(this);
+	    }
+	    	
+	    	rightBtn = (ImageButton)findViewById(R.id.btn_right);
+			rightBtn.setVisibility(View.VISIBLE);
+			rightBtn.setOnClickListener(this);
+	    
 		
 	}
 	
@@ -97,6 +106,10 @@ public class TeaSayActivity extends BaseActivity implements OnClickListener{
 			startActivity(i);
 			popMenu.dismiss();
 			break;
+		case R.id.btn_left:
+			finish();
+			break;
+			
 		default:
 			break;
 		}
