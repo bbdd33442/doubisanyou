@@ -2,23 +2,22 @@ package com.doubisanyou.appcenter.activity;
 
 import java.util.ArrayList;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.TextView;
 
 import com.doubisanyou.appcenter.R;
 import com.doubisanyou.appcenter.adapter.ImageListAdapter;
+import com.doubisanyou.appcenter.date.Config;
+import com.doubisanyou.baseproject.base.BaseActivity;
 
-public class TeaSayImageSelectedViewActivity extends Activity implements OnClickListener{
+public class TeaSayImageSelectedViewActivity extends BaseActivity implements OnClickListener{
 
 	public static final String FOLDER_DIR="folder_dir";
 	public static final String SELECTED_IMAGE_PATH="selected_image_path";
@@ -61,8 +60,8 @@ public class TeaSayImageSelectedViewActivity extends Activity implements OnClick
 		type = i.getStringExtra(TeaSayPublushImageFolderListActivity.ACTIVITYTYPE);
 		int num = 0;
 		if(type.equals(TeaSayPublushImageFolderListActivity.TEASYPUBLISH)){
-			num=9;
-		}else if(type.equals(TeaSayPublushImageFolderListActivity.USERAVATARS)){
+			num = 9;
+		}else if(type.equals(TeaSayPublushImageFolderListActivity.USERAVATARS)||type.equals(TeaSayPublushImageFolderListActivity.EDITEUSERAVATARS)){
 			num = 1;
 		}
 		if(selectedImagePath!=null){
@@ -100,6 +99,15 @@ public class TeaSayImageSelectedViewActivity extends Activity implements OnClick
 				i1 = new Intent(TeaSayImageSelectedViewActivity.this,TeaSayPublishActivity.class);
 			}else if(type.equals(TeaSayPublushImageFolderListActivity.USERAVATARS)){
 				i1 = new Intent(TeaSayImageSelectedViewActivity.this,RegisterActivity.class);
+			}else if(type.equals(TeaSayPublushImageFolderListActivity.EDITEUSERAVATARS)){
+				Bundle b = new Bundle();
+				Message msg = Config.handler.obtainMessage();
+				msg.setData(b);
+				b.putStringArrayList(SELECTED_IMAGE_PATH, selectedImagePath);
+				Config.handler.sendMessage(msg);
+				setResult(1, i);
+				finish();
+				break;
 			}
 			i1.putStringArrayListExtra(SELECTED_IMAGE_PATH, selectedImagePath);
 			i1.putExtra(TeaSayPublishActivity.PUBLISHTYPE, TeaSayPublishActivity.IMAGE);

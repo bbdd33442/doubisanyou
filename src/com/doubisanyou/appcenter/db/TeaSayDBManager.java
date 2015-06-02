@@ -67,6 +67,10 @@ public class TeaSayDBManager {
 		return tss;
 	}
 
+	public void delteTeaSayById(String id) {
+		db.delete("TEA_SAY", "tea_say_time=?", new String[]{id});
+	}
+
 	/*
 	 * public AppUpdate findApp(String app_id){ AppUpdate app = null; Cursor c =
 	 * db.rawQuery("SELECT * FROM APP_INFO t where t.app_id=? ",new

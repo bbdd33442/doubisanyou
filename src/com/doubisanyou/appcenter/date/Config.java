@@ -6,6 +6,7 @@ import java.util.Map;
 import android.content.Context;
 import android.content.SharedPreferences.Editor;
 import android.graphics.Bitmap;
+import android.os.Handler;
 
 import com.doubisanyou.appcenter.bean.User;
 
@@ -38,4 +39,6 @@ public class Config {
 		ed.putString(TOKEN, token);
 		ed.commit();
 	}
+	//用于设置中的图片处理
+	public static Handler handler;
 }

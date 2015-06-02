@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 import com.doubisanyou.appcenter.R;
 import com.doubisanyou.appcenter.bean.ChatListFormEntity;
-import com.doubisanyou.appcenter.widget.NBadgeView;
+import com.doubisanyou.appcenter.widget.BadgeView;
 
 public class ChatListAdapter extends BaseAdapter {
 	// private List<Map<String, Object>> chatListItems;
@@ -47,11 +47,11 @@ public class ChatListAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(int pos, View view, ViewGroup parent) {
-		NBadgeView bv;
+		BadgeView bv;
 		ViewHolder holder;
 		if (view == null) {
 			view = inflater.inflate(R.layout.chat_list_item, null);
-			bv = new NBadgeView(inflater.getContext());
+			bv = new BadgeView(inflater.getContext());
 			holder = new ViewHolder();
 			holder.bv = bv;
 			view.setTag(holder);
@@ -95,6 +95,6 @@ public class ChatListAdapter extends BaseAdapter {
 	}
 
 	static class ViewHolder {
-		NBadgeView bv;
+		BadgeView bv;
 	}
 }

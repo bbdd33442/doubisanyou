@@ -3,8 +3,13 @@ package com.doubisanyou.appcenter.adapter;
 import java.util.List;
 
 import android.app.Activity;
+import android.app.AlertDialog.Builder;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -22,10 +27,13 @@ import com.doubisanyou.baseproject.utilCommon.StringAndDataUtil;
 import com.doubisanyou.baseproject.utilCommon.TimeUtil;
 
 public class TeaSayAdapter extends ActivityBaseAdapter<TeaSay> {
-    private Activity ac;
-	public TeaSayAdapter(Context context, List<TeaSay> tys,Activity ac) {
+    
+	private Activity ac;
+	private Handler handler;
+	public TeaSayAdapter(Context context, List<TeaSay> tys,Activity ac,Handler handler) {
 		super(context, tys);
 		this.ac = ac;
+		this.handler = handler;
 	}
 	
 	@Override
@@ -77,49 +85,61 @@ public class TeaSayAdapter extends ActivityBaseAdapter<TeaSay> {
 		 }
 		 ImageView tea_say_list_reply =  ViewHolder.get(convertView, R.id.tea_say_list_reply);
 		 ImageView tea_say_list_delete = ViewHolder.get(convertView, R.id.tea_say_list_delete);
+		 tea_say_list_delete.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Builder b = new Builder(ac);
+				b.setMessage("删除？");
+				b.setPositiveButton("确定", new DialogInterface.OnClickListener(){
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						Bundle bd = new Bundle();
+						bd.putString("POSITION", String.valueOf(position));
+						Message msg = handler.obtainMessage();
+						msg.setData(bd);
+						handler.sendMessage(msg);
+					}
+					
+				});
+				b.setNegativeButton("取消", new DialogInterface.OnClickListener(){
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.dismiss();
+					}
+					
+				});
+				b.show();		
+			}
+		});
 		 
 		 tea_say_list_reply.setOnClickListener(new OnClickListener() {
 			@Override
-			public void onClick(View v) {
+			public void onClick(View v) { 
 				Intent i =new Intent(ac,TeaSayReplyActivity.class);
 				i.putExtra(TeaSayReplyActivity.TEASAYINFO,ts);
 				ac.startActivity(i);
 			}
 		});
 		 
-		 final BadgeView goodBadge = new BadgeView(mContext, praise_img);
-		 goodBadge.setText("8");
-		 goodBadge.setTextSize(7);
-		 goodBadge.show();
+		 final BadgeView badge = new BadgeView(mContext);
+		 badge.setTargetView(praise_img);
+		 badge.setText("8");
+		 praise_img.setBackgroundResource(R.drawable.dispraise_icon);
 		 
-		 final BadgeView badBadge = new BadgeView(mContext, praise_img);
-		 badBadge.setTextSize(7);
-		
-			 praise_img.setOnClickListener(new OnClickListener() {
-				 int s=8;
+		 praise_img.setOnClickListener(new OnClickListener() {
 				 @Override
 				public void onClick(View v) {
-					if(goodBadge.isShown()){
-						praise_img.setBackgroundResource(R.drawable.dispraise_icon);
-						goodBadge.increment(1);
-						s+=1;
-						goodBadge.hide();
-						badBadge.setText(goodBadge.getText());
-						badBadge.show();
-					}else if(badBadge.isShown()){
-						praise_img.setBackgroundResource(R.drawable.praise_icon);
-						badBadge.increment(-1);
-						s-=1;
-						badBadge.hide();
-						goodBadge.setText(badBadge.getText());
-						goodBadge.show();
-					}
+					 badge.incrementBadgeCount(1);
+					 praise_img.setBackgroundResource(R.drawable.praise_icon);
 				}
 			});
 			 tea_say_publisher_name.setText("1111");
 			 tea_say_publisher_id.setText("1");
 	    return convertView;
 	}
+
+	
 	
 
 }

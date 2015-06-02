@@ -4,6 +4,8 @@ import java.util.List;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -57,7 +59,7 @@ public class TeaSayActivity extends BaseActivity implements OnClickListener{
 		carLoadingDialog = new LoadingDialog(this);
 		tsdb = new TeaSayDBManager(getApplicationContext());
 		tys = tsdb.getTeaSayList();
-		tsa=new TeaSayAdapter(getApplicationContext(),tys,TeaSayActivity.this);
+		tsa=new TeaSayAdapter(getApplicationContext(),tys,TeaSayActivity.this,handler);
 		popMenu = new PopMenu(TeaSayActivity.this);
 	    mPullRefreshListView = (PullToRefreshListView) findViewById(R.id.tea_say_list);
 	    mPullRefreshListView.setOnRefreshListener(mOnrefreshListener);
@@ -79,13 +81,25 @@ public class TeaSayActivity extends BaseActivity implements OnClickListener{
 	    
 		
 	}
-	
+	Handler handler= new Handler(){
+
+		@Override
+		public void handleMessage(Message msg) {
+			String position  = (String) msg.getData().get("POSITION");
+			int p = Integer.valueOf(position);
+			TeaSay ts = tys.get(p);
+			tsdb.delteTeaSayById(ts.tea_say_time);
+			tys.remove(p);
+			tsa.clearListCatch(tys);
+			tsa.notifyDataSetChanged();
+		}
+		
+	};
 	
 	@Override
 	protected void onResume() {
 		super.onResume();
-		tys.clear();
-		tys.addAll(tsdb.getTeaSayList());
+		tsa.clearListCatch(tsdb.getTeaSayList());
 		tsa.notifyDataSetChanged();
 	}
 
