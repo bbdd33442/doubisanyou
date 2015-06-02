@@ -53,6 +53,7 @@ public class TeaSayPublushImageFolderListActivity extends BaseActivity implement
 	
 	public static final String ACTIVITYTYPE = "activtytype";
 	
+	public static final String EDITEUSERAVATARS = "editeactivtytype";
 	String type;
 	
 	@Override

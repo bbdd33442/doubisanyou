@@ -1,16 +1,24 @@
 package com.doubisanyou.appcenter.activity;
 
+import java.util.ArrayList;
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.doubisanyou.appcenter.R;
 import com.doubisanyou.appcenter.date.Config;
 import com.doubisanyou.baseproject.base.BaseActivity;
+import com.doubisanyou.baseproject.utilsResource.ImageLoader;
+import com.doubisanyou.baseproject.utilsResource.ImageLoader.Type;
 
 public class ManagerActivity extends BaseActivity implements OnClickListener {
 	
@@ -21,6 +29,8 @@ public class ManagerActivity extends BaseActivity implements OnClickListener {
 	private RelativeLayout my_publish_tea_say;
 	private TextView nickName;
 	private TextView signature;
+	private ImageView userAvatars;
+	ArrayList<String> selectedImage = new ArrayList<String>();
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -41,6 +51,8 @@ public class ManagerActivity extends BaseActivity implements OnClickListener {
 		clearnCatcheBtn.setOnClickListener(this);
 		logOutBtn = (Button) findViewById(R.id.btn_log_out);
 		logOutBtn.setOnClickListener(this);
+		userAvatars = (ImageView) findViewById(R.id.manager_user_avatars);
+		userAvatars.setOnClickListener(this);
 		title = (TextView) findViewById(R.id.default_title);
 		my_publish_tea_say = (RelativeLayout) findViewById(R.id.my_publish_tea_say);
 		my_publish_tea_say.setOnClickListener(this);
@@ -50,7 +62,17 @@ public class ManagerActivity extends BaseActivity implements OnClickListener {
 		signature = (TextView) findViewById(R.id.manager_user_signature);
 		signature.setOnClickListener(this);
 	}
+	
+	Handler mHandler = new Handler(){
 
+		@Override
+		public void handleMessage(Message msg) {
+			super.handleMessage(msg);
+			selectedImage = (ArrayList<String>) msg.getData().get(TeaSayImageSelectedViewActivity.SELECTED_IMAGE_PATH);
+			ImageLoader.getInstance(3,Type.LIFO).loadImage(selectedImage.get(0),userAvatars);
+		}
+		
+	};
 	@Override
 	public void onClick(View arg0) {
 		switch (arg0.getId()) {
@@ -77,6 +99,13 @@ public class ManagerActivity extends BaseActivity implements OnClickListener {
 			Intent i3 = new Intent(this,UserInfoEditeActivity.class);
 			i3.putExtra(UserInfoEditeActivity.TITILENAME, UserInfoEditeActivity.SIGNATURE);
 			startActivity(i3);
+			break;
+		case R.id.manager_user_avatars:
+			Config.handler = mHandler;
+			Intent i4 =  new Intent(this,TeaSayPublushImageFolderListActivity.class);
+			i4.putStringArrayListExtra(TeaSayImageSelectedViewActivity.SELECTED_IMAGE_PATH, selectedImage);
+			i4.putExtra(TeaSayPublushImageFolderListActivity.ACTIVITYTYPE,TeaSayPublushImageFolderListActivity.EDITEUSERAVATARS);
+			startActivity(i4);
 			break;
 		default:
 			break;

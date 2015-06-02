@@ -41,7 +41,9 @@ public abstract class ActivityBaseAdapter<T> extends BaseAdapter {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
+	public void clearListCatch(List<T> mDatas) {
+		this.mDatas = mDatas;
+	}
 	
 	public abstract View getView(int position, View convertView, ViewGroup parent);
 	
