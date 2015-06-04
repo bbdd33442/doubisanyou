@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.doubisanyou.appcenter.R;
 import com.doubisanyou.appcenter.date.Config;
@@ -101,6 +102,7 @@ public class ManagerActivity extends BaseActivity implements OnClickListener {
 		case R.id.btn_clear_catche:
 			//清除本地的缓存图片
 			Config.BITMAPCATCH.clear();
+			showToast("清除成功！",Toast.LENGTH_SHORT);
 			break;
 		case R.id.btn_log_out:
 			Config.setToken(this, "");

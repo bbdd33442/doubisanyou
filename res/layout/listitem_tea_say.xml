@@ -52,12 +52,12 @@
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:textColor="#919191" />
 
-				<ImageView 
+				<!-- <ImageView 
 				    android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_marginTop="10dp"
                     android:layout_alignParentRight="true"
-                    android:src="@drawable/add_friend"/>
+                    android:src="@drawable/add_friend"/> -->
                 <TextView
                     android:id="@+id/tea_say_content"
                     android:layout_width="fill_parent"
