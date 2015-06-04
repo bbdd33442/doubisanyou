@@ -154,7 +154,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:editable="false"
-                    android:text="  祁门红茶简称祁红，茶叶原料选用当地的中叶、中生种茶树“槠叶种”（又名祁门种）制作，是一种汉族传统名茶，中国历史名茶，著名红茶精品。由安徽省汉族茶农创制于光绪年间，但史籍记载最早可追溯至唐朝陆羽的茶经。产于安徽省祁门、东至、贵池（今池州市）、石台、黟县，以及江西的浮梁一带。“祁红特绝群芳最，清誉高香不二门。”祁门红茶是红茶中的极品，享有盛誉，是英国女王和王室的至爱饮品，高香美誉，香名远播，美称“群芳最”、“红茶皇后”。相关经典名句：“一器成名只为茗，悦来客满是茶香。"
+                    android:text=" "
                     android:textAppearance="@android:style/TextAppearance.Small"
                     android:textColor="@color/black" />
             </LinearLayout>
@@ -182,7 +182,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:editable="false"
-                    android:text="  祁门红茶简称祁红，茶叶原料选用当地的中叶、中生种茶树“槠叶种”（又名祁门种）制作，是一种汉族传统名茶，中国历史名茶，著名红茶精品。由安徽省汉族茶农创制于光绪年间，但史籍记载最早可追溯至唐朝陆羽的茶经。产于安徽省祁门、东至、贵池（今池州市）、石台、黟县，以及江西的浮梁一带。“祁红特绝群芳最，清誉高香不二门。”祁门红茶是红茶中的极品，享有盛誉，是英国女王和王室的至爱饮品，高香美誉，香名远播，美称“群芳最”、“红茶皇后”。相关经典名句：“一器成名只为茗，悦来客满是茶香。"
+                    android:text=" "
                     android:textAppearance="@android:style/TextAppearance.Small"
                     android:textColor="@color/black" />
             </LinearLayout>
@@ -210,8 +210,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:editable="false"
-                    android:text="  祁门红茶简称祁红，茶叶原料选用当地的中叶、中生种茶树“槠叶种”（又名祁门种）制作，是一种汉族传统名茶，中国历史名茶，著名红茶精品。由安徽省汉族茶农创制于光绪年间，但史籍记载最早可追溯至唐朝陆羽的茶经。产于安徽省祁门、东至、贵池（今池州市）、石台、黟县，以及江西的浮梁一带。“祁红特绝群芳最，清誉高香不二门。”祁门红茶是红茶中的极品，享有盛誉，是英国女王和王室的至爱饮品，高香美誉，香名远播，美称“群芳最”、“红茶皇后”。相关经典名句：“一器成名只为茗，悦来客满是茶香。"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text=" "
                     android:textColor="@color/black" />
             </LinearLayout>
         </LinearLayout>

@@ -110,7 +110,7 @@ public class TeaSayReplyActivity extends BaseActivity implements
 		teaSayCommentButton.setOnClickListener(this);
 		commentText = (EditText) findViewById(R.id.tea_say_comment_content);
 
-		tea_say_publisher_name = (TextView) findViewById(R.id.tea_say_publisher_naa);
+		tea_say_publisher_name = (TextView) findViewById(R.id.tea_say_publisher_name);
 		tea_say_publisher_name.setText(ts.tea_say_publisher_name);
 		tea_say_content = (TextView) findViewById(R.id.tea_say_content);
 		tea_say_content.setText(ts.tea_say_content);
