@@ -55,6 +55,7 @@ public class TeaSayAdapter extends ActivityBaseAdapter<TeaSay> {
 		 TextView tea_say_time = ViewHolder.get(convertView, R.id.tea_say_time);
 		 tea_say_time.setText(TimeUtil.getDescriptionTimeFromTimestamp(Long.parseLong(ts.tea_say_time)));
 		 ImageView teasay_publisher_avatar = ViewHolder.get(convertView, R.id.tea_say_publisher_avatar);
+		 teasay_publisher_avatar.setImageResource(R.drawable.csu);
 		 ImageView tea_say_image = ViewHolder.get(convertView, R.id.tea_say_image);
 		 final ImageView praise_img = ViewHolder.get(convertView, R.id.tea_say_praise_img);
 		 GridView tea_say_grid =  ViewHolder.get(convertView, R.id.tea_say_grid);
@@ -134,8 +135,6 @@ public class TeaSayAdapter extends ActivityBaseAdapter<TeaSay> {
 					 praise_img.setBackgroundResource(R.drawable.praise_icon);
 				}
 			});
-			 tea_say_publisher_name.setText("1111");
-			 tea_say_publisher_id.setText("1");
 	    return convertView;
 	}
 

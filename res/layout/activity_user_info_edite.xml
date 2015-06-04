@@ -12,7 +12,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:text="XX"
+        android:hint="输入新的昵称.."
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/black"
         android:visibility="gone" />
@@ -25,7 +25,7 @@
         android:ems="10"
         android:gravity="top"
         android:singleLine="false"
-        android:text="贵以贱为本，高以下为基"
+        android:hint="输入新的签名.."
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/black"
         android:visibility="gone" >

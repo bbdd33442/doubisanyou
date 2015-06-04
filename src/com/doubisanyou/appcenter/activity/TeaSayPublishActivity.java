@@ -87,7 +87,7 @@ public class TeaSayPublishActivity extends BaseActivity implements OnClickListen
 			//进行网络通讯，返回一个ID
 			ts.tea_say_id="1121";
 			ts.tea_say_publisher_id="1234";
-			ts.tea_say_publisher_name="xxx111";
+			ts.tea_say_publisher_name="中南大学";
 			ts.tea_say_time=String.valueOf(System.currentTimeMillis());
 			ts.tea_say_publish_date=DateUtil.getCurDate();
 			ts.tea_say_content=teaSayContent.getText().toString();

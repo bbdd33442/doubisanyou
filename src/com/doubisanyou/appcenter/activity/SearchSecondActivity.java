@@ -98,6 +98,7 @@ public class SearchSecondActivity extends Activity {
 			tk.tea_knowledge_type = "红茶";
 			tk.tea_knowledge_brew = "温杯:用开水温茶具，使茶具均匀受热；投茶:取5g左右茶叶放入茶壶中；泡茶:倒掉洗茶的水，倒入8分满开水，盖上壶盖泡2-3min；出汤：将泡好的茶汤倒入公道杯中，然后将茶汤分到小直口杯中。闻茶香，品茶味，";
 			tk.tea_knowledge_quality = "1、最简单的方法是看祁门红茶茶叶的外形。品质好的茶叶其外形看起来条索纤细紧结，茶叶之间看起来均匀整齐;质量茶的茶叶则条索较粗，松散，茶叶大小不一，不整齐。2、从茶叶的颜色上看。好的祁门红茶茶叶色泽乌润鲜亮有光泽，而品质差的茶叶颜色不一，相对看起来光泽比较的暗淡。3、从茶叶的香气上看。好的茶叶的香气浓郁持久，品质茶的茶叶香气不纯正，不持久。4、从冲泡后的茶汤汤色上看。冲泡后茶汤红艳，而且有金圈，说明这种祁门红茶茶叶的品质是好的;如果冲泡出来的茶汤颜色较暗，而且汤色有浑浊的样子则说明其是不好的茶叶。";
+			tk.tea_knowledge_pic = String.valueOf(R.drawable.red_tea);
 			teaKnowledges.add(tk);
 			info = (TextView) this.findViewById(R.id.bn);
 			info.setText(getIntent().getStringExtra(
@@ -106,7 +107,7 @@ public class SearchSecondActivity extends Activity {
 		case GREENTEA:
 			TeaKnowledge tk1 = new TeaKnowledge();
 			tk1.tea_knowledge_name = "信阳毛尖";
-
+			tk1.tea_knowledge_pic = String.valueOf(R.drawable.green_tea);
 			tk1.tea_knowledge_introduce = "  信阳毛尖又称豫毛峰，汉族传统名茶，属绿茶类。中国十大名茶之一，河南省著名特产。由汉族茶农创制于民国初年。主要产地在信阳市和新县，商城县及境内大别山一带。信阳毛尖具有“细、圆、光、直、多白毫、香高、味浓、汤色绿”的独特风格，具有生津解渴、清心明目、提神醒脑、去腻消食等多种营养价值。";
 			tk1.tea_knowledge_simple_name = "信阳毛尖";
 			tk1.tea_knowledge_area = "信阳";
@@ -127,7 +128,7 @@ public class SearchSecondActivity extends Activity {
 		case BLACKTEA:
 			TeaKnowledge tk2 = new TeaKnowledge();
 			tk2.tea_knowledge_name = "云南普洱";
-
+			tk2.tea_knowledge_pic = String.valueOf(R.drawable.balck_tea);
 			tk2.tea_knowledge_introduce = "普洱茶，又名滇青茶，属于黑茶类，因原运销集散地在普洱县，故名普洱茶。普洱茶以云南大叶种晒青茶为原料，使用亚发酵青茶制法，从发酵不同分为生茶和熟茶两种，成品分为散茶和紧压茶两类。"
 					+ "普洱茶是中国名茶中最讲究冲泡技巧和品饮艺术的茶类，其饮用方法异常丰富，既可清饮，也可混饮。普洱茶茶汤橙黄浓厚，香气高锐持久，香型独特，滋味浓醇，经久耐泡，冲泡五六次后仍有香味。";
 			tk2.tea_knowledge_simple_name = "普洱茶";
@@ -147,7 +148,7 @@ public class SearchSecondActivity extends Activity {
 		case WHITETEA:
 			TeaKnowledge tk3 = new TeaKnowledge();
 			tk3.tea_knowledge_name = "白毫银针";
-
+			tk3.tea_knowledge_pic = String.valueOf(R.drawable.white_tea);
 			tk3.tea_knowledge_introduce = "  白毫银针，简称银针，又叫白毫，是一种汉族传统名茶，属白茶类。素有茶中“美女”、“茶王”之美称。白毫银针由福建省的汉族茶农创制于1889年，产地位于中国福建省的福鼎市和南平市政和县。"
 					+ "由于鲜叶原料全部是茶芽，白毫银针制成成品茶后，形状似针，白毫密被，色白如银，因此命名为白毫银针。其针状成品茶，长三厘米许，整个茶芽为白毫覆被，银装素裹，熠熠闪光，令人赏心悦目。冲泡后，香气清鲜，滋味醇和，杯中的景观也使人情趣横生。茶在杯中冲泡，即出现白云疑光闪，满盏浮花乳，芽芽挺立，蔚为奇观。";
 			tk3.tea_knowledge_simple_name = "白毫银针";
@@ -168,7 +169,7 @@ public class SearchSecondActivity extends Activity {
 		case YELLOWTEA:
 			TeaKnowledge tk4 = new TeaKnowledge();
 			tk4.tea_knowledge_name = "君山银针";
-
+			tk4.tea_knowledge_pic = String.valueOf(R.drawable.yello_tea);
 			tk4.tea_knowledge_introduce = "  君山银针是汉族传统名茶，中国名茶之一。产于湖南岳阳洞庭湖中的君山，形细如针，故名君山银针。属于黄茶。其成品茶芽头茁壮，长短大小均匀，茶芽内面呈金黄色，外层白毫显露完整，而且包裹坚实，茶芽外形很象一根根银针，雅称“金镶玉”。“金镶玉色尘心去，川迥洞庭好月来。”君山茶历史悠久，唐代就已生产、出名。据说文成公主出嫁时就选带了君山银针茶带入西藏。";
 			tk4.tea_knowledge_simple_name = "君山银针";
 			tk4.tea_knowledge_area = "岳阳";
@@ -189,7 +190,7 @@ public class SearchSecondActivity extends Activity {
 		case CYANTEA:
 			TeaKnowledge tk5 = new TeaKnowledge();
 			tk5.tea_knowledge_name = "铁观音";
-
+			tk5.tea_knowledge_pic = String.valueOf(R.drawable.cyan_tea);
 			tk5.tea_knowledge_introduce = "  铁观音茶，汉族传统名茶，属于青茶类，是中国十大名茶之一。原产于福建泉州市安溪县西坪镇，发现于1723—1735年。“铁观音”既是茶名，也是茶树品种名，铁观音茶介于绿茶和红茶之间，属于半发酵茶类，铁观音独具“观音韵”，清香雅韵，冲泡后有天然的兰花香，滋味纯浓,香气馥郁持久，有“七泡有余香之誉 ”。除具有一般茶叶的保健功能外，还具有抗衰老、抗动脉硬化、防治糖尿病、减肥健美、防治龋齿、清热降火，敌烟醒酒等功效。";
 			tk5.tea_knowledge_simple_name = "铁观音";
 			tk5.tea_knowledge_area = "闽南、闽北、广东、台湾";
@@ -209,7 +210,7 @@ public class SearchSecondActivity extends Activity {
 		case HEALTHTEA:
 			TeaKnowledge tk6 = new TeaKnowledge();
 			tk6.tea_knowledge_name = "决明子茶";
-
+			tk6.tea_knowledge_pic = String.valueOf(R.drawable.health_care_tea);
 			tk6.tea_knowledge_introduce = "  决明子茶是豆科草本植物的成熟种子，味苦、甘而性凉，清肝明目、润肠通便。现代药理研究认为，决明子富含大黄酚、大黄素、决明素等成分，具有降压、抗菌和降低胆固醇的作用。将单味炒决明子15克，直接泡茶饮用，直至茶水无色。";
 			tk6.tea_knowledge_simple_name = "决明子茶";
 			tk6.tea_knowledge_area = "中国";
@@ -225,7 +226,7 @@ public class SearchSecondActivity extends Activity {
 		case FLOWERTEA:
 			TeaKnowledge tk7 = new TeaKnowledge();
 			tk7.tea_knowledge_name = "茉莉花茶";
-
+			tk7.tea_knowledge_pic = String.valueOf(R.drawable.flower_tea);
 			tk7.tea_knowledge_introduce = "  信阳毛尖又称豫毛峰，汉族传统名茶，属绿茶类。中国十大名茶之一，河南省著名特产。由汉族茶农创制于民国初年。主要产地在信阳市和新县，商城县及境内大别山一带。信阳毛尖具有“细、圆、光、直、多白毫、香高、味浓、汤色绿”的独特风格，具有生津解渴、清心明目、提神醒脑、去腻消食等多种营养价值。";
 			tk7.tea_knowledge_simple_name = "茉莉花茶";
 			tk7.tea_knowledge_area = "广西 、福建等地";
@@ -266,7 +267,7 @@ public class SearchSecondActivity extends Activity {
 		replyItem = new ArrayList<HashMap<String, Object>>();
 		for (int i = 0; i < teaKnowledges.size(); i++) {
 			map = new HashMap<String, Object>();
-			map.put("searchImage", R.drawable.user_default_avatars);
+			map.put("searchImage",  teaKnowledges.get(i).tea_knowledge_pic);
 			map.put("searchContent", teaKnowledges.get(i).tea_knowledge_name);
 			replyItem.add(map);
 		}
