@@ -58,6 +58,7 @@ public class RegisterActivity extends BaseActivity implements OnClickListener{
 		title = (TextView) findViewById(R.id.default_title);
 		title.setText("注册");
 		registeOk =(Button) findViewById(R.id.btn_registe_ok);
+		registeOk.setOnClickListener(this);
 		if(getIntent().getStringArrayListExtra(TeaSayImageSelectedViewActivity.SELECTED_IMAGE_PATH)!=null){
 			selectedImage.clear();
 			selectedImage = getIntent().getStringArrayListExtra(TeaSayImageSelectedViewActivity.SELECTED_IMAGE_PATH);

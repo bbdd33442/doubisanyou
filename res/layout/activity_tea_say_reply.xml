@@ -48,7 +48,7 @@
                 android:textColor="#000000"
                 android:textSize="16sp" />
 			    <TextView
-                    android:id="@+id/tea_say_publisher_name"
+                    android:id="@+id/tea_say_publisher_naa"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="4dp"
@@ -70,7 +70,7 @@
                     android:id="@+id/tea_say_content"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/tea_say_publisher_name"
+                    android:layout_below="@id/tea_say_publisher_naa"
                     android:layout_marginRight="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="8dp"

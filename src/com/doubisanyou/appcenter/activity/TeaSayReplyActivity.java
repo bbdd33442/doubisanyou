@@ -110,7 +110,7 @@ public class TeaSayReplyActivity extends BaseActivity implements
 		teaSayCommentButton.setOnClickListener(this);
 		commentText = (EditText) findViewById(R.id.tea_say_comment_content);
 
-		tea_say_publisher_name = (TextView) findViewById(R.id.tea_say_publisher_name);
+		tea_say_publisher_name = (TextView) findViewById(R.id.tea_say_publisher_naa);
 		tea_say_publisher_name.setText(ts.tea_say_publisher_name);
 		tea_say_content = (TextView) findViewById(R.id.tea_say_content);
 		tea_say_content.setText(ts.tea_say_content);
@@ -195,24 +195,4 @@ public class TeaSayReplyActivity extends BaseActivity implements
 		}
 
 	}
-	
-	
-	/*  public static void setListViewHeightBasedOnChildren(ListView listView) {  
-	        ListAdapter listAdapter = listView.getAdapter();   
-	        if (listAdapter == null) {  
-	            // pre-condition  
-	            return;  
-	        }  
-	  
-	        int totalHeight = 0;  
-	        for (int i = 0; i < listAdapter.getCount(); i++) {  
-	            View listItem = listAdapter.getView(i, null, listView);  
-	            listItem.measure(0, 0);  
-	            totalHeight += listItem.getMeasuredHeight();  
-	        }  
-	  
-	        ViewGroup.LayoutParams params = listView.getLayoutParams();  
-	        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));  
-	        listView.setLayoutParams(params);  
-	    }  */
 }

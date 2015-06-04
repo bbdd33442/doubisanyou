@@ -117,6 +117,7 @@
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@id/registe_pass_label"
                     android:password="true"
+                    android:textColor="@color/black"
                     android:singleLine="true" />
             </RelativeLayout>
 
@@ -139,6 +140,7 @@
                     style="@style/layout_width_height_fw"
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@id/registe_pass_check_label"
+                    android:textColor="@color/black"
                     android:singleLine="true" />
             </RelativeLayout>
 

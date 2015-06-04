@@ -18,7 +18,7 @@ public class Config {
 
 	public static String TOKEN="token";
 	
-	public static User user;
+	public static User user = new User();
 	
 	public static String PROJECT_ID="com.doubisanyou.tea";
 	

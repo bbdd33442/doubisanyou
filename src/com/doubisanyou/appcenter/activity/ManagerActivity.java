@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.doubisanyou.appcenter.R;
 import com.doubisanyou.appcenter.date.Config;
 import com.doubisanyou.baseproject.base.BaseActivity;
+import com.doubisanyou.baseproject.utilCommon.StringAndDataUtil;
 import com.doubisanyou.baseproject.utilsResource.ImageLoader;
 import com.doubisanyou.baseproject.utilsResource.ImageLoader.Type;
 
@@ -34,7 +35,9 @@ public class ManagerActivity extends BaseActivity implements OnClickListener {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+	
 		setContentView(R.layout.activity_manager);
+		iniView();
 		token = Config.getToken(getApplicationContext());
 		if(token==null||token.equals("")){
 			Intent i = new Intent(this,LoginActivity.class);
@@ -43,7 +46,6 @@ public class ManagerActivity extends BaseActivity implements OnClickListener {
 			//将token传给服务器，从服务器上拿到当前用户的信息
 		}
 		
-		iniView();
 	}
 	
 	void iniView(){
@@ -61,6 +63,26 @@ public class ManagerActivity extends BaseActivity implements OnClickListener {
 		nickName.setOnClickListener(this);
 		signature = (TextView) findViewById(R.id.manager_user_signature);
 		signature.setOnClickListener(this);
+	}
+	
+	protected void onResume() {
+		super.onResume();
+		dateToView();
+	}
+	
+	void dateToView(){
+		if(Config.user.equals(null)){
+			return;
+		}
+		String nickNameText = Config.user.user_nick_name;
+		if(!StringAndDataUtil.isNullOrEmpty(nickNameText)){
+			nickName.setText(nickNameText);
+		}
+		String signatureText = Config.user.user_signature;
+		if(!StringAndDataUtil.isNullOrEmpty(signatureText)){
+			signature.setText(signatureText);
+		}
+		
 	}
 	
 	Handler mHandler = new Handler(){
