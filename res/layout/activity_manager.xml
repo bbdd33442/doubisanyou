@@ -55,7 +55,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:minEms="5"
-                android:text="1123123" />
+                android:text="中南大学" />
         </LinearLayout>
 
         <LinearLayout
