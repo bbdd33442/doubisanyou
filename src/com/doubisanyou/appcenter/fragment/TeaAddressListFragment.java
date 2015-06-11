@@ -33,22 +33,18 @@ public class TeaAddressListFragment extends Fragment {
 	private ExpandableListView mExpandableListView;
 	private TeaAddressListViewAdapter mTalvAdapter;
 
-	@Override
-	public void onStart() {
-		super.onStart();
-		EventBus.getDefault().register(this);
-	}
 
 	@Override
-	public void onStop() {
+	public void onDestroyView() {		
 		EventBus.getDefault().unregister(this);
-		super.onStop();
+		super.onDestroyView();
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		super.onCreateView(inflater, container, savedInstanceState);
+		EventBus.getDefault().register(this);
 		View addressListView = inflater.inflate(R.layout.fragment_address_list,
 				container, false);
 		mExpandableListView = (ExpandableListView) addressListView
