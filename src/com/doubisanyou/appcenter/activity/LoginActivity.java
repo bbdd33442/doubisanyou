@@ -99,14 +99,11 @@ public class LoginActivity extends Activity implements OnClickListener {
 		String errorText;
 		switch (respCode) {
 		case 0:
-			this.finish();
-			return;
-		case 1:
 			errorText = "用户名或密码错误";
 			break;
-		case 3:
-			errorText = "连接错误";
-			break;
+		case 1:			
+			this.finish();
+			return;
 		default:
 			errorText = "未知错误";
 			break;
