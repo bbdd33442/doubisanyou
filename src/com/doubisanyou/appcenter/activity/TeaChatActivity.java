@@ -60,6 +60,7 @@ public class TeaChatActivity extends BaseActivity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_tea_chat);
 		startService(new Intent(this, XmppService.class));
+
 		initView();
 		initTabLineWidth();
 	}
@@ -68,6 +69,15 @@ public class TeaChatActivity extends BaseActivity implements OnClickListener {
 	protected void onDestroy() {
 		stopService(new Intent(this, XmppService.class));
 		super.onDestroy();
+	}
+
+	@Override
+	protected void onStart() {
+		super.onStart();
+		if (!XmppService.IS_LOGIN) {
+			Intent intent = new Intent(this, LoginActivity.class);
+			startActivity(intent);
+		}
 	}
 
 	private void initView() {
@@ -184,23 +194,20 @@ public class TeaChatActivity extends BaseActivity implements OnClickListener {
 		}
 	}
 
-/*	@Override
-	protected void onStart() {
-		super.onStart();
-		EventBus.getDefault().register(this);
-	}
+	/*
+	 * @Override protected void onStart() { super.onStart();
+	 * EventBus.getDefault().register(this); }
+	 * 
+	 * @Override protected void onStop() {
+	 * EventBus.getDefault().unregister(this); super.onStop(); }
+	 */
 
-	@Override
-	protected void onStop() {
-		EventBus.getDefault().unregister(this);
-		super.onStop();
-	}*/
-
-/*	public void onEventMainThread(
-			EBEvents.ReceiveChatMsgEvent receiveChatMsgEvent) {
-		String from = receiveChatMsgEvent.getChatMsgTransferEntity().getFrom();
-		Log.i(TAG, from);
-	}*/
+	/*
+	 * public void onEventMainThread( EBEvents.ReceiveChatMsgEvent
+	 * receiveChatMsgEvent) { String from =
+	 * receiveChatMsgEvent.getChatMsgTransferEntity().getFrom(); Log.i(TAG,
+	 * from); }
+	 */
 
 	private void showAddFriendDialog(Context context) {
 		LayoutInflater inflater = LayoutInflater.from(this);

@@ -40,6 +40,8 @@ public class TeaChatListFragment extends Fragment {
 			Bundle savedInstanceState) {
 		super.onCreateView(inflater, container, savedInstanceState);
 		Log.i(TAG, "createView");
+		EventBus.getDefault().register(this);
+
 		View chatListView = inflater.inflate(R.layout.fragment_chat_list,
 				container, false);
 		Log.i(TAG, "显示视图");
@@ -101,16 +103,13 @@ public class TeaChatListFragment extends Fragment {
 	@Override
 	public void onStart() {
 		super.onStart();
-		Log.i(TAG, "start");
-		EventBus.getDefault().register(this);
 		EventBus.getDefault().post(EBEvents.instanceGetChatListEvent());
 	}
 
 	@Override
-	public void onStop() {
-		Log.i(TAG, "stop");
+	public void onDestroyView() {
 		EventBus.getDefault().unregister(this);
-		super.onStop();
+		super.onDestroyView();
 	}
 
 	/**
