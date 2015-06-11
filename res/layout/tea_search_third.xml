@@ -14,8 +14,10 @@
         android:orientation="vertical" >
 
         <ImageView
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:id="@+id/tea_pic"
+            android:layout_gravity="center"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_weight="1"
             android:src="@drawable/ic_launcher" >
         </ImageView>
@@ -33,7 +35,7 @@
                 android:layout_weight="1"
                 android:autoLink="all"
                 android:gravity="center"
-                android:text="名    稱："
+                android:text="名    称："
                 android:textAppearance="@android:style/TextAppearance.Small"
                 android:textColor="@color/black" />
 
@@ -44,7 +46,7 @@
                 android:layout_weight="1"
                 android:autoLink="all"
                 android:gravity="center"
-                android:text="祁門紅茶"
+                android:text="祁门紅茶"
                 android:textAppearance="@android:style/TextAppearance.Small"
                 android:textColor="@color/black" />
 
@@ -54,7 +56,7 @@
                 android:layout_weight="1"
                 android:autoLink="all"
                 android:gravity="center"
-                android:text="簡稱："
+                android:text="简称："
                 android:textAppearance="@android:style/TextAppearance.Small"
                 android:textColor="@color/black" />
 
@@ -83,7 +85,7 @@
                 android:layout_weight="1"
                 android:autoLink="all"
                 android:gravity="center"
-                android:text="主產地："
+                android:text="主产地："
                 android:textAppearance="@android:style/TextAppearance.Small"
                 android:textColor="@color/black" />
 
@@ -104,7 +106,7 @@
                 android:layout_weight="1"
                 android:autoLink="all"
                 android:gravity="center"
-                android:text="茶種："
+                android:text="茶种："
                 android:textAppearance="@android:style/TextAppearance.Small"
                 android:textColor="@color/black" />
 
@@ -135,7 +137,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                android:background="@drawable/background_border"
+               
                 android:orientation="vertical" >
 
                 <TextView
@@ -143,8 +145,8 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:autoLink="all"
-                    android:text="簡介："
-                    android:textAppearance="@android:style/TextAppearance.Small"
+                    android:text="简介："
+                    android:textAppearance="?android:attr/textAppearanceLarge"
                     android:textColor="@color/black"
                     android:textSize="20dp" />
 
@@ -154,6 +156,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:editable="false"
+                     android:background="@drawable/background_border"
                     android:text=" "
                     android:textAppearance="@android:style/TextAppearance.Small"
                     android:textColor="@color/black" />
@@ -163,7 +166,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                android:background="@drawable/background_border"
+           
                 android:orientation="vertical" >
 
                 <TextView
@@ -182,6 +185,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:editable="false"
+                    android:background="@drawable/background_border"
                     android:text=" "
                     android:textAppearance="@android:style/TextAppearance.Small"
                     android:textColor="@color/black" />
@@ -191,7 +195,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                android:background="@drawable/background_border"
                 android:orientation="vertical" >
 
                 <TextView
@@ -209,6 +212,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:background="@drawable/background_border"
                     android:editable="false"
                     android:text=" "
                     android:textColor="@color/black" />

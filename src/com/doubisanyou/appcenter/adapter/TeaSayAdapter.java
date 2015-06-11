@@ -96,7 +96,7 @@ public class TeaSayAdapter extends ActivityBaseAdapter<TeaSay> {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						Bundle bd = new Bundle();
-						bd.putString("POSITION", String.valueOf(position));
+						bd.putSerializable("POSITION", ts);
 						Message msg = handler.obtainMessage();
 						msg.setData(bd);
 						handler.sendMessage(msg);

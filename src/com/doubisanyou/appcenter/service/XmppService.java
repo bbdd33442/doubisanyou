@@ -94,11 +94,11 @@ public class XmppService extends Service {
 			public void run() {
 				if (conn == null) {
 					XMPPTCPConnectionConfiguration conf = XMPPTCPConnectionConfiguration
-							.builder().setUsernameAndPassword("blook","1234")
+							.builder().setUsernameAndPassword("xy198989","xy198989")
 							.setSendPresence(false)
 							.setSecurityMode(SecurityMode.disabled)
 							.setServiceName("localhost")
-							.setHost("192.168.1.118").setPort(5222).build();
+							.setHost("192.168.1.122").setPort(5222).build();
 					conn = new XMPPTCPConnection(conf);
 				}
 				if (conn.isConnected()) {
@@ -115,7 +115,7 @@ public class XmppService extends Service {
 									+ offlineManager.getMessageCount());
 					List<Message> offlineMsgs = offlineManager.getMessages();
 					for (Message msg : offlineMsgs) {
-						Log.i(TAG, msg.getBody());
+						//Log.i(TAG, msg.getBody());
 						String fromJid = msg.getFrom().split("/")[0];
 						String fromId = getContactId(fromJid);
 						if (fromId == null) {

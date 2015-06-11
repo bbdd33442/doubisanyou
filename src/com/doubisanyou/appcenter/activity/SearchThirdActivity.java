@@ -1,15 +1,19 @@
 package com.doubisanyou.appcenter.activity;
 
-import com.doubisanyou.appcenter.R;
-import com.doubisanyou.appcenter.bean.TeaKnowledge;
-
 import android.app.Activity;
-import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.doubisanyou.appcenter.R;
+import com.doubisanyou.appcenter.bean.TeaKnowledge;
+import com.doubisanyou.baseproject.utilsResource.BitmapUtil;
+import com.doubisanyou.baseproject.utilsResource.ImageLoader;
+import com.doubisanyou.baseproject.utilsResource.ImageLoader.Type;
 
 public class SearchThirdActivity extends Activity {
 	private TextView title;
@@ -20,7 +24,7 @@ public class SearchThirdActivity extends Activity {
 	private TextView introduce;
 	private TextView brew;
 	private TextView quality;
-
+    private ImageView pic;
 	public static final String TEAKNOWLEDGE = "teaknowledge";
 
 	@Override
@@ -32,6 +36,9 @@ public class SearchThirdActivity extends Activity {
 		back.setVisibility(View.VISIBLE);
 		TeaKnowledge tk = (TeaKnowledge) getIntent().getSerializableExtra(
 				TEAKNOWLEDGE);
+		pic = (ImageView) findViewById(R.id.tea_pic);
+		Bitmap bitmap = BitmapUtil.ReadBitmapById(getApplicationContext(), Integer.parseInt(tk.tea_knowledge_pic));
+		pic.setImageBitmap(bitmap);
 		title = (TextView) this.findViewById(R.id.default_title);
 		title.setText(tk.tea_knowledge_name);
 

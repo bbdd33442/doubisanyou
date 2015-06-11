@@ -11,6 +11,8 @@ import java.net.URL;
 
 import android.os.AsyncTask;
 
+import com.doubisanyou.appcenter.date.Config;
+
 public class NetConnect {
 	HttpURLConnection uc=null;
 	public NetConnect(final String url,SuccessCallBack successcallback,FailCallBack failcallback,String params){
@@ -30,7 +32,8 @@ public class NetConnect {
 					case POST:
 						uc= (HttpURLConnection) new URL(url).openConnection();
 						uc.setDoOutput(true);
-						BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(uc.getOutputStream(),com.doubisanyou.appcenter.date.Config.CHARSET_UTF8));
+						uc.setRequestProperty("Content-type", "text/plain");
+						BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(uc.getOutputStream(),Config.CHARSET_UTF8));
 						bw.write(params);
 						bw.flush();
 						break;
@@ -38,10 +41,10 @@ public class NetConnect {
 						uc= (HttpURLConnection) new URL(url+"?"+params).openConnection();
 						break;
 					}
-					 System.out.println("请求的url"+uc.getURL());
+					 System.out.println("请求的url:"+uc.getURL());
 					 System.out.println("参数为:"+params);
-					
-					 BufferedReader bd = new BufferedReader(new InputStreamReader(uc.getInputStream(), com.doubisanyou.appcenter.date.Config.CHARSET_UTF8));
+					 System.out.println(uc.getResponseCode());
+					 BufferedReader bd = new BufferedReader(new InputStreamReader(uc.getInputStream(),Config.CHARSET_UTF8));
 					 String line;
 					 StringBuffer result = new StringBuffer();
 					 while((line=bd.readLine())!=null){
@@ -60,7 +63,7 @@ public class NetConnect {
 			}
 			
 			
-			protected void e(String result) {
+			protected void onPostExecute(String result) {
 				super.onPostExecute(result);
 				if(result!=null){
 					successcallback.onSuccess(result);

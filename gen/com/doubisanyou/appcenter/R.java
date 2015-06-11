@@ -212,18 +212,18 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int app_ver=0x7f050060;
         public static final int bn=0x7f0500a2;
         public static final int both=0x7f050002;
-        public static final int brew=0x7f0500a8;
-        public static final int brewinfo=0x7f0500a9;
+        public static final int brew=0x7f0500a9;
+        public static final int brewinfo=0x7f0500aa;
         public static final int btn_back=0x7f050036;
         public static final int btn_bottom=0x7f05003b;
         public static final int btn_clear_catche=0x7f05001a;
-        public static final int btn_left=0x7f0500ad;
+        public static final int btn_left=0x7f0500ae;
         public static final int btn_log_out=0x7f05001b;
         public static final int btn_rcd=0x7f05003e;
         public static final int btn_registe_ok=0x7f050030;
         public static final int btn_register=0x7f05000b;
-        public static final int btn_right=0x7f0500af;
-        public static final int btn_right_btn=0x7f0500b0;
+        public static final int btn_right=0x7f0500b0;
+        public static final int btn_right_btn=0x7f0500b1;
         public static final int btn_send=0x7f05003c;
         public static final int btn_signin=0x7f05000a;
         public static final int chat_layout_vp=0x7f050034;
@@ -234,8 +234,8 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int contact_gxqm_tv=0x7f05005a;
         public static final int contact_nickname_tv=0x7f050059;
         public static final int content=0x7f050092;
-        public static final int default_title=0x7f0500ae;
-        public static final int del_re=0x7f0500b5;
+        public static final int default_title=0x7f0500af;
+        public static final int del_re=0x7f0500b6;
         public static final int dir_item_count=0x7f050077;
         public static final int dir_item_image=0x7f050075;
         public static final int dir_item_name=0x7f050076;
@@ -244,7 +244,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int et_sendmessage=0x7f05003d;
         public static final int get_check_code=0x7f050022;
         public static final int hometabs=0x7f05008e;
-        public static final int id1=0x7f0500a7;
+        public static final int id1=0x7f0500a8;
         public static final int id_bottom_image_view=0x7f050094;
         public static final int id_page_vp=0x7f050041;
         public static final int id_switch_tab_ll=0x7f050098;
@@ -257,10 +257,10 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int id_tea_history_text=0x7f05009c;
         public static final int id_tea_knowledge_text=0x7f05009a;
         public static final int id_teaset_text=0x7f0500a0;
-        public static final int imageView1=0x7f0500b2;
+        public static final int imageView1=0x7f0500b3;
         public static final int image_view_finish=0x7f050095;
         public static final int image_view_gridview=0x7f050093;
-        public static final int img1=0x7f0500b4;
+        public static final int img1=0x7f0500b5;
         public static final int include_titlebar=0x7f05001c;
         public static final int itcl_avatar_iv=0x7f050065;
         public static final int itcl_nickname_tv=0x7f050066;
@@ -296,16 +296,16 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int pop_menu_only_text=0x7f050088;
         public static final int pop_menu_with_image=0x7f050089;
         public static final int popup_view_cont=0x7f050087;
-        public static final int ppma_item_delete_friend=0x7f0500ba;
-        public static final int ppmc_item_delete_chat_form=0x7f0500bb;
-        public static final int progressBar1=0x7f0500b8;
+        public static final int ppma_item_delete_friend=0x7f0500bb;
+        public static final int ppmc_item_delete_chat_form=0x7f0500bc;
+        public static final int progressBar1=0x7f0500b9;
         public static final int pullDownFromTop=0x7f050000;
         public static final int pullUpFromBottom=0x7f050001;
         public static final int pull_to_refresh_image=0x7f05008c;
         public static final int pull_to_refresh_progress=0x7f05008b;
         public static final int pull_to_refresh_text=0x7f05008a;
-        public static final int quality=0x7f0500aa;
-        public static final int qualityinfo=0x7f0500ab;
+        public static final int quality=0x7f0500ab;
+        public static final int qualityinfo=0x7f0500ac;
         public static final int rcChat_popup=0x7f050040;
         public static final int registe_check_code=0x7f050024;
         public static final int registe_check_code_label=0x7f050023;
@@ -325,7 +325,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int right_btn=0x7f050038;
         public static final int rl_bottom=0x7f050039;
         public static final int rl_layout=0x7f050035;
-        public static final int sc_img1=0x7f0500b6;
+        public static final int sc_img1=0x7f0500b7;
         public static final int scroll_view=0x7f050044;
         public static final int search_friend_sv=0x7f050003;
         public static final int seporater=0x7f05004f;
@@ -339,6 +339,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int tea_knowledge_gridview=0x7f050097;
         public static final int tea_knowledge_item_image=0x7f050073;
         public static final int tea_knowledge_item_text=0x7f050074;
+        public static final int tea_pic=0x7f0500a3;
         public static final int tea_say_comment_btn=0x7f050053;
         public static final int tea_say_comment_content=0x7f050052;
         public static final int tea_say_content=0x7f050049;
@@ -365,16 +366,16 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int tea_search_second_content=0x7f050084;
         public static final int tea_search_second_image=0x7f050083;
         public static final int tea_set_content=0x7f050086;
-        public static final int tea_set_gridview=0x7f0500ac;
+        public static final int tea_set_gridview=0x7f0500ad;
         public static final int tea_set_image=0x7f050085;
         public static final int tea_set_item_image=0x7f05007a;
         public static final int tea_set_item_text=0x7f05007b;
         public static final int top=0x7f05000d;
         public static final int top_list_layout=0x7f050046;
-        public static final int tv01=0x7f0500a3;
-        public static final int tv02=0x7f0500a4;
-        public static final int tv03=0x7f0500a5;
-        public static final int tv04=0x7f0500a6;
+        public static final int tv01=0x7f0500a4;
+        public static final int tv02=0x7f0500a5;
+        public static final int tv03=0x7f0500a6;
+        public static final int tv04=0x7f0500a7;
         public static final int tv_chatcontent=0x7f05006a;
         public static final int tv_sendtime=0x7f050068;
         public static final int tv_time=0x7f05006b;
@@ -382,10 +383,10 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int user_type_tea_business=0x7f05002e;
         public static final int user_type_tea_company=0x7f05002f;
         public static final int user_type_tea_friend=0x7f05002d;
-        public static final int voice_rcd_hint_loading=0x7f0500b7;
-        public static final int voice_rcd_hint_rcding=0x7f0500b1;
-        public static final int voice_rcd_hint_tooshort=0x7f0500b9;
-        public static final int volume=0x7f0500b3;
+        public static final int voice_rcd_hint_loading=0x7f0500b8;
+        public static final int voice_rcd_hint_rcding=0x7f0500b2;
+        public static final int voice_rcd_hint_tooshort=0x7f0500ba;
+        public static final int volume=0x7f0500b4;
     }
     public static final class layout {
         public static final int activity_add_friend=0x7f030000;
@@ -535,7 +536,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <tr><td><code>pullUpFromBottom</code></td><td>0x2</td><td></td></tr>
 <tr><td><code>both</code></td><td>0x3</td><td></td></tr>
 </table>
-          @attr name android:mode
+          @attr name com.doubisanyou.appcenter:mode
         */
         public static final int PullToRefresh_mode = 0;
         /** Attributes that can be used with a circularimageview.
@@ -565,7 +566,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:border_color
+          @attr name com.doubisanyou.appcenter:border_color
         */
         public static final int circularimageview_border_color = 1;
         /**
@@ -581,7 +582,7 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:border_thickness
+          @attr name com.doubisanyou.appcenter:border_thickness
         */
         public static final int circularimageview_border_thickness = 0;
     };

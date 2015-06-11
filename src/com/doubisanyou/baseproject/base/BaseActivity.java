@@ -25,6 +25,7 @@ import android.widget.Toast;
 import com.doubisanyou.appcenter.R;
 import com.doubisanyou.appcenter.date.Config;
 import com.doubisanyou.appcenter.widget.LoadingDialog;
+import com.doubisanyou.baseproject.network.ConnectMethd;
 import com.doubisanyou.baseproject.network.NetConnect;
 import com.doubisanyou.baseproject.network.NetConnect.FailCallBack;
 import com.doubisanyou.baseproject.network.NetConnect.SuccessCallBack;
@@ -51,9 +52,14 @@ public abstract class BaseActivity extends FragmentActivity implements
 
 
 	/** 发送任务,并显示相应进度条 */
-	public String sendTask(Context context,String parameter) {
+	public String sendTask(Context context,String parameter,String url) {
+		return sendTask(context,parameter,url, ConnectMethd.POST);
+	}
+	public ProgressDialog pDlg;
+	/** 发送任务,并显示相应进度条 */
+	public String sendTask(Context context,String parameter,String url, ConnectMethd methed) {
 		/*final ProgressDialog pd = new ProgressDialog(context).show(context, "链接","与服务器通信中...");*/
-		final ProgressDialog pDlg;
+		
 		pDlg = new ProgressDialog(this);
 		pDlg.setOnCancelListener(this);
 		pDlg.setTitle("提示");
@@ -63,7 +69,7 @@ public abstract class BaseActivity extends FragmentActivity implements
 				onClickDlgCancel);
 		pDlg.setIndeterminate(true);
 		pDlg.show();
-		task = new NetConnect(Config.SERVICE_URL, new SuccessCallBack() {
+		task = new NetConnect(url,methed,new SuccessCallBack() {
 			
 			@Override
 			public void onSuccess(String result) {
@@ -82,7 +88,19 @@ public abstract class BaseActivity extends FragmentActivity implements
 		}, parameter);
 		return rs;
 	}
-
+	
+	public void showProgressDialog(){
+		pDlg = new ProgressDialog(this);
+		pDlg.setOnCancelListener(this);
+		pDlg.setTitle("提示");
+		pDlg.setMessage("正在进行网络连接，请稍后...");
+		pDlg.setCancelable(true);
+		pDlg.setButton(getResources().getString(R.string.cancel),
+				onClickDlgCancel);
+		pDlg.setIndeterminate(true);
+		pDlg.show();
+	}
+	
 	/** 发送任务,选择是否显示进度条 *//*
 	public void sendTask(NetConnect task, boolean showProgress) {
 		if (showProgress) {

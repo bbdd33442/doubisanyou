@@ -1,11 +1,31 @@
 package com.doubisanyou.appcenter.activity;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 
+import org.jivesoftware.smack.AbstractXMPPConnection;
+import org.jivesoftware.smack.ConnectionConfiguration;
+import org.jivesoftware.smack.ConnectionConfiguration.SecurityMode;
+import org.jivesoftware.smack.SASLAuthentication;
+import org.jivesoftware.smack.SmackConfiguration;
+import org.jivesoftware.smack.SmackException;
+import org.jivesoftware.smack.SmackException.NoResponseException;
+import org.jivesoftware.smack.SmackException.NotConnectedException;
+import org.jivesoftware.smack.XMPPException;
+import org.jivesoftware.smack.XMPPException.XMPPErrorException;
+import org.jivesoftware.smack.sasl.provided.SASLDigestMD5Mechanism;
+import org.jivesoftware.smack.tcp.XMPPTCPConnection;
+import org.jivesoftware.smack.tcp.XMPPTCPConnectionConfiguration;
+import org.jivesoftware.smackx.vcardtemp.packet.VCard;
+
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -14,16 +34,23 @@ import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.doubisanyou.appcenter.R;
 import com.doubisanyou.appcenter.bean.User;
 import com.doubisanyou.appcenter.date.Config;
 import com.doubisanyou.baseproject.base.BaseActivity;
+import com.doubisanyou.baseproject.network.ConnectMethd;
+import com.doubisanyou.baseproject.network.NetConnect;
+import com.doubisanyou.baseproject.network.NetConnect.FailCallBack;
+import com.doubisanyou.baseproject.network.NetConnect.SuccessCallBack;
+import com.doubisanyou.baseproject.utilCommon.JsonUtil;
 import com.doubisanyou.baseproject.utilsResource.ImageLoader;
 import com.doubisanyou.baseproject.utilsResource.ImageLoader.Type;
 
 public class RegisterActivity extends BaseActivity implements OnClickListener{
-	
+	String re = "";
+	Bitmap b;
 	Button back;
 	Button getCheckCode;
 	Button registeOk;
@@ -90,6 +117,66 @@ public class RegisterActivity extends BaseActivity implements OnClickListener{
 				
 			}
 		});
+     
+		new Thread(){
+			@Override
+			public void run(){
+			/*	SASLAuthentication.supportSASLMechanism("PLAIN",0);*/
+				 SmackConfiguration.DEBUG = true;
+				 VCard vcard = new VCard();  
+					XMPPTCPConnectionConfiguration conf = XMPPTCPConnectionConfiguration
+							.builder()
+							.setSendPresence(false)
+							.setSecurityMode(SecurityMode.disabled)
+							.setServiceName("localhost")
+							.setHost("192.168.1.122").setPort(5222).build();
+				
+					AbstractXMPPConnection  con = new XMPPTCPConnection(conf);
+					
+			        try {
+			        	if (con.isConnected()) {
+			        		con.disconnect();
+						}
+			        	con.connect();
+			        	con.login("xy198989", "xy198989");
+			        	System.out.println(con.getUser());
+			        	
+			        	vcard.load(con);
+					} catch (NoResponseException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (XMPPErrorException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (NotConnectedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (SmackException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (XMPPException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}  
+			          
+			       
+			        ByteArrayInputStream bais = new ByteArrayInputStream(  
+			                vcard.getAvatar());  
+			        b = BitmapFactory.decodeStream(bais);
+			        handler.sendEmptyMessage(3);
+			       
+		
+			}
+			}.start();
+			
+			
+				
+	
+		
+	   
 	}
    
 	Handler handler = new Handler(){
@@ -104,6 +191,10 @@ public class RegisterActivity extends BaseActivity implements OnClickListener{
 				getCheckCode.setText("获取验证码");
 				getCheckCode.setClickable(true);
 				break;
+			case 3:
+				userAvatars.setImageBitmap(b);
+				break;
+				 
 			default:
 				break;
 			}
@@ -139,10 +230,30 @@ public class RegisterActivity extends BaseActivity implements OnClickListener{
 			}).start(); 
 			break;
 		case R.id.btn_registe_ok:
-			//进行网络通讯，将用户加入到数据库中
+			this.showProgressDialog();
+			user.user_id = registePhoneNumber.getText().toString();
+			user.user_nick_name=registeNickName.getText().toString();
+			String parameter = JsonUtil.ObjectToJson(user);	
+			task = new NetConnect(Config.SERVICE_URL+"mobile/user/registe",ConnectMethd.POST,new SuccessCallBack() {
+				@Override
+				public void onSuccess(String result) {
+					re= result;
+					pDlg.dismiss();
+					Toast.makeText(getApplicationContext(), re, Toast.LENGTH_LONG).show();
+					finish();
+				}
+			},new FailCallBack() {
+				
+				@Override
+				public void onFail() {
+					re="错误！";
+					Toast.makeText(getApplicationContext(), re, Toast.LENGTH_LONG).show();
+					pDlg.dismiss();
+					
+				}
+			}, parameter);
 			
-			Config.user = user;
-			finish();
+		
 			break;
 		case R.id.registe_user_avartar:
 			Intent i = new Intent(this,TeaSayPublushImageFolderListActivity.class);
