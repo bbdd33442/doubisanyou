@@ -535,7 +535,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <tr><td><code>pullUpFromBottom</code></td><td>0x2</td><td></td></tr>
 <tr><td><code>both</code></td><td>0x3</td><td></td></tr>
 </table>
-          @attr name android:mode
+          @attr name com.doubisanyou.appcenter:mode
         */
         public static final int PullToRefresh_mode = 0;
         /** Attributes that can be used with a circularimageview.
@@ -565,7 +565,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:border_color
+          @attr name com.doubisanyou.appcenter:border_color
         */
         public static final int circularimageview_border_color = 1;
         /**
@@ -581,7 +581,7 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:border_thickness
+          @attr name com.doubisanyou.appcenter:border_thickness
         */
         public static final int circularimageview_border_thickness = 0;
     };
