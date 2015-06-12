@@ -183,7 +183,14 @@ public class TeaChatActivity extends BaseActivity implements OnClickListener {
 			break;
 		}
 	}
-
+	@Override
+	protected void onStart() {
+		super.onStart();
+		if (!XmppService.IS_LOGIN) {
+			Intent intent = new Intent(this, LoginActivity.class);
+			startActivity(intent);
+		}
+	}
 /*	@Override
 	protected void onStart() {
 		super.onStart();
