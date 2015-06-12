@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.jivesoftware.smack.util.StringUtils;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -26,6 +27,10 @@ import com.doubisanyou.appcenter.bean.EBEvents.ResponseRegisterEvent;
 import com.doubisanyou.appcenter.bean.User;
 import com.doubisanyou.appcenter.date.Config;
 import com.doubisanyou.baseproject.base.BaseActivity;
+import com.doubisanyou.baseproject.network.NetConnect;
+import com.doubisanyou.baseproject.network.NetConnect.FailCallBack;
+import com.doubisanyou.baseproject.network.NetConnect.SuccessCallBack;
+import com.doubisanyou.baseproject.utilCommon.JsonUtil;
 import com.doubisanyou.baseproject.utilsResource.ImageLoader;
 import com.doubisanyou.baseproject.utilsResource.ImageLoader.Type;
 
@@ -153,9 +158,17 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 			break;
 		case R.id.btn_registe_ok:
 			// 进行网络通讯，将用户加入到数据库中
-			String username = registeNickName.getText().toString();
+			String username = registePhoneNumber.getText().toString();
 			String password = registePass.getText().toString();
 			String checkPasswrod = registePassCheck.getText().toString();
+			if (StringUtils.isNullOrEmpty(user.user_type)) {
+				Toast.makeText(this, "必须选择一个身份", Toast.LENGTH_SHORT).show();
+				return;
+			}
+			if (StringUtils.isNullOrEmpty(registeNickName.getText().toString())) {
+				Toast.makeText(this, "昵称不能为空", Toast.LENGTH_SHORT).show();
+				return;
+			}
 			if (StringUtils.isNullOrEmpty(username)
 					|| StringUtils.isNullOrEmpty(password)
 					|| StringUtils.isNullOrEmpty(checkPasswrod)) {
@@ -171,8 +184,7 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 			reqRegisterEvent.setUsername(username);
 			reqRegisterEvent.setPassword(password);
 			EventBus.getDefault().post(reqRegisterEvent);
-			Config.user = user;
-			// finish();
+			//finish();
 			break;
 		case R.id.registe_user_avartar:
 			Intent i = new Intent(this,
@@ -206,14 +218,45 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 
 	public void onEventMainThread(ResponseRegisterEvent respRegisterEvent) {
 		int respCode = respRegisterEvent.getRespCode();
-		String errorText;
+		String errorText = null;
 		switch (respCode) {
 		case 0:
 			errorText = "连接错误";
 			break;
 		case 1:
-			this.finish();
-			return;
+			showToast("ok");
+			/*user.user_id = registePhoneNumber.getText().toString();
+			user.user_nick_name=registeNickName.getText().toString();
+			user.user_integral="0";
+			user.user_count_num="0";
+			
+			if(selectedImage.size()>0){
+				user.user_avartars=selectedImage.get(0);
+			}
+			String parameter = JsonUtil.ObjectToJson(user);
+			final ProgressDialog pDlg = new ProgressDialog(this);
+			pDlg.setTitle("提示");
+			pDlg.setMessage("正在进行网络连接，请稍后...");
+			pDlg.setIndeterminate(true);
+			pDlg.show();
+			NetConnect task = new NetConnect(Config.SERVICE_URL+"/mobile/user/registe",new SuccessCallBack() {
+				@Override
+				public void onSuccess(String result) {
+					Config.user = user;
+					showToast("result");
+					finish();
+					pDlg.dismiss();
+					
+				}
+			},new FailCallBack() {
+				@Override
+				public void onFail() {
+					showToast("错误");
+					pDlg.dismiss();
+					
+				}
+			}, parameter);*/
+			break;
 		default:
 			errorText = "未知错误";
 			break;

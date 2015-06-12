@@ -125,7 +125,7 @@ public abstract class BaseActivity extends FragmentActivity implements
 		task.send();
 	}
 */
-	private OnClickListener onClickDlgCancel = new OnClickListener() {
+	public OnClickListener onClickDlgCancel = new OnClickListener() {
 		@Override
 		public void onClick(DialogInterface dialog, int which) {
 			dialog.cancel();
@@ -237,7 +237,10 @@ public abstract class BaseActivity extends FragmentActivity implements
 	public void showToast(String text, int timeLength) {
 		Toast.makeText(this, text, timeLength).show();
 	}
-
+	
+	public void showToast(String text) {
+		Toast.makeText(this, text, Toast.LENGTH_LONG).show();
+	}
 	
 
 	/**
