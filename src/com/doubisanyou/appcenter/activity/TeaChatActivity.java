@@ -59,7 +59,7 @@ public class TeaChatActivity extends BaseActivity implements OnClickListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_tea_chat);
-		startService(new Intent(this, XmppService.class));
+//		startService(new Intent(this, XmppService.class));
 		initView();
 		initTabLineWidth();
 	}

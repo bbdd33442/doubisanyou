@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import org.jivesoftware.smack.util.StringUtils;
 
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -17,9 +16,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.doubisanyou.appcenter.R;
 import com.doubisanyou.appcenter.bean.EBEvents;

@@ -35,12 +35,17 @@ import org.jivesoftware.smackx.iqregister.AccountManager;
 import org.jivesoftware.smackx.offline.OfflineMessageManager;
 import org.jivesoftware.smackx.search.ReportedData;
 import org.jivesoftware.smackx.search.UserSearchManager;
+import org.jivesoftware.smackx.vcardtemp.VCardManager;
+import org.jivesoftware.smackx.vcardtemp.packet.VCard;
 import org.jivesoftware.smackx.xdata.Form;
 
 import android.annotation.SuppressLint;
 import android.app.Service;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Binder;
@@ -60,18 +65,19 @@ import com.doubisanyou.appcenter.bean.ContactEntity;
 import com.doubisanyou.appcenter.bean.EBEvents;
 import com.doubisanyou.appcenter.bean.EBEvents.RequestLoginEvent;
 import com.doubisanyou.appcenter.bean.EBEvents.RequestRegisterEvent;
+import com.doubisanyou.appcenter.bean.EBEvents.RequestSaveVCardEvent;
+import com.doubisanyou.appcenter.bean.EBEvents.RequestVCardEvent;
 import com.doubisanyou.appcenter.bean.EBEvents.ResponseLoginEvent;
 import com.doubisanyou.appcenter.bean.EBEvents.ResponseRegisterEvent;
+import com.doubisanyou.appcenter.bean.EBEvents.ResponseSaveVCardEvent;
+import com.doubisanyou.appcenter.bean.EBEvents.ResponseVCardEvent;
+import com.doubisanyou.appcenter.date.Config;
 import com.doubisanyou.appcenter.db.TeaDatabaseHelper;
 
 import de.greenrobot.event.EventBus;
 
 public class XmppService extends Service {
 	private static final String TAG = XmppService.class.getSimpleName();
-	private static final String XMPP_HOST = "192.168.0.108";
-	private static final int XMPP_PORT = 5222;
-	private static final String XMPP_SERVICE_NAME = "localhost";
-	private static final String DEFAULT_DATABASE = "teaDatabase_blook.db3";
 	public static boolean IS_CONNECT = false; // 是否连接
 	public static boolean IS_LOGIN = false; // 是否登录
 	private XMPPTCPConnection conn = null;
@@ -83,8 +89,7 @@ public class XmppService extends Service {
 	// private List<ChatInfoEntity> chatInfoList = new
 	// ArrayList<ChatInfoEntity>();
 	private Map<String, String> chatInfoMap = new HashMap<String, String>();
-
-	// private SendMsgReceiver smReceiver;
+	private static SharedPreferences userInfoSp;
 
 	@Override
 	public IBinder onBind(Intent intent) {
@@ -96,142 +101,17 @@ public class XmppService extends Service {
 	public void onCreate() {
 		super.onCreate();
 		Log.i(TAG, "create");
+		userInfoSp = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
 		EventBus.getDefault().register(this);
-		teaDatabaseHelper = new TeaDatabaseHelper(this, DEFAULT_DATABASE, 1);
+		teaDatabaseHelper = new TeaDatabaseHelper(this,
+				Config.DEFAULT_DATABASE, 1);
 		SmackConfiguration.DEBUG = true;
 		new Thread() {
 			public void run() {
-				doConnect(XMPP_SERVICE_NAME, XMPP_HOST, XMPP_PORT);
+				doConnect(Config.XMPP_SERVICE_NAME, Config.XMPP_HOST,
+						Config.XMPP_PORT);
 			};
 		}.start();
-		/*
-		 * loginThread = new Thread() { String result = "failed connected";
-		 * 
-		 * @Override public void run() { if (conn == null) {
-		 * XMPPTCPConnectionConfiguration conf = XMPPTCPConnectionConfiguration
-		 * .builder().setUsernameAndPassword("blook", "1234")
-		 * .setSendPresence(false) .setSecurityMode(SecurityMode.disabled)
-		 * .setServiceName("localhost")
-		 * .setHost("192.168.1.118").setPort(5222).build(); conn = new
-		 * XMPPTCPConnection(conf); } if (conn.isConnected()) {
-		 * conn.disconnect(); } try { conn.connect(); conn.login(); // 接收离线消息
-		 * OfflineMessageManager offlineManager = new OfflineMessageManager(
-		 * conn); Log.i(TAG, "offline message count: " +
-		 * offlineManager.getMessageCount()); List<Message> offlineMsgs =
-		 * offlineManager.getMessages(); for (Message msg : offlineMsgs) {
-		 * Log.i(TAG, msg.getBody()); String fromJid =
-		 * msg.getFrom().split("/")[0]; String fromId = getContactId(fromJid);
-		 * if (fromId == null) { Log.i(TAG, "来自陌生人的消息"); continue; } //
-		 * offlineManager. MessageModel mm = new MessageModel(); String chatId =
-		 * isExistChatRoom(fromJid, String.valueOf(1)); if (chatId == null) {
-		 * ChatRoomModel crm = new ChatRoomModel(); crm.jid = fromJid; crm.type
-		 * = String.valueOf(1); crm.updateTime = getDatetime(); crm =
-		 * saveChatRoom(crm); if (crm.id != null) chatId = crm.id; } mm.chatId =
-		 * chatId; mm.content = msg.getBody(); mm.time = getDatetime(); mm.from
-		 * = fromId; mm.type = String.valueOf(1); mm.isRead = false; // 默认消息未读
-		 * if (insertMessage(mm)) { Log.i(TAG, "message insert success"); } }
-		 * offlineManager.deleteMessages(); conn.sendStanza(new
-		 * Presence(Presence.Type.available)); // 保存用户 ContactModel owner = new
-		 * ContactModel(); owner.nickname = conn.getUser().split("@")[0];
-		 * owner.jid = conn.getUser().split("/")[0]; if (saveContact(owner)) {
-		 * Log.i(TAG, " user save success!"); } cm =
-		 * ChatManager.getInstanceFor(conn); cm.addChatListener(new
-		 * ChatManagerListener() {
-		 * 
-		 * @Override public void chatCreated(Chat chat, boolean isLocally) {
-		 * Log.i(TAG, "createChat：" + isLocally); if (!isLocally) { Log.i(TAG,
-		 * chat.getParticipant() + "\t" + chat.getThreadID()); String username =
-		 * chat.getParticipant().split( "@")[0]; if
-		 * (getContactId(chat.getParticipant().split( "/")[0]) == null) {
-		 * Log.i(TAG, "陌生人来信:" + chat.getParticipant()); chat.close(); return; }
-		 * String threadId = chatInfoMap.get(username); // 如果同一用户已存在聊天室，则关闭原聊天室
-		 * if (threadId != null && !threadId.equals(chat.getThreadID())) {
-		 * cm.getThreadChat(threadId).close(); } chatInfoMap.put(username,
-		 * chat.getThreadID()); } // 保存聊天室 Log.i(TAG, "jid =" +
-		 * chat.getParticipant()); ChatRoomModel cm = new ChatRoomModel();
-		 * cm.jid = chat.getParticipant().split("/")[0]; cm.type =
-		 * String.valueOf(1); cm.updateTime = getDatetime(); saveChatRoom(cm);
-		 * chat.addMessageListener(new ChatMessageListener() {
-		 * 
-		 * @Override public void processMessage(Chat chat, Message msg) {
-		 * Log.i(TAG, msg.getBody()); // if(activityName.equals("")) // 广播收到的消息
-		 * ChatMsgTransferEntity cmte = new ChatMsgTransferEntity();
-		 * cmte.setFrom(msg.getFrom().split("@")[0]);
-		 * cmte.setTo(TeaChatActivity.ACCOUNT_NAME);
-		 * cmte.setContent(msg.getBody()); cmte.setType(1); //
-		 * 向teaChatRoomActivity发送消息 EBEvents.ReceiveChatMsgEvent
-		 * receiveChatMsgEvent = EBEvents .instanceReceiveChatMsgEvent();
-		 * receiveChatMsgEvent .setChatMsgTransferEntity(cmte);
-		 * EventBus.getDefault().post( receiveChatMsgEvent);
-		 * 
-		 * // .... // 更新chatroom时间 // .... // 保存未读消息 String fromJid =
-		 * msg.getFrom().split("/")[0]; String fromId = getContactId(fromJid);
-		 * MessageModel mm = new MessageModel(); mm.chatId =
-		 * isExistChatRoom(fromJid, String.valueOf(1)); mm.content =
-		 * msg.getBody(); mm.time = getDatetime(); mm.from = fromId; mm.type =
-		 * String.valueOf(1); mm.isRead = false; // 默认消息未读 if
-		 * (insertMessage(mm)) { Log.i(TAG, "message insert success"); //
-		 * 向teaChatListFragment发送消息 EBEvents.RefreshChatListEvent
-		 * refreshChatListEvent = EBEvents .instanceRefreshChatListEvent();
-		 * refreshChatListEvent .setChatListForms(getChatListForms());
-		 * EventBus.getDefault().post( refreshChatListEvent); } } }); }
-		 * 
-		 * }); // 获取通讯录 final Roster roster = Roster.getInstanceFor(conn); //
-		 * roster.setSubscriptionMode(SubscriptionMode.manual); // Gson gson =
-		 * new Gson(); roster.addRosterListener(new RosterListener() {
-		 * 
-		 * @Override public void presenceChanged(Presence presence) {
-		 * System.out.println("changed====================");
-		 * System.out.println(presence.toString()); // presence.getFrom(); //
-		 * 用户状态改变 loadContact(roster); EBEvents.GetAddressListEvent
-		 * getAddressListEvent = EBEvents .instanceGetAddressListEvent();
-		 * getAddressListEvent .setAddressGroupList(addressGroupList);
-		 * getAddressListEvent.setContactList(contactList);
-		 * EventBus.getDefault().post(getAddressListEvent); }
-		 * 
-		 * @Override public void entriesUpdated(Collection<String> entries) {
-		 * System.out.println("updated===================="); for (String e :
-		 * entries) { System.out.println(e); } }
-		 * 
-		 * @Override public void entriesDeleted(Collection<String> entries) {
-		 * System.out.println("deleted===================="); for (String e :
-		 * entries) { System.out.println(e); } loadContact(roster);
-		 * EBEvents.GetAddressListEvent getAddressListEvent = EBEvents
-		 * .instanceGetAddressListEvent(); getAddressListEvent
-		 * .setAddressGroupList(addressGroupList);
-		 * getAddressListEvent.setContactList(contactList);
-		 * EventBus.getDefault().post(getAddressListEvent);
-		 * List<ChatListFormEntity> chatlst = getChatListForms();
-		 * EBEvents.RefreshChatListEvent refreshChatListEvent = EBEvents
-		 * .instanceRefreshChatListEvent();
-		 * refreshChatListEvent.setChatListForms(chatlst);
-		 * EventBus.getDefault().post(refreshChatListEvent); }
-		 * 
-		 * @Override public void entriesAdded(Collection<String> entries) {
-		 * System.out.println("added===================="); for (String e :
-		 * entries) { System.out.println(e); } loadContact(roster);
-		 * EBEvents.GetAddressListEvent getAddressListEvent = EBEvents
-		 * .instanceGetAddressListEvent(); getAddressListEvent
-		 * .setAddressGroupList(addressGroupList);
-		 * getAddressListEvent.setContactList(contactList);
-		 * EventBus.getDefault().post(getAddressListEvent); } }); result =
-		 * "XmppSever has connected"; loadContact(roster);
-		 * EBEvents.GetAddressListEvent getAddressListEvent = EBEvents
-		 * .instanceGetAddressListEvent();
-		 * getAddressListEvent.setAddressGroupList(addressGroupList);
-		 * getAddressListEvent.setContactList(contactList);
-		 * EventBus.getDefault().post(getAddressListEvent); // 获取聊天列表
-		 * List<ChatListFormEntity> chatlst = getChatListForms();
-		 * EBEvents.RefreshChatListEvent refreshChatListEvent = EBEvents
-		 * .instanceRefreshChatListEvent();
-		 * refreshChatListEvent.setChatListForms(chatlst);
-		 * EventBus.getDefault().post(refreshChatListEvent); } catch
-		 * (SmackException e) { e.printStackTrace(); Log.e(TAG, "登录错误");
-		 * makeToast("登录错误", Toast.LENGTH_LONG); } catch (IOException e) {
-		 * e.printStackTrace(); } catch (XMPPException e) { e.printStackTrace();
-		 * Log.e(TAG, "连接错误"); makeToast("连接错误", Toast.LENGTH_LONG); }
-		 * Log.i(TAG, result); } }; loginThread.start();
-		 */
 	}
 
 	@Override
@@ -339,6 +219,7 @@ public class XmppService extends Service {
 		}
 		if (!roster.isLoaded()) {
 			Log.i(TAG, "添加好友失败");
+			makeToast("添加好友失败，网络问题", Toast.LENGTH_LONG);
 			return;
 		}
 		UserSearchManager usm = new UserSearchManager(conn);
@@ -373,6 +254,7 @@ public class XmppService extends Service {
 			}
 		} else {
 			Log.i(TAG, "用户" + jid + "不存在");
+			makeToast("该用户不存在", Toast.LENGTH_LONG);
 		}
 
 	}
@@ -478,6 +360,37 @@ public class XmppService extends Service {
 				doRegister(username, password);
 			};
 		}.start();
+	}
+
+	/**
+	 * @Description 请求VCard
+	 * @param requestVCardEvent
+	 */
+	public void onEventBackgroundThread(RequestVCardEvent requestVCardEvent) {
+		String username = requestVCardEvent.getUsername();
+		VCard vCard = getUserVCard(username);
+		ResponseVCardEvent responseVCardEvent = EBEvents
+				.instanceResponseVCardEvent();
+		responseVCardEvent.setvCard(vCard);
+		EventBus.getDefault().post(responseVCardEvent);
+	}
+
+	/**
+	 * @Description 保存VCard
+	 * @param requestSaveVCardEvent
+	 */
+	public void onEventBackgroundThread(
+			RequestSaveVCardEvent requestSaveVCardEvent) {
+		VCard vCard = requestSaveVCardEvent.getvCard();
+		int respCode = -1;
+		if (saveUserVCard(vCard)) {
+			respCode = 1;
+		} else
+			respCode = 0;
+		ResponseSaveVCardEvent responseSaveVCardEvent = EBEvents
+				.instanceResponseSaveVCardEvent();
+		responseSaveVCardEvent.setRespCode(respCode);
+		EventBus.getDefault().post(responseSaveVCardEvent);
 	}
 
 	private String getDatetime() {
@@ -814,7 +727,8 @@ public class XmppService extends Service {
 		Log.i(TAG, "start login");
 		if (conn == null || !conn.isConnected()) {
 			Log.e(TAG, "还没有连接服务器");
-			doConnect(XMPP_SERVICE_NAME, XMPP_HOST, XMPP_PORT);
+			doConnect(Config.XMPP_SERVICE_NAME, Config.XMPP_HOST,
+					Config.XMPP_PORT);
 			try {
 				conn.login(username, password);
 				IS_LOGIN = true;
@@ -870,6 +784,10 @@ public class XmppService extends Service {
 		}
 		int respCode = -1;
 		if (IS_LOGIN) {
+			Editor editor = userInfoSp.edit();
+			editor.putString("username", username);
+			editor.putString("password", password);
+			editor.commit();
 			initUserData(username);
 			respCode = 1;
 		} else
@@ -886,7 +804,7 @@ public class XmppService extends Service {
 	 * @param password
 	 */
 	private void doConnectAndLogin(final String username, final String password) {
-		doConnect(XMPP_SERVICE_NAME, XMPP_HOST, XMPP_PORT);
+		doConnect(Config.XMPP_SERVICE_NAME, Config.XMPP_HOST, Config.XMPP_PORT);
 		try {
 			conn.login(username, password);
 			IS_LOGIN = true;
@@ -901,6 +819,10 @@ public class XmppService extends Service {
 			IS_LOGIN = false;
 		}
 		if (IS_LOGIN) {
+			Editor editor = userInfoSp.edit();
+			editor.putString("username", username);
+			editor.putString("password", password);
+			editor.commit();
 			initUserData(username);
 		}
 	}
@@ -1133,7 +1055,8 @@ public class XmppService extends Service {
 	private void doRegister(String username, String password) {
 		int respCode = -1;
 		if (conn == null || !conn.isConnected()) {
-			doConnect(XMPP_SERVICE_NAME, XMPP_HOST, XMPP_PORT);
+			doConnect(Config.XMPP_SERVICE_NAME, Config.XMPP_HOST,
+					Config.XMPP_PORT);
 		}
 		AccountManager am = AccountManager.getInstance(conn);
 		try {
@@ -1155,275 +1078,69 @@ public class XmppService extends Service {
 		EventBus.getDefault().post(respRegisterEvent);
 	}
 
-	class LoginThread extends Thread {
-		private String username;
-		private String password;
-		private String host;
-		private int port;
-		private String serviceName;
-
-		public LoginThread(String username, String password, String host,
-				int port, String serviceName) {
-			this.username = username;
-			this.password = password;
-			this.host = host;
-			this.port = port;
-			this.serviceName = serviceName;
+	/**
+	 * @Description 获取VCard
+	 * @param username
+	 * @return
+	 */
+	private VCard getUserVCard(String username) {
+		VCard vCard = null;
+		String bareJid;
+		if (conn == null || !conn.isConnected() || !conn.isAuthenticated()) {
+			String name = userInfoSp.getString("username", "");
+			String password = userInfoSp.getString("password", "");
+			if (!name.isEmpty() && !password.isEmpty()) {
+				doConnectAndLogin(name, password);
+			}
 		}
-
-		@SuppressLint("NewApi")
-		@Override
-		public void run() {
-			int respCode = -1;
-			if (conn == null) {
-				XMPPTCPConnectionConfiguration conf = XMPPTCPConnectionConfiguration
-						.builder().setUsernameAndPassword(username, password)
-						.setSendPresence(false)
-						.setSecurityMode(SecurityMode.disabled)
-						.setServiceName(serviceName).setHost(host)
-						.setPort(port).build();
-				conn = new XMPPTCPConnection(conf);
-			}
-			if (conn.isConnected()) {
-				conn.disconnect();
-			}
+		if (IS_LOGIN) {
+			VCardManager vCardManager = VCardManager.getInstanceFor(conn);
 			try {
-				conn.connect();
-				conn.login();
-				TeaChatActivity.ACCOUNT_NAME = username;
-				String databaseName = "teaDatabase_" + username + ".db3";
-				if (!teaDatabaseHelper.getDatabaseName().equals(databaseName)) {
-					teaDatabaseHelper.close();
-					teaDatabaseHelper = new TeaDatabaseHelper(XmppService.this,
-							databaseName, 1);
-				}
-				Log.i(TAG, "数据库名称：" + teaDatabaseHelper.getDatabaseName());
-				// 接收离线消息
-				OfflineMessageManager offlineManager = new OfflineMessageManager(
-						conn);
-				Log.i(TAG,
-						"offline message count: "
-								+ offlineManager.getMessageCount());
-				List<Message> offlineMsgs = offlineManager.getMessages();
-				for (Message msg : offlineMsgs) {
-					Log.i(TAG, msg.getBody());
-					String fromJid = msg.getFrom().split("/")[0];
-					String fromId = getContactId(fromJid);
-					if (fromId == null) {
-						Log.i(TAG, "来自陌生人的消息");
-						continue;
-					}
-					// offlineManager.
-					MessageModel mm = new MessageModel();
-					String chatId = isExistChatRoom(fromJid, String.valueOf(1));
-					if (chatId == null) {
-						ChatRoomModel crm = new ChatRoomModel();
-						crm.jid = fromJid;
-						crm.type = String.valueOf(1);
-						crm.updateTime = getDatetime();
-						crm = saveChatRoom(crm);
-						if (crm.id != null)
-							chatId = crm.id;
-					}
-					mm.chatId = chatId;
-					mm.content = msg.getBody();
-					mm.time = getDatetime();
-					mm.from = fromId;
-					mm.type = String.valueOf(1);
-					mm.isRead = false; // 默认消息未读
-					if (insertMessage(mm)) {
-						Log.i(TAG, "message insert success");
-					}
-				}
-				offlineManager.deleteMessages();
-				conn.sendStanza(new Presence(Presence.Type.available));
-				// 保存用户
-				ContactModel owner = new ContactModel();
-				owner.nickname = conn.getUser().split("@")[0];
-				owner.jid = conn.getUser().split("/")[0];
-				if (saveContact(owner)) {
-					Log.i(TAG, " user save success!");
-				}
-				cm = ChatManager.getInstanceFor(conn);
-				cm.addChatListener(new ChatManagerListener() {
-
-					@Override
-					public void chatCreated(Chat chat, boolean isLocally) {
-						Log.i(TAG, "createChat：" + isLocally);
-						if (!isLocally) {
-							Log.i(TAG,
-									chat.getParticipant() + "\t"
-											+ chat.getThreadID());
-							String username = chat.getParticipant().split("@")[0];
-							if (getContactId(chat.getParticipant().split("/")[0]) == null) {
-								Log.i(TAG, "陌生人来信:" + chat.getParticipant());
-								chat.close();
-								return;
-							}
-							String threadId = chatInfoMap.get(username);
-							// 如果同一用户已存在聊天室，则关闭原聊天室
-							if (threadId != null
-									&& !threadId.equals(chat.getThreadID())) {
-								cm.getThreadChat(threadId).close();
-							}
-							chatInfoMap.put(username, chat.getThreadID());
-						}
-						// 保存聊天室
-						Log.i(TAG, "jid =" + chat.getParticipant());
-						ChatRoomModel cm = new ChatRoomModel();
-						cm.jid = chat.getParticipant().split("/")[0];
-						cm.type = String.valueOf(1);
-						cm.updateTime = getDatetime();
-						saveChatRoom(cm);
-						chat.addMessageListener(new ChatMessageListener() {
-
-							@Override
-							public void processMessage(Chat chat, Message msg) {
-								Log.i(TAG, msg.getBody());
-								// if(activityName.equals(""))
-								// 广播收到的消息
-								ChatMsgTransferEntity cmte = new ChatMsgTransferEntity();
-								cmte.setFrom(msg.getFrom().split("@")[0]);
-								cmte.setTo(TeaChatActivity.ACCOUNT_NAME);
-								cmte.setContent(msg.getBody());
-								cmte.setType(1);
-								// 向teaChatRoomActivity发送消息
-								EBEvents.ReceiveChatMsgEvent receiveChatMsgEvent = EBEvents
-										.instanceReceiveChatMsgEvent();
-								receiveChatMsgEvent
-										.setChatMsgTransferEntity(cmte);
-								EventBus.getDefault().post(receiveChatMsgEvent);
-
-								// ....
-								// 更新chatroom时间
-								// ....
-								// 保存未读消息
-								String fromJid = msg.getFrom().split("/")[0];
-								String fromId = getContactId(fromJid);
-								MessageModel mm = new MessageModel();
-								mm.chatId = isExistChatRoom(fromJid,
-										String.valueOf(1));
-								mm.content = msg.getBody();
-								mm.time = getDatetime();
-								mm.from = fromId;
-								mm.type = String.valueOf(1);
-								mm.isRead = false; // 默认消息未读
-								if (insertMessage(mm)) {
-									Log.i(TAG, "message insert success");
-									// 向teaChatListFragment发送消息
-									EBEvents.RefreshChatListEvent refreshChatListEvent = EBEvents
-											.instanceRefreshChatListEvent();
-									refreshChatListEvent
-											.setChatListForms(getChatListForms());
-									EventBus.getDefault().post(
-											refreshChatListEvent);
-								}
-							}
-						});
-					}
-
-				});
-				// 获取通讯录
-				final Roster roster = Roster.getInstanceFor(conn);
-				// roster.setSubscriptionMode(SubscriptionMode.manual);
-				// Gson gson = new Gson();
-				roster.addRosterListener(new RosterListener() {
-
-					@Override
-					public void presenceChanged(Presence presence) {
-						System.out.println("changed====================");
-						System.out.println(presence.toString());
-						// presence.getFrom();
-						// 用户状态改变
-						loadContact(roster);
-						EBEvents.GetAddressListEvent getAddressListEvent = EBEvents
-								.instanceGetAddressListEvent();
-						getAddressListEvent
-								.setAddressGroupList(addressGroupList);
-						getAddressListEvent.setContactList(contactList);
-						EventBus.getDefault().post(getAddressListEvent);
-					}
-
-					@Override
-					public void entriesUpdated(Collection<String> entries) {
-						System.out.println("updated====================");
-						for (String e : entries) {
-							System.out.println(e);
-						}
-					}
-
-					@Override
-					public void entriesDeleted(Collection<String> entries) {
-						System.out.println("deleted====================");
-						for (String e : entries) {
-							System.out.println(e);
-						}
-						loadContact(roster);
-						EBEvents.GetAddressListEvent getAddressListEvent = EBEvents
-								.instanceGetAddressListEvent();
-						getAddressListEvent
-								.setAddressGroupList(addressGroupList);
-						getAddressListEvent.setContactList(contactList);
-						EventBus.getDefault().post(getAddressListEvent);
-						List<ChatListFormEntity> chatlst = getChatListForms();
-						EBEvents.RefreshChatListEvent refreshChatListEvent = EBEvents
-								.instanceRefreshChatListEvent();
-						refreshChatListEvent.setChatListForms(chatlst);
-						EventBus.getDefault().post(refreshChatListEvent);
-					}
-
-					@Override
-					public void entriesAdded(Collection<String> entries) {
-						System.out.println("added====================");
-						for (String e : entries) {
-							System.out.println(e);
-						}
-						loadContact(roster);
-						EBEvents.GetAddressListEvent getAddressListEvent = EBEvents
-								.instanceGetAddressListEvent();
-						getAddressListEvent
-								.setAddressGroupList(addressGroupList);
-						getAddressListEvent.setContactList(contactList);
-						EventBus.getDefault().post(getAddressListEvent);
-					}
-				});
-				loadContact(roster);
-				EBEvents.GetAddressListEvent getAddressListEvent = EBEvents
-						.instanceGetAddressListEvent();
-				getAddressListEvent.setAddressGroupList(addressGroupList);
-				getAddressListEvent.setContactList(contactList);
-				EventBus.getDefault().post(getAddressListEvent);
-				// 获取聊天列表
-				List<ChatListFormEntity> chatlst = getChatListForms();
-				EBEvents.RefreshChatListEvent refreshChatListEvent = EBEvents
-						.instanceRefreshChatListEvent();
-				refreshChatListEvent.setChatListForms(chatlst);
-				EventBus.getDefault().post(refreshChatListEvent);
-				IS_LOGIN = true;
-				respCode = 0;
-
-			} catch (SmackException e) {
+				bareJid = username + "@" + conn.getServiceName();
+				vCard = vCardManager.loadVCard(bareJid);
+			} catch (NoResponseException e) {
 				e.printStackTrace();
-				Log.e(TAG, "登录错误");
-				makeToast("登录错误", Toast.LENGTH_LONG);
-				IS_LOGIN = false;
-				respCode = 1;
-			} catch (IOException e) {
+			} catch (XMPPErrorException e) {
 				e.printStackTrace();
-				IS_LOGIN = false;
-				respCode = 2;
-			} catch (XMPPException e) {
+			} catch (NotConnectedException e) {
 				e.printStackTrace();
-				Log.e(TAG, "连接错误");
-				makeToast("连接错误", Toast.LENGTH_LONG);
-				IS_LOGIN = false;
-				respCode = 3;
 			}
-			ResponseLoginEvent respLoginEvent = EBEvents
-					.instanceReponseLoginEvent();
-			respLoginEvent.setRespCode(respCode);
-			EventBus.getDefault().post(respLoginEvent);
 		}
+
+		return vCard;
+	}
+
+	/**
+	 * @Description 保存VCard
+	 * @param vCard
+	 * @return
+	 */
+	private boolean saveUserVCard(VCard vCard) {
+		boolean result = false;
+		if (conn == null || !conn.isConnected() || !conn.isAuthenticated()) {
+			String name = userInfoSp.getString("username", "");
+			String password = userInfoSp.getString("password", "");
+			if (!name.isEmpty() && !password.isEmpty()) {
+				doConnectAndLogin(name, password);
+			}
+		}
+		if (IS_LOGIN) {
+			VCardManager vCardManager = VCardManager.getInstanceFor(conn);
+			try {
+				vCardManager.saveVCard(vCard);
+				result = true;
+			} catch (NoResponseException e) {
+				e.printStackTrace();
+				result = false;
+			} catch (XMPPErrorException e) {
+				e.printStackTrace();
+				result = false;
+			} catch (NotConnectedException e) {
+				e.printStackTrace();
+				result = false;
+			}
+		}
+		return result;
 	}
 
 	class MessageModel {

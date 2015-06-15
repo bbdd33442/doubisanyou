@@ -15,9 +15,11 @@ import android.widget.Toast;
 
 import com.doubisanyou.appcenter.R;
 import com.doubisanyou.appcenter.bean.EBEvents;
+import com.doubisanyou.appcenter.bean.EBEvents.RequestVCardEvent;
 import com.doubisanyou.appcenter.bean.User;
 import com.doubisanyou.appcenter.bean.EBEvents.RequestLoginEvent;
 import com.doubisanyou.appcenter.bean.EBEvents.ResponseLoginEvent;
+import com.doubisanyou.appcenter.bean.EBEvents.ResponseVCardEvent;
 import com.doubisanyou.appcenter.date.Config;
 import com.doubisanyou.baseproject.base.BaseActivity;
 import com.doubisanyou.baseproject.network.NetConnect;
@@ -100,6 +102,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 
 	public void onEventMainThread(ResponseLoginEvent respLoginEvent) {
 		int respCode = respLoginEvent.getRespCode();
+		
 		String errorText;
 		switch (respCode) {
 		case 0:
@@ -127,4 +130,10 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 		}
 		Toast.makeText(this, errorText, Toast.LENGTH_LONG).show();
 	}
+/*	public void onEventMainThread(ResponseVCardEvent responseVCardEvent){
+		responseVCardEvent.getvCard();
+		RequestVCardEvent requestVCardEvent = EBEvents.instanceRequestVCardEvent();
+		requestVCardEvent.setUsername(username);
+		EventBus.getDefault().post(requestVCardEvent);
+	}*/
 }
