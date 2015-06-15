@@ -3,6 +3,8 @@ package com.doubisanyou.appcenter.bean;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.jivesoftware.smackx.vcardtemp.packet.VCard;
+
 /**
  * @author Blook
  * @Description eventBus事件
@@ -76,6 +78,16 @@ public class EBEvents {
 	public static ResponseRegisterEvent instanceResponseRegisterEvent() {
 		EBEvents events = new EBEvents();
 		return events.new ResponseRegisterEvent();
+	}
+
+	public static RequestVCardEvent instanceRequestVCardEvent() {
+		EBEvents events = new EBEvents();
+		return events.new RequestVCardEvent();
+	}
+
+	public static ResponseVCardEvent instanceResponseVCardEvent() {
+		EBEvents events = new EBEvents();
+		return events.new ResponseVCardEvent();
 	}
 
 	/**
@@ -336,6 +348,32 @@ public class EBEvents {
 
 		public void setRespCode(int respCode) {
 			this.respCode = respCode;
+		}
+
+	}
+
+	public class RequestVCardEvent {
+		private String username;
+
+		public String getUsername() {
+			return username;
+		}
+
+		public void setUsername(String username) {
+			this.username = username;
+		}
+
+	}
+
+	public class ResponseVCardEvent {
+		private VCard vCard;
+
+		public VCard getvCard() {
+			return vCard;
+		}
+
+		public void setvCard(VCard vCard) {
+			this.vCard = vCard;
 		}
 
 	}

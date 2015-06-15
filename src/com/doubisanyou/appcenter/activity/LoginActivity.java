@@ -1,6 +1,7 @@
 package com.doubisanyou.appcenter.activity;
 
 import org.jivesoftware.smack.util.StringUtils;
+import org.jivesoftware.smackx.vcardtemp.packet.VCard;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -16,7 +17,9 @@ import android.widget.Toast;
 import com.doubisanyou.appcenter.R;
 import com.doubisanyou.appcenter.bean.EBEvents;
 import com.doubisanyou.appcenter.bean.EBEvents.RequestLoginEvent;
+import com.doubisanyou.appcenter.bean.EBEvents.RequestVCardEvent;
 import com.doubisanyou.appcenter.bean.EBEvents.ResponseLoginEvent;
+import com.doubisanyou.appcenter.bean.EBEvents.ResponseVCardEvent;
 import com.doubisanyou.appcenter.date.Config;
 
 import de.greenrobot.event.EventBus;
@@ -101,7 +104,7 @@ public class LoginActivity extends Activity implements OnClickListener {
 		case 0:
 			errorText = "用户名或密码错误";
 			break;
-		case 1:			
+		case 1:
 			this.finish();
 			return;
 		default:
@@ -109,5 +112,11 @@ public class LoginActivity extends Activity implements OnClickListener {
 			break;
 		}
 		Toast.makeText(this, errorText, Toast.LENGTH_LONG).show();
+	}
+
+	public void onEventMainThread(ResponseVCardEvent responseVCardEvent) {
+		VCard vCard = responseVCardEvent.getvCard();
+		Log.i(TAG, "jid: " + vCard.getJabberId());
+		Log.i(TAG, "avatar: " + String.valueOf(vCard.getAvatar() != null));
 	}
 }

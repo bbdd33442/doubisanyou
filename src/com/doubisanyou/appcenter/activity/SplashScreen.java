@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.view.WindowManager;
 
 import com.doubisanyou.appcenter.R;
+import com.doubisanyou.appcenter.service.XmppService;
 import com.doubisanyou.baseproject.base.BaseActivity;
 
 
@@ -22,6 +23,7 @@ public class SplashScreen extends BaseActivity {
         getWindow().setFormat(PixelFormat.RGBA_8888);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_DITHER);
         setContentView(R.layout.splash_screen);
+        startService(new Intent(this, XmppService.class));
         new Handler().postDelayed(new Runnable() {  
             @Override  
             public void run() {  

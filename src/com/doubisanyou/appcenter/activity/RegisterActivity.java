@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import org.jivesoftware.smack.util.StringUtils;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -16,21 +15,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.doubisanyou.appcenter.R;
 import com.doubisanyou.appcenter.bean.EBEvents;
 import com.doubisanyou.appcenter.bean.EBEvents.RequestRegisterEvent;
 import com.doubisanyou.appcenter.bean.EBEvents.ResponseRegisterEvent;
 import com.doubisanyou.appcenter.bean.User;
-import com.doubisanyou.appcenter.date.Config;
 import com.doubisanyou.baseproject.base.BaseActivity;
-import com.doubisanyou.baseproject.network.NetConnect;
-import com.doubisanyou.baseproject.network.NetConnect.FailCallBack;
-import com.doubisanyou.baseproject.network.NetConnect.SuccessCallBack;
-import com.doubisanyou.baseproject.utilCommon.JsonUtil;
 import com.doubisanyou.baseproject.utilsResource.ImageLoader;
 import com.doubisanyou.baseproject.utilsResource.ImageLoader.Type;
 
