@@ -30,7 +30,7 @@ public class GeneralSecondActivity extends Activity{
 		TeaGeneral tk = (TeaGeneral) getIntent().getSerializableExtra(
 				TEAGENERAL);
 		title = (TextView) this.findViewById(R.id.default_title);
-		title.setText(tk.tea_general_name);
+		title.setText(tk.tea_general_title);
 
 		tea_general_name = (TextView) this.findViewById(R.id.content);
 		tea_general_name.setText("茶叶命名是茶叶分类的重要程序之一。一种茶叶必须有一个名称以为标志。不论作为分类研究或实际应用，茶叶皆有一专门名称。命名与分类可以联系一起，如工夫红茶，前者是命名，后者是分类；又如白毫银针或岩茶水仙，前者是分类，后者是命名。茶叶名称通常都带有描写性，名称文雅也是其他商品所不及的。");

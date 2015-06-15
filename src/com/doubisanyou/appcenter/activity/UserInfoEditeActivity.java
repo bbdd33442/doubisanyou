@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.doubisanyou.appcenter.R;
 import com.doubisanyou.appcenter.bean.User;
 import com.doubisanyou.appcenter.date.Config;
+import com.doubisanyou.baseproject.utilCommon.StringAndDataUtil;
 
 public class UserInfoEditeActivity extends Activity implements OnClickListener{
   
@@ -65,11 +66,17 @@ public class UserInfoEditeActivity extends Activity implements OnClickListener{
 			break;
 		case R.id.btn_right_btn:
 			if(titleText.equals(NICKNAME)){
-				Config.user.user_nick_name=nickName.getText().toString();
+				if(!StringAndDataUtil.isNullOrEmpty(nickName.getText().toString())){
+					Config.user.user_nick_name=nickName.getText().toString();
+					Config.handler.sendEmptyMessage(2);
+				}
 			}else if(titleText.equals(FAVORITETEA)){
 			
 			}else if(titleText.equals(SIGNATURE)){
-				Config.user.user_signature = signature.getText().toString();
+				if(!StringAndDataUtil.isNullOrEmpty(signature.getText().toString())){
+					Config.user.user_signature =signature.getText().toString();
+					Config.handler.sendEmptyMessage(3);
+				}
 			}
 			finish();
 			break;

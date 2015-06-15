@@ -64,12 +64,12 @@ public class TeaGeneralFragment extends Fragment {
 		replyItem.clear();
 		teaGeneral.clear();
 		TeaGeneral tg = new TeaGeneral();
-		tg.tea_general_name = "茶叶的命名";
+		tg.tea_general_title = "茶叶的命名";
 		teaGeneral.add(tg);
 		// replyItem = new ArrayList<HashMap<String, Object>>();
 		for (int i = 0; i < teaGeneral.size(); i++) {
 			map = new HashMap<String, Object>();
-			map.put("searchContent", teaGeneral.get(i).tea_general_name);
+			map.put("searchContent", teaGeneral.get(i).tea_general_info);
 			replyItem.add(map);
 		}
 

@@ -51,14 +51,14 @@ public abstract class BaseActivity extends FragmentActivity implements
 	protected LoadingDialog carLoadingDialog;
 
 
-	/** 发送任务,并显示相应进度条 */
+/*	*//** 发送任务,并显示相应进度条 *//*
 	public String sendTask(Context context,String parameter,String url) {
 		return sendTask(context,parameter,url, ConnectMethd.POST);
-	}
-	public ProgressDialog pDlg;
+	}*/
+	/*public ProgressDialog pDlg;*/
 	/** 发送任务,并显示相应进度条 */
-	public String sendTask(Context context,String parameter,String url, ConnectMethd methed) {
-		/*final ProgressDialog pd = new ProgressDialog(context).show(context, "链接","与服务器通信中...");*/
+/*	public String sendTask(Context context,String parameter,String url, ConnectMethd methed) {
+		final ProgressDialog pd = new ProgressDialog(context).show(context, "链接","与服务器通信中...");
 		
 		pDlg = new ProgressDialog(this);
 		pDlg.setOnCancelListener(this);
@@ -88,18 +88,7 @@ public abstract class BaseActivity extends FragmentActivity implements
 		}, parameter);
 		return rs;
 	}
-	
-	public void showProgressDialog(){
-		pDlg = new ProgressDialog(this);
-		pDlg.setOnCancelListener(this);
-		pDlg.setTitle("提示");
-		pDlg.setMessage("正在进行网络连接，请稍后...");
-		pDlg.setCancelable(true);
-		pDlg.setButton(getResources().getString(R.string.cancel),
-				onClickDlgCancel);
-		pDlg.setIndeterminate(true);
-		pDlg.show();
-	}
+	*/
 	
 	/** 发送任务,选择是否显示进度条 *//*
 	public void sendTask(NetConnect task, boolean showProgress) {

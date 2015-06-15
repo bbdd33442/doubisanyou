@@ -22,7 +22,7 @@ public class Config {
 	
 	public static String PROJECT_ID="com.doubisanyou.tea";
 	
-	public static String SERVICE_URL="http://192.168.1.122:8080/chazhongservice/";
+	public static String SERVICE_URL="http://192.168.0.108:8080/chazhongservice/";
 	
 	public static final String  AppCenters_Path  = "doubisanyou";              // 应用中心路径
     

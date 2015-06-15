@@ -68,7 +68,7 @@ import de.greenrobot.event.EventBus;
 
 public class XmppService extends Service {
 	private static final String TAG = XmppService.class.getSimpleName();
-	private static final String XMPP_HOST = "192.168.1.142";
+	private static final String XMPP_HOST = "192.168.0.108";
 	private static final int XMPP_PORT = 5222;
 	private static final String XMPP_SERVICE_NAME = "localhost";
 	private static final String DEFAULT_DATABASE = "teaDatabase_blook.db3";

@@ -10,4 +10,5 @@ public class TeaSet implements Serializable {
 	 */
 	public String tea_set_name;
 	public String tea_set_introduction;
+	public String tea_set_pic;
 }
