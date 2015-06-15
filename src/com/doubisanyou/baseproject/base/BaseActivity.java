@@ -25,6 +25,7 @@ import android.widget.Toast;
 import com.doubisanyou.appcenter.R;
 import com.doubisanyou.appcenter.date.Config;
 import com.doubisanyou.appcenter.widget.LoadingDialog;
+import com.doubisanyou.baseproject.network.ConnectMethd;
 import com.doubisanyou.baseproject.network.NetConnect;
 import com.doubisanyou.baseproject.network.NetConnect.FailCallBack;
 import com.doubisanyou.baseproject.network.NetConnect.SuccessCallBack;
@@ -50,10 +51,15 @@ public abstract class BaseActivity extends FragmentActivity implements
 	protected LoadingDialog carLoadingDialog;
 
 
+/*	*//** 发送任务,并显示相应进度条 *//*
+	public String sendTask(Context context,String parameter,String url) {
+		return sendTask(context,parameter,url, ConnectMethd.POST);
+	}*/
+	/*public ProgressDialog pDlg;*/
 	/** 发送任务,并显示相应进度条 */
-	public String sendTask(Context context,String parameter) {
-		/*final ProgressDialog pd = new ProgressDialog(context).show(context, "链接","与服务器通信中...");*/
-		final ProgressDialog pDlg;
+/*	public String sendTask(Context context,String parameter,String url, ConnectMethd methed) {
+		final ProgressDialog pd = new ProgressDialog(context).show(context, "链接","与服务器通信中...");
+		
 		pDlg = new ProgressDialog(this);
 		pDlg.setOnCancelListener(this);
 		pDlg.setTitle("提示");
@@ -63,7 +69,7 @@ public abstract class BaseActivity extends FragmentActivity implements
 				onClickDlgCancel);
 		pDlg.setIndeterminate(true);
 		pDlg.show();
-		task = new NetConnect(Config.SERVICE_URL, new SuccessCallBack() {
+		task = new NetConnect(url,methed,new SuccessCallBack() {
 			
 			@Override
 			public void onSuccess(String result) {
@@ -82,7 +88,8 @@ public abstract class BaseActivity extends FragmentActivity implements
 		}, parameter);
 		return rs;
 	}
-
+	*/
+	
 	/** 发送任务,选择是否显示进度条 *//*
 	public void sendTask(NetConnect task, boolean showProgress) {
 		if (showProgress) {
@@ -107,7 +114,7 @@ public abstract class BaseActivity extends FragmentActivity implements
 		task.send();
 	}
 */
-	private OnClickListener onClickDlgCancel = new OnClickListener() {
+	public OnClickListener onClickDlgCancel = new OnClickListener() {
 		@Override
 		public void onClick(DialogInterface dialog, int which) {
 			dialog.cancel();
@@ -219,7 +226,10 @@ public abstract class BaseActivity extends FragmentActivity implements
 	public void showToast(String text, int timeLength) {
 		Toast.makeText(this, text, timeLength).show();
 	}
-
+	
+	public void showToast(String text) {
+		Toast.makeText(this, text, Toast.LENGTH_LONG).show();
+	}
 	
 
 	/**

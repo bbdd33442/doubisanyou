@@ -15,4 +15,5 @@ public class TeaKnowledge implements Serializable {
 	public String tea_knowledge_introduce;
 	public String tea_knowledge_brew;
 	public String tea_knowledge_quality;
+	public String tea_knowledge_pic;
 }

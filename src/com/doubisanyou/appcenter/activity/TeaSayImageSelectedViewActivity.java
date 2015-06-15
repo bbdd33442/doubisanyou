@@ -102,6 +102,7 @@ public class TeaSayImageSelectedViewActivity extends BaseActivity implements OnC
 			}else if(type.equals(TeaSayPublushImageFolderListActivity.EDITEUSERAVATARS)){
 				Bundle b = new Bundle();
 				Message msg = Config.handler.obtainMessage();
+				msg.what=1;
 				msg.setData(b);
 				b.putStringArrayList(SELECTED_IMAGE_PATH, selectedImagePath);
 				Config.handler.sendMessage(msg);

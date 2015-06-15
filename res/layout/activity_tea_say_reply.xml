@@ -39,9 +39,9 @@
 			
 			<ImageView  
 			    android:id="@+id/tea_say_publisher_avatar"
-			    android:src="@drawable/user_default_avatars"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+			    android:src="@drawable/csu"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_marginBottom="7dp"
                 android:layout_marginLeft="1dp"
                 android:layout_marginTop="8dp"
@@ -57,14 +57,14 @@
                     android:layout_toRightOf="@id/tea_say_publisher_avatar"
                     android:text="xxxxxxxxx"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textColor="#919191" />
+                    android:textColor="@color/black" />
 
-				<ImageView 
+			<!-- 	<ImageView 
 				    android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_marginTop="10dp"
                     android:layout_alignParentRight="true"
-                    android:src="@drawable/add_friend"/>
+                    android:src="@drawable/add_friend"/> -->
           
 			   <TextView
                     android:id="@+id/tea_say_content"
@@ -72,11 +72,11 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/tea_say_publisher_name"
                     android:layout_marginRight="8dp"
-                    android:layout_marginLeft="8dp"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginTop="8dp"
                     android:layout_toRightOf="@id/tea_say_publisher_avatar"
                     android:text="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-                    android:textColor="#919191"
+                    android:textColor="@color/black"
                     android:textSize="16sp" />
            <ImageView
                     android:id="@+id/tea_say_image"
@@ -122,8 +122,9 @@
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="1dp"
+                    android:textColor="@color/black"
                     android:text="2014年11月22日"
-                    android:textColor="#919191"
+                
                     android:textSize="14sp" />
      
                 <TextView
@@ -134,7 +135,8 @@
                     android:layout_alignParentRight="true"
                     android:layout_marginLeft="1dp"
                     android:text="1分钟前"
-                    android:textColor="#919191"
+                    android:textColor="@color/black"
+                  
                     android:textSize="14sp" />
             </RelativeLayout>
         </RelativeLayout>

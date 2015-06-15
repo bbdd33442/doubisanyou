@@ -58,6 +58,26 @@ public class EBEvents {
 		return events.new DeleteChatRoomEvent();
 	}
 
+	public static RequestLoginEvent instanceRequestLoginEvent() {
+		EBEvents events = new EBEvents();
+		return events.new RequestLoginEvent();
+	}
+
+	public static ResponseLoginEvent instanceReponseLoginEvent() {
+		EBEvents events = new EBEvents();
+		return events.new ResponseLoginEvent();
+	}
+
+	public static RequestRegisterEvent instanceRequestRegisterEvent() {
+		EBEvents events = new EBEvents();
+		return events.new RequestRegisterEvent();
+	}
+
+	public static ResponseRegisterEvent instanceResponseRegisterEvent() {
+		EBEvents events = new EBEvents();
+		return events.new ResponseRegisterEvent();
+	}
+
 	/**
 	 * @author Blook
 	 * @Description 获取通信录
@@ -241,5 +261,82 @@ public class EBEvents {
 		public void setChatId(String chatId) {
 			this.chatId = chatId;
 		}
+	}
+
+	/**
+	 * @author Blook
+	 * @Description 登陆事件
+	 */
+	public class RequestLoginEvent {
+		private String username;
+		private String password;
+
+		public String getUsername() {
+			return username;
+		}
+
+		public void setUsername(String username) {
+			this.username = username;
+		}
+
+		public String getPassword() {
+			return password;
+		}
+
+		public void setPassword(String password) {
+			this.password = password;
+		}
+
+	}
+
+	public class ResponseLoginEvent {
+		private int respCode;
+
+		public int getRespCode() {
+			return respCode;
+		}
+
+		public void setRespCode(int respCode) {
+			this.respCode = respCode;
+		}
+
+	}
+
+	/**
+	 * @author Blook
+	 * @Description 注册事件
+	 */
+	public class RequestRegisterEvent {
+		private String username;
+		private String password;
+
+		public String getUsername() {
+			return username;
+		}
+
+		public void setUsername(String username) {
+			this.username = username;
+		}
+
+		public String getPassword() {
+			return password;
+		}
+
+		public void setPassword(String password) {
+			this.password = password;
+		}
+	}
+
+	public class ResponseRegisterEvent {
+		private int respCode;
+
+		public int getRespCode() {
+			return respCode;
+		}
+
+		public void setRespCode(int respCode) {
+			this.respCode = respCode;
+		}
+
 	}
 }

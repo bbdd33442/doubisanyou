@@ -85,12 +85,9 @@ public class TeaSayActivity extends BaseActivity implements OnClickListener{
 
 		@Override
 		public void handleMessage(Message msg) {
-			String position  = (String) msg.getData().get("POSITION");
-			int p = Integer.valueOf(position);
-			TeaSay ts = tys.get(p);
+			TeaSay ts   = (TeaSay) msg.getData().get("POSITION");
 			tsdb.delteTeaSayById(ts.tea_say_time);
-			tys.remove(p);
-			tsa.clearListCatch(tys);
+			tsa.clearListCatch(tsdb.getTeaSayList());
 			tsa.notifyDataSetChanged();
 		}
 		

@@ -62,7 +62,7 @@ public class TeaSetFragment extends Fragment {
 		//replyItem = new ArrayList<HashMap<String, Object>>();
 		for (int i = 0; i < teaSet.size(); i++) {
 			map = new HashMap<String, Object>();
-			map.put("searchImage", R.drawable.user_default_avatars);
+			map.put("searchImage", R.drawable.zishahu);
 			map.put("searchContent", teaSet.get(i).tea_set_name);
 			replyItem.add(map);
 		}

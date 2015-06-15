@@ -86,6 +86,7 @@
                 android:layout_marginRight="10dp"
                 android:layout_toLeftOf="@id/btn_send"
                 android:background="@drawable/login_edit_normal"
+                android:textColor="@color/black"
                 android:singleLine="true"
                 android:textSize="18sp" />
         </RelativeLayout>

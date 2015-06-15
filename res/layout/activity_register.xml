@@ -35,7 +35,7 @@
                     android:layout_toLeftOf="@+id/get_check_code"
                     android:layout_toRightOf="@id/registe_phone_number_label"
                     android:textColor="@color/black"
-                    android:phoneNumber="true"
+                    android:inputType="phone"
                     android:hint="请输入手机号..."
                     android:singleLine="true" />
 
@@ -116,7 +116,8 @@
                     style="@style/layout_width_height_fw"
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@id/registe_pass_label"
-                    android:password="true"
+                    android:inputType="textPassword"
+                    android:textColor="@color/black"
                     android:singleLine="true" />
             </RelativeLayout>
 
@@ -139,6 +140,8 @@
                     style="@style/layout_width_height_fw"
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@id/registe_pass_check_label"
+                    android:textColor="@color/black"
+                    android:inputType="textPassword"
                     android:singleLine="true" />
             </RelativeLayout>
 

@@ -18,11 +18,11 @@ public class Config {
 
 	public static String TOKEN="token";
 	
-	public static User user;
+	public static User user = new User();
 	
 	public static String PROJECT_ID="com.doubisanyou.tea";
 	
-	public static String SERVICE_URL="http://192.168.1.101:8080/api/test.jsp";
+	public static String SERVICE_URL="http://192.168.0.108:8080/chazhongservice/";
 	
 	public static final String  AppCenters_Path  = "doubisanyou";              // 应用中心路径
     
@@ -39,6 +39,8 @@ public class Config {
 		ed.putString(TOKEN, token);
 		ed.commit();
 	}
+	
 	//用于设置中的图片处理
 	public static Handler handler;
+	
 }

@@ -75,7 +75,11 @@ public class TeaSayReplyActivity extends BaseActivity implements
 		for (int i = 0; i < 6; i++) {
 			View view =LayoutInflater.from(this).inflate(R.layout.listitem_tea_say_repley, null);
 			TextView x = (TextView) view.findViewById(R.id.tea_say_reply_content);
+			ImageView iv = (ImageView) view.findViewById(R.id.tea_say_reply_user_avatars);
+			TextView x1 = (TextView) view.findViewById(R.id.tea_say_reply_user_name);
+			x1.setText("中南大学");
 			x.setText("1234566");
+			iv.setImageResource(R.drawable.csu);
 			ll.addView(view);
 		}
 		
@@ -195,24 +199,4 @@ public class TeaSayReplyActivity extends BaseActivity implements
 		}
 
 	}
-	
-	
-	/*  public static void setListViewHeightBasedOnChildren(ListView listView) {  
-	        ListAdapter listAdapter = listView.getAdapter();   
-	        if (listAdapter == null) {  
-	            // pre-condition  
-	            return;  
-	        }  
-	  
-	        int totalHeight = 0;  
-	        for (int i = 0; i < listAdapter.getCount(); i++) {  
-	            View listItem = listAdapter.getView(i, null, listView);  
-	            listItem.measure(0, 0);  
-	            totalHeight += listItem.getMeasuredHeight();  
-	        }  
-	  
-	        ViewGroup.LayoutParams params = listView.getLayoutParams();  
-	        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));  
-	        listView.setLayoutParams(params);  
-	    }  */
 }
