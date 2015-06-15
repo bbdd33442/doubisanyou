@@ -61,12 +61,12 @@ public class TeaHistoryFragment extends Fragment {
 		teaHistory.clear();
 		replyItem.clear();
 		TeaHistory tk = new TeaHistory();
-		tk.tea_history_origin = "茶的起源";
+		tk.tea_history_title = "茶的起源";
 		teaHistory.add(tk);
 		//replyItem = new ArrayList<HashMap<String, Object>>();
 		for (int i = 0; i < teaHistory.size(); i++) {
 			map = new HashMap<String, Object>();
-			map.put("searchContent", teaHistory.get(i).tea_history_origin);
+			map.put("searchContent", teaHistory.get(i).tea_history_info);
 			replyItem.add(map);
 		}
 		sla = new SimpleAdapter(container.getContext(), replyItem,

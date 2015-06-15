@@ -10,4 +10,9 @@ public class JsonUtil {
 		return result;
 	}
 	
+	public static Object JsonToObject(String result,Class clazz){
+		Gson g = new Gson();
+		Object c = g.fromJson(result, clazz);
+		return c;
+	}
 }

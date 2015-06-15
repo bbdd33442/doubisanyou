@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.jivesoftware.smack.util.StringUtils;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -24,7 +25,12 @@ import com.doubisanyou.appcenter.bean.EBEvents;
 import com.doubisanyou.appcenter.bean.EBEvents.RequestRegisterEvent;
 import com.doubisanyou.appcenter.bean.EBEvents.ResponseRegisterEvent;
 import com.doubisanyou.appcenter.bean.User;
+import com.doubisanyou.appcenter.date.Config;
 import com.doubisanyou.baseproject.base.BaseActivity;
+import com.doubisanyou.baseproject.network.NetConnect;
+import com.doubisanyou.baseproject.network.NetConnect.FailCallBack;
+import com.doubisanyou.baseproject.network.NetConnect.SuccessCallBack;
+import com.doubisanyou.baseproject.utilCommon.JsonUtil;
 import com.doubisanyou.baseproject.utilsResource.ImageLoader;
 import com.doubisanyou.baseproject.utilsResource.ImageLoader.Type;
 
@@ -46,7 +52,7 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 	RadioGroup registeUserType;
 	User user;
 	ArrayList<String> selectedImage = new ArrayList<String>();
-
+	public ProgressDialog pDlg;
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
@@ -72,8 +78,10 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 			selectedImage.clear();
 			selectedImage = getIntent().getStringArrayListExtra(
 					TeaSayImageSelectedViewActivity.SELECTED_IMAGE_PATH);
+			
 			ImageLoader.getInstance(3, Type.LIFO).loadImage(
 					selectedImage.get(0), userAvatars);
+			user.user_avartars = selectedImage.get(0);
 		}
 		registePhoneNumber = (EditText) findViewById(R.id.registe_phone_number);
 		registeCheckCode = (EditText) findViewById(R.id.registe_check_code);
@@ -102,7 +110,13 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 
 					}
 				});
+		
+		pDlg = new ProgressDialog(this);
+		pDlg.setOnCancelListener(this);
+		pDlg.setTitle("提示");
+		pDlg.setMessage("正在进行网络连接，请稍后...");
 	}
+
 
 	Handler handler = new Handler() {
 
@@ -219,7 +233,7 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 			break;
 		case 1:
 			showToast("ok");
-			/*user.user_id = registePhoneNumber.getText().toString();
+			user.user_id = registePhoneNumber.getText().toString();
 			user.user_nick_name=registeNickName.getText().toString();
 			user.user_integral="0";
 			user.user_count_num="0";
@@ -228,28 +242,25 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 				user.user_avartars=selectedImage.get(0);
 			}
 			String parameter = JsonUtil.ObjectToJson(user);
-			final ProgressDialog pDlg = new ProgressDialog(this);
-			pDlg.setTitle("提示");
-			pDlg.setMessage("正在进行网络连接，请稍后...");
-			pDlg.setIndeterminate(true);
+			
 			pDlg.show();
+			
 			NetConnect task = new NetConnect(Config.SERVICE_URL+"/mobile/user/registe",new SuccessCallBack() {
 				@Override
 				public void onSuccess(String result) {
 					Config.user = user;
-					showToast("result");
-					finish();
+					showToast(result);
 					pDlg.dismiss();
-					
+					finish();
 				}
 			},new FailCallBack() {
 				@Override
 				public void onFail() {
 					showToast("错误");
 					pDlg.dismiss();
-					
 				}
-			}, parameter);*/
+			}, parameter);
+			finish();
 			break;
 		default:
 			errorText = "未知错误";
