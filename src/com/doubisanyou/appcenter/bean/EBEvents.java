@@ -90,6 +90,16 @@ public class EBEvents {
 		return events.new ResponseVCardEvent();
 	}
 
+	public static RequestSaveVCardEvent instanceRequestSaveVCardEvent() {
+		EBEvents events = new EBEvents();
+		return events.new RequestSaveVCardEvent();
+	}
+
+	public static ResponseSaveVCardEvent instanceResponseSaveVCardEvent() {
+		EBEvents events = new EBEvents();
+		return events.new ResponseSaveVCardEvent();
+	}
+
 	/**
 	 * @author Blook
 	 * @Description 获取通信录
@@ -374,6 +384,31 @@ public class EBEvents {
 
 		public void setvCard(VCard vCard) {
 			this.vCard = vCard;
+		}
+	}
+
+	public class RequestSaveVCardEvent {
+		private VCard vCard;
+
+		public VCard getvCard() {
+			return vCard;
+		}
+
+		public void setvCard(VCard vCard) {
+			this.vCard = vCard;
+		}
+
+	}
+
+	public class ResponseSaveVCardEvent {
+		private int respCode;
+
+		public int getRespCode() {
+			return respCode;
+		}
+
+		public void setRespCode(int respCode) {
+			this.respCode = respCode;
 		}
 
 	}

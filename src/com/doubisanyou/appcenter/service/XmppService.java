@@ -38,7 +38,6 @@ import org.jivesoftware.smackx.search.UserSearchManager;
 import org.jivesoftware.smackx.vcardtemp.VCardManager;
 import org.jivesoftware.smackx.vcardtemp.packet.VCard;
 import org.jivesoftware.smackx.xdata.Form;
-import org.jxmpp.util.XmppStringUtils;
 
 import android.annotation.SuppressLint;
 import android.app.Service;
@@ -66,9 +65,11 @@ import com.doubisanyou.appcenter.bean.ContactEntity;
 import com.doubisanyou.appcenter.bean.EBEvents;
 import com.doubisanyou.appcenter.bean.EBEvents.RequestLoginEvent;
 import com.doubisanyou.appcenter.bean.EBEvents.RequestRegisterEvent;
+import com.doubisanyou.appcenter.bean.EBEvents.RequestSaveVCardEvent;
 import com.doubisanyou.appcenter.bean.EBEvents.RequestVCardEvent;
 import com.doubisanyou.appcenter.bean.EBEvents.ResponseLoginEvent;
 import com.doubisanyou.appcenter.bean.EBEvents.ResponseRegisterEvent;
+import com.doubisanyou.appcenter.bean.EBEvents.ResponseSaveVCardEvent;
 import com.doubisanyou.appcenter.bean.EBEvents.ResponseVCardEvent;
 import com.doubisanyou.appcenter.date.Config;
 import com.doubisanyou.appcenter.db.TeaDatabaseHelper;
@@ -77,10 +78,6 @@ import de.greenrobot.event.EventBus;
 
 public class XmppService extends Service {
 	private static final String TAG = XmppService.class.getSimpleName();
-	// private static final String XMPP_HOST = "192.168.1.142";
-	// private static final int XMPP_PORT = 5222;
-	// private static final String XMPP_SERVICE_NAME = "localhost";
-	// private static final String DEFAULT_DATABASE = "teaDatabase_blook.db3";
 	public static boolean IS_CONNECT = false; // 是否连接
 	public static boolean IS_LOGIN = false; // 是否登录
 	private XMPPTCPConnection conn = null;
@@ -376,6 +373,24 @@ public class XmppService extends Service {
 				.instanceResponseVCardEvent();
 		responseVCardEvent.setvCard(vCard);
 		EventBus.getDefault().post(responseVCardEvent);
+	}
+
+	/**
+	 * @Description 保存VCard
+	 * @param requestSaveVCardEvent
+	 */
+	public void onEventBackgroundThread(
+			RequestSaveVCardEvent requestSaveVCardEvent) {
+		VCard vCard = requestSaveVCardEvent.getvCard();
+		int respCode = -1;
+		if (saveUserVCard(vCard)) {
+			respCode = 1;
+		} else
+			respCode = 0;
+		ResponseSaveVCardEvent responseSaveVCardEvent = EBEvents
+				.instanceResponseSaveVCardEvent();
+		responseSaveVCardEvent.setRespCode(respCode);
+		EventBus.getDefault().post(responseSaveVCardEvent);
 	}
 
 	private String getDatetime() {
