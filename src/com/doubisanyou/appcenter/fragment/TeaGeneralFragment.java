@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -29,8 +30,11 @@ import com.doubisanyou.baseproject.network.ConnectMethd;
 import com.doubisanyou.baseproject.network.NetConnect;
 import com.doubisanyou.baseproject.network.NetConnect.FailCallBack;
 import com.doubisanyou.baseproject.network.NetConnect.SuccessCallBack;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 public class TeaGeneralFragment extends Fragment {
+	Context context;
 	HashMap<String, Object> map;
 	ArrayList<HashMap<String, Object>> replyItem = new ArrayList<HashMap<String, Object>>();
 	private PullToRefreshListView mPullRefreshListView;
@@ -45,6 +49,8 @@ public class TeaGeneralFragment extends Fragment {
 	private int pagesize = 10;
 	private int pageNumber = 1;
 
+	ListView lv;
+	
 	private TextView title;
 
 	@Override
@@ -53,27 +59,51 @@ public class TeaGeneralFragment extends Fragment {
 		super.onCreateView(inflater, container, savedInstanceState);
 		View chatView = inflater.inflate(R.layout.tea_general_list, container,
 				false);
-
+		
+		context = container.getContext();
+		
 		mPullRefreshListView = (PullToRefreshListView) chatView
 				.findViewById(R.id.task_list);
 		mPullRefreshListView.setOnRefreshListener(mOnrefreshListener);
 		mListView = mPullRefreshListView.getRefreshableView();
 		mPullRefreshListView.setUpRefreshEnabled(true);
 
-		ListView lv = mPullRefreshListView.getRefreshableView();
+		lv = mPullRefreshListView.getRefreshableView();
 		replyItem.clear();
 		teaGeneral.clear();
-		TeaGeneral tg = new TeaGeneral();
-		tg.tea_general_title = "茶叶的命名";
-		teaGeneral.add(tg);
+		
+		NetConnect task = new NetConnect(Config.SERVICE_URL+"mobile/teageneral/getlist",new SuccessCallBack() {
+			@Override
+			public void onSuccess(String result) {
+				Gson gson = new Gson();
+				teaGeneral = gson.fromJson(result,  
+		                new TypeToken<List<TeaGeneral>>() {  
+		                }.getType()); 
+				iniList(teaGeneral);
+			}
+		},new FailCallBack() {
+			@Override
+			public void onFail() {
+				
+			}
+		},"");
+		
+//		TeaGeneral tg = new TeaGeneral();
+//		tg.tea_general_title = "茶叶的命名";
+//		teaGeneral.add(tg);
 		// replyItem = new ArrayList<HashMap<String, Object>>();
+		
+		return chatView;
+	}
+
+	void iniList(final List<TeaGeneral> tg){
 		for (int i = 0; i < teaGeneral.size(); i++) {
 			map = new HashMap<String, Object>();
-			map.put("searchContent", teaGeneral.get(i).tea_general_info);
+			map.put("searchContent", teaGeneral.get(i).tea_general_title);
 			replyItem.add(map);
 		}
 
-		sla = new SimpleAdapter(container.getContext(), replyItem,
+		sla = new SimpleAdapter(context, replyItem,
 				R.layout.listitem_tea_general,
 				new String[] { "searchContent" },
 				new int[] { R.id.tea_general_content });
@@ -92,15 +122,14 @@ public class TeaGeneralFragment extends Fragment {
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {// 重写选项被单击事件的处理方法
 				TeaGeneral c = teaGeneral.get(arg2 - 1);
-				Intent intent = new Intent(container.getContext(),
+				Intent intent = new Intent(context,
 						GeneralSecondActivity.class);
 				intent.putExtra(GeneralSecondActivity.TEAGENERAL, c);
 				startActivity(intent);
 			}
 		});
-		return chatView;
 	}
-
+	
 	OnRefreshListener mOnrefreshListener = new OnRefreshListener() {
 		public void onRefresh() {
 			switch (mPullRefreshListView.getRefreshType()) {
