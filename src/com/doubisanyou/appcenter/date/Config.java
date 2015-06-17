@@ -22,7 +22,7 @@ public class Config {
 
 	public static String PROJECT_ID = "com.doubisanyou.tea";
 
-	public static String SERVICE_URL = "http://192.168.1.122:8080/chazhongservice/";
+	public static String SERVICE_URL = "http://192.168.0.111:8080/chazhongservice/";
 
 	public static final String AppCenters_Path = "doubisanyou"; // 应用中心路径
 
@@ -30,7 +30,7 @@ public class Config {
 
 	public static final Map<String, Bitmap> BITMAPCATCH = new HashMap<String, Bitmap>();
 
-	public static final String XMPP_HOST = "192.168.1.142";
+	public static final String XMPP_HOST = "192.168.0.111";
 
 	public static final int XMPP_PORT = 5222;
 
@@ -52,5 +52,6 @@ public class Config {
 
 	// 用于设置中的图片处理
 	public static Handler handler;
-
+	//注册时临时存放图片地址
+	public static String TEMPAVATAR="";
 }

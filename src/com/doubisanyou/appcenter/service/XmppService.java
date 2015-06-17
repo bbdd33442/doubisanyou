@@ -90,7 +90,7 @@ public class XmppService extends Service {
 	// ArrayList<ChatInfoEntity>();
 	private Map<String, String> chatInfoMap = new HashMap<String, String>();
 	private static SharedPreferences userInfoSp;
-
+	
 	@Override
 	public IBinder onBind(Intent intent) {
 		Log.i(TAG, "is binded");

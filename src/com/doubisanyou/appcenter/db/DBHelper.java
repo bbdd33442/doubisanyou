@@ -19,7 +19,7 @@ public class DBHelper extends SQLiteOpenHelper{
 		db.execSQL("create table TEA_SAY (_id INTEGER PRIMARY KEY AUTOINCREMENT," +
 				   "tea_say_id VARCHAR,tea_say_publisher_id VARCHAR,tea_say_publisher_name VARCHAR," +
 				   "tea_say_content VARCHAR,tea_say_publish_date VARCHAR,tea_say_time VARCHAR," +
-				   "tea_say_publisher_avatar VARCHAR,tea_say_images VARCHAR)");
+				   "tea_say_publisher_avatar VARCHAR,tea_say_praise_num VARCHAR,tea_say_images VARCHAR)");
 	}
 
 	@Override

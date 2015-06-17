@@ -21,6 +21,7 @@ public class TeaSay implements Serializable{
 	public String tea_say_publish_date;
 	public String tea_say_time;
 	public String tea_say_publisher_avatar;
+	public String tea_say_praise_num;
 	public List<String> tea_say_images = new ArrayList<String>();
 		
 }

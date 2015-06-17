@@ -1,11 +1,18 @@
 package com.doubisanyou.appcenter.activity;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
+import org.jivesoftware.smackx.vcardtemp.packet.VCard;
+
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -15,15 +22,22 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.doubisanyou.appcenter.R;
+import com.doubisanyou.appcenter.bean.EBEvents;
+import com.doubisanyou.appcenter.bean.EBEvents.RequestSaveVCardEvent;
+import com.doubisanyou.appcenter.bean.EBEvents.RequestVCardEvent;
+import com.doubisanyou.appcenter.bean.EBEvents.ResponseVCardEvent;
 import com.doubisanyou.appcenter.bean.User;
 import com.doubisanyou.appcenter.date.Config;
 import com.doubisanyou.baseproject.base.BaseActivity;
+import com.doubisanyou.baseproject.utilCommon.FileUtil;
 import com.doubisanyou.baseproject.utilCommon.StringAndDataUtil;
 import com.doubisanyou.baseproject.utilsResource.ImageLoader;
 import com.doubisanyou.baseproject.utilsResource.ImageLoader.Type;
 
+import de.greenrobot.event.EventBus;
+
 public class ManagerActivity extends BaseActivity implements OnClickListener {
-	
+	private static final String TAG = ManagerActivity.class.getSimpleName();
 	private Button clearnCatcheBtn;
 	private Button logOutBtn;
 	private TextView title;
@@ -45,6 +59,20 @@ public class ManagerActivity extends BaseActivity implements OnClickListener {
 			Intent i = new Intent(this,LoginActivity.class);
 			startActivity(i);
 		}
+	}
+	
+	@Override
+	protected void onStart() {
+		Log.i(TAG, "start");
+		super.onStart();
+		EventBus.getDefault().register(this);
+	}
+
+	@Override
+	protected void onStop() {
+		Log.i(TAG, "stop");
+		EventBus.getDefault().unregister(this);
+		super.onStop();
 	}
 	
 	void iniView(){
@@ -71,11 +99,34 @@ public class ManagerActivity extends BaseActivity implements OnClickListener {
 		super.onResume();
 		dateToView();
 	}
-	
+
 	void dateToView(){
 		if(!StringAndDataUtil.isNullOrEmpty(Config.user.user_avartars)){
-			ImageLoader.getInstance(3,Type.LIFO).loadImage(Config.user.user_avartars,userAvatars);
+			VCard vcard = new VCard();
+			byte[] b = null;
+			
+				try {
+					b = FileUtil.readFile(Config.user.user_avartars);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				ImageLoader.getInstance(3,Type.LIFO).loadImage(Config.user.user_avartars,userAvatars);
+			
+			if(b!=null){
+				vcard.setAvatar(b);
+				RequestSaveVCardEvent requestSaveVCardEvent = EBEvents.instanceRequestSaveVCardEvent();
+				requestSaveVCardEvent.setvCard(vcard);
+				EventBus.getDefault().post(requestSaveVCardEvent);
+			}
+		}else{
+			RequestVCardEvent requestVCardEvent = EBEvents.instanceRequestVCardEvent();
+			requestVCardEvent.setUsername(Config.user.user_id);
+			EventBus.getDefault().post(requestVCardEvent);
 		}
+		
+			/*ImageLoader.getInstance(3,Type.LIFO).loadImage(Config.user.user_avartars,userAvatars);*/
+		
 		String nickNameText = Config.user.user_nick_name;
 		if(!StringAndDataUtil.isNullOrEmpty(nickNameText)){
 			nickName.setText(nickNameText);
@@ -98,8 +149,25 @@ public class ManagerActivity extends BaseActivity implements OnClickListener {
 			switch (msg.what) {
 			case 1:
 				selectedImage = (ArrayList<String>) msg.getData().get(TeaSayImageSelectedViewActivity.SELECTED_IMAGE_PATH);
-				Config.user.user_avartars =	selectedImage.get(0);
+			
+				Config.user.user_avartars =selectedImage.get(0);
+				
 				ImageLoader.getInstance(3,Type.LIFO).loadImage(selectedImage.get(0),userAvatars);
+				VCard vcard = new VCard();
+				byte[] b = null;
+			
+				try {
+					b = FileUtil.readFile(Config.user.user_avartars);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			
+					vcard.setAvatar(b);
+					RequestSaveVCardEvent requestSaveVCardEvent = EBEvents.instanceRequestSaveVCardEvent();
+					requestSaveVCardEvent.setvCard(vcard);
+					EventBus.getDefault().post(requestSaveVCardEvent);
+				
 				break;
 			case 2:
 				String nickNameText = Config.user.user_nick_name;
@@ -164,5 +232,22 @@ public class ManagerActivity extends BaseActivity implements OnClickListener {
 		
 	}
 	
+/*	public void onEventMainThread(ResponseVCardEvent responseVCardEvent){
+		VCard vcard= responseVCardEvent.getvCard();
+		byte[] data = vcard.getAvatar();
+		Bitmap b = BitmapFactory.decodeByteArray(data, 0, data.length);
+		userAvatars.setImageBitmap(b);
+	}*/
+	
+	public void onEventMainThread(ResponseVCardEvent responseVCardEvent){
+		VCard vcard= responseVCardEvent.getvCard();
+		if(vcard!=null){
+			byte[] data = vcard.getAvatar();
+			if(data!=null&&data.length>0){
+				Bitmap b = BitmapFactory.decodeByteArray(data, 0, data.length);
+				userAvatars.setImageBitmap(b);
+			}
+		}
+	}
 	
 }

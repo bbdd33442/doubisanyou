@@ -30,11 +30,11 @@ public class TeaSayDBManager {
 			images= StringAndDataUtil.List2String(s);
 		}
 		db.beginTransaction();
-		db.execSQL("insert into TEA_SAY values(null,?,?,?,?,?,?,?,?)",
+		db.execSQL("insert into TEA_SAY values(null,?,?,?,?,?,?,?,?,?)",
 				new Object[] { ts.tea_say_id, ts.tea_say_publisher_id,
 						ts.tea_say_publisher_name, ts.tea_say_content,
 						ts.tea_say_publish_date, ts.tea_say_time,
-						ts.tea_say_publisher_avatar, images });
+						ts.tea_say_publisher_avatar,'0',images });
 		db.setTransactionSuccessful();
 		db.endTransaction();
 	}

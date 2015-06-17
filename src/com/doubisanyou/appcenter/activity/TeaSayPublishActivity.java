@@ -1,6 +1,7 @@
 package com.doubisanyou.appcenter.activity;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
@@ -18,9 +19,11 @@ import android.widget.TextView;
 import com.doubisanyou.appcenter.R;
 import com.doubisanyou.appcenter.adapter.TeaSayPublishImageGridAdapter;
 import com.doubisanyou.appcenter.bean.TeaSay;
+import com.doubisanyou.appcenter.date.Config;
 import com.doubisanyou.appcenter.db.TeaSayDBManager;
 import com.doubisanyou.baseproject.base.BaseActivity;
 import com.doubisanyou.baseproject.utilCommon.DateUtil;
+import com.doubisanyou.baseproject.utilCommon.StringAndDataUtil;
 
 public class TeaSayPublishActivity extends BaseActivity implements OnClickListener,OnItemClickListener{
 	
@@ -84,14 +87,16 @@ public class TeaSayPublishActivity extends BaseActivity implements OnClickListen
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.btn_right_btn:
-			//进行网络通讯，返回一个ID
-			ts.tea_say_id="1121";
-			ts.tea_say_publisher_id="1234";
-			ts.tea_say_publisher_name="中南大学";
+			ts.tea_say_id=UUID.randomUUID().toString();
+			ts.tea_say_publisher_id=Config.user.user_id;
+			ts.tea_say_publisher_avatar = Config.user.user_avartars;
+			ts.tea_say_publisher_name=Config.user.user_nick_name;
 			ts.tea_say_time=String.valueOf(System.currentTimeMillis());
 			ts.tea_say_publish_date=DateUtil.getCurDate();
 			ts.tea_say_content=teaSayContent.getText().toString();
-			ts.tea_say_publisher_avatar="";
+			if(!StringAndDataUtil.isNullOrEmpty(Config.user.user_avartars)){
+				ts.tea_say_publisher_avatar=Config.user.user_avartars;				
+			}
 			if(ts.tea_say_images.contains(String.valueOf(R.drawable.tea_say_publish_add_image))){
 				ts.tea_say_images.remove(String.valueOf(R.drawable.tea_say_publish_add_image));
 			}

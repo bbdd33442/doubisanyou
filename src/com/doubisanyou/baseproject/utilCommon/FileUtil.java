@@ -1,16 +1,18 @@
 
 package com.doubisanyou.baseproject.utilCommon;
 
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
-
-import com.doubisanyou.appcenter.date.Config;
 
 import android.content.Context;
 import android.os.Environment;
 import android.os.StatFs;
+
+import com.doubisanyou.appcenter.date.Config;
 
 /**
  * @Title：文件工具类
@@ -182,6 +184,32 @@ public class FileUtil {
 			content.mkdirs();
 		}
 		return   content.getAbsolutePath();
+
+	}
+	
+	/**
+	 * 读取源文件内容
+	 * @param filename String 文件路径
+	 * @throws IOException
+	 * @return byte[] 文件内容
+	*/
+	public static byte[] readFile(String filename) throws IOException {
+
+		 File file =new File(filename);
+		 if(filename==null || filename.equals(""))
+		{
+		 throw new NullPointerException("无效的文件路径");
+		}
+		 long len = file.length();
+		 byte[] bytes = new byte[(int)len];
+	
+		 BufferedInputStream bufferedInputStream=new BufferedInputStream(new FileInputStream(file));
+		 int r = bufferedInputStream.read( bytes );
+		 if (r != len)
+		 throw new IOException("读取文件不正确");
+		bufferedInputStream.close();
+
+	 return bytes;
 
 	}
 }

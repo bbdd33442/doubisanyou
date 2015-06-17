@@ -126,6 +126,7 @@ public class TeaSayReplyActivity extends BaseActivity implements
 		tea_say_time.setText(TimeUtil.getDescriptionTimeFromTimestamp(Long
 				.parseLong(ts.tea_say_time)));
 		tea_say_publisher_avatar = (ImageView) findViewById(R.id.tea_say_publisher_avatar);
+		ImageLoader.getInstance(3,Type.LIFO).loadImage(ts.tea_say_publisher_avatar, tea_say_publisher_avatar);
 		tea_say_image = (ImageView) findViewById(R.id.tea_say_image);
 		tea_say_praise_img = (ImageView) findViewById(R.id.tea_say_praise_img);
 		final BadgeView badge = new BadgeView(getApplicationContext());

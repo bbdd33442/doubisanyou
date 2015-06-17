@@ -20,11 +20,16 @@ import android.widget.TextView;
 
 import com.doubisanyou.appcenter.R;
 import com.doubisanyou.appcenter.activity.TeaSayReplyActivity;
+import com.doubisanyou.appcenter.bean.EBEvents;
 import com.doubisanyou.appcenter.bean.TeaSay;
+import com.doubisanyou.appcenter.bean.EBEvents.RequestVCardEvent;
+import com.doubisanyou.appcenter.date.Config;
 import com.doubisanyou.appcenter.widget.BadgeView;
 import com.doubisanyou.appcenter.widget.ViewHolder;
 import com.doubisanyou.baseproject.utilCommon.StringAndDataUtil;
 import com.doubisanyou.baseproject.utilCommon.TimeUtil;
+
+import de.greenrobot.event.EventBus;
 
 public class TeaSayAdapter extends ActivityBaseAdapter<TeaSay> {
     
@@ -42,7 +47,7 @@ public class TeaSayAdapter extends ActivityBaseAdapter<TeaSay> {
 	    if (convertView == null) {
 	        convertView = layoutInflater.inflate(R.layout.listitem_tea_say, parent, false);
 	    }
-	  
+		
 	     final TeaSay ts = (TeaSay) getItem(position);
 	     TextView tea_say_publisher_name = ViewHolder.get(convertView, R.id.tea_say_publisher_name);
 	     tea_say_publisher_name.setText(ts.tea_say_publisher_name);
@@ -53,13 +58,20 @@ public class TeaSayAdapter extends ActivityBaseAdapter<TeaSay> {
 		 TextView tea_say_publish_date = ViewHolder.get(convertView, R.id.tea_say_publish_date);
 		 tea_say_publish_date.setText(ts.tea_say_publish_date);
 		 TextView tea_say_time = ViewHolder.get(convertView, R.id.tea_say_time);
+		
 		 tea_say_time.setText(TimeUtil.getDescriptionTimeFromTimestamp(Long.parseLong(ts.tea_say_time)));
-		 ImageView teasay_publisher_avatar = ViewHolder.get(convertView, R.id.tea_say_publisher_avatar);
-		 teasay_publisher_avatar.setImageResource(R.drawable.csu);
+		 /*ImageView teasay_publisher_avatar = ViewHolder.get(convertView, R.id.tea_say_publisher_avatar);*/
+		 if(!StringAndDataUtil.isNullOrEmpty(ts.tea_say_publisher_avatar)){
+			 ViewHolder.setImageByUrl(convertView, R.id.tea_say_publisher_avatar, ts.tea_say_publisher_avatar); 
+		 }
+		 /* teasay_publisher_avatar.setImageResource(R.drawable.csu);*/
 		 ImageView tea_say_image = ViewHolder.get(convertView, R.id.tea_say_image);
 		 final ImageView praise_img = ViewHolder.get(convertView, R.id.tea_say_praise_img);
 		 GridView tea_say_grid =  ViewHolder.get(convertView, R.id.tea_say_grid);
 		
+		 RequestVCardEvent requestVCardEvent = EBEvents.instanceRequestVCardEvent();
+		 requestVCardEvent.setUsername(ts.tea_say_publisher_id);
+		 EventBus.getDefault().post(requestVCardEvent);
 		 if(ts.tea_say_images.size()==1){
 			 if(!StringAndDataUtil.isNullOrEmpty(ts.tea_say_images.get(0))){
 				 tea_say_image.setVisibility(View.VISIBLE);
@@ -125,9 +137,8 @@ public class TeaSayAdapter extends ActivityBaseAdapter<TeaSay> {
 		 
 		 final BadgeView badge = new BadgeView(mContext);
 		 badge.setTargetView(praise_img);
-		 badge.setText("8");
+		 badge.setText("0");
 		 praise_img.setBackgroundResource(R.drawable.dispraise_icon);
-		 
 		 praise_img.setOnClickListener(new OnClickListener() {
 				 @Override
 				public void onClick(View v) {

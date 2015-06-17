@@ -16,12 +16,14 @@ import android.widget.TextView;
 import com.doubisanyou.appcenter.R;
 import com.doubisanyou.appcenter.adapter.TeaSayAdapter;
 import com.doubisanyou.appcenter.bean.TeaSay;
+import com.doubisanyou.appcenter.date.Config;
 import com.doubisanyou.appcenter.db.TeaSayDBManager;
 import com.doubisanyou.appcenter.widget.LoadingDialog;
 import com.doubisanyou.appcenter.widget.PopMenu;
 import com.doubisanyou.appcenter.widget.PullToRefreshBase.OnRefreshListener;
 import com.doubisanyou.appcenter.widget.PullToRefreshListView;
 import com.doubisanyou.baseproject.base.BaseActivity;
+import com.doubisanyou.baseproject.utilCommon.StringAndDataUtil;
 /**
  * 茶说模块
  * @author xy 2015/04/22
@@ -70,16 +72,12 @@ public class TeaSayActivity extends BaseActivity implements OnClickListener{
 	    titleBar.setText("茶说");
 		backBtn = (Button) findViewById(R.id.btn_left);
 		backBtn.setVisibility(View.GONE);
-	    if(getIntent().getStringExtra(USERID)!=null){
+		rightBtn = (ImageButton)findViewById(R.id.btn_right);
+		if(getIntent().getStringExtra(USERID)!=null){
 	    	backBtn.setVisibility(View.VISIBLE);
 	    	backBtn.setOnClickListener(this);
 	    }
-	    	
-	    	rightBtn = (ImageButton)findViewById(R.id.btn_right);
-			rightBtn.setVisibility(View.VISIBLE);
-			rightBtn.setOnClickListener(this);
-	    
-		
+	  
 	}
 	Handler handler= new Handler(){
 
@@ -96,6 +94,10 @@ public class TeaSayActivity extends BaseActivity implements OnClickListener{
 	@Override
 	protected void onResume() {
 		super.onResume();
+		  if(!StringAndDataUtil.isNullOrEmpty(Config.user.user_token)){
+		    	rightBtn.setVisibility(View.VISIBLE);
+				rightBtn.setOnClickListener(this);	
+		    }
 		tsa.clearListCatch(tsdb.getTeaSayList());
 		tsa.notifyDataSetChanged();
 	}

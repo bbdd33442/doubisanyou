@@ -1,8 +1,10 @@
 package com.doubisanyou.appcenter.activity;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import org.jivesoftware.smack.util.StringUtils;
+import org.jivesoftware.smackx.vcardtemp.packet.VCard;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -23,13 +25,16 @@ import android.widget.Toast;
 import com.doubisanyou.appcenter.R;
 import com.doubisanyou.appcenter.bean.EBEvents;
 import com.doubisanyou.appcenter.bean.EBEvents.RequestRegisterEvent;
+import com.doubisanyou.appcenter.bean.EBEvents.RequestSaveVCardEvent;
 import com.doubisanyou.appcenter.bean.EBEvents.ResponseRegisterEvent;
+import com.doubisanyou.appcenter.bean.EBEvents.ResponseSaveVCardEvent;
 import com.doubisanyou.appcenter.bean.User;
 import com.doubisanyou.appcenter.date.Config;
 import com.doubisanyou.baseproject.base.BaseActivity;
 import com.doubisanyou.baseproject.network.NetConnect;
 import com.doubisanyou.baseproject.network.NetConnect.FailCallBack;
 import com.doubisanyou.baseproject.network.NetConnect.SuccessCallBack;
+import com.doubisanyou.baseproject.utilCommon.FileUtil;
 import com.doubisanyou.baseproject.utilCommon.JsonUtil;
 import com.doubisanyou.baseproject.utilsResource.ImageLoader;
 import com.doubisanyou.baseproject.utilsResource.ImageLoader.Type;
@@ -81,7 +86,7 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 			
 			ImageLoader.getInstance(3, Type.LIFO).loadImage(
 					selectedImage.get(0), userAvatars);
-			user.user_avartars = selectedImage.get(0);
+			user.user_avartars = selectedImage.get(0);	
 		}
 		registePhoneNumber = (EditText) findViewById(R.id.registe_phone_number);
 		registeCheckCode = (EditText) findViewById(R.id.registe_check_code);
@@ -118,6 +123,7 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 	}
 
 
+	
 	Handler handler = new Handler() {
 
 		public void handleMessage(Message msg) {
@@ -192,7 +198,7 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 			reqRegisterEvent.setUsername(username);
 			reqRegisterEvent.setPassword(password);
 			EventBus.getDefault().post(reqRegisterEvent);
-			//finish();
+			
 			break;
 		case R.id.registe_user_avartar:
 			Intent i = new Intent(this,
@@ -223,28 +229,26 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 		EventBus.getDefault().unregister(this);
 		super.onStop();
 	}
-
+	void registe(){
+	
+	}
 	public void onEventMainThread(ResponseRegisterEvent respRegisterEvent) {
 		int respCode = respRegisterEvent.getRespCode();
 		String errorText = null;
 		switch (respCode) {
 		case 0:
-			errorText = "连接错误";
+			errorText = "用户名重复";
 			break;
 		case 1:
-			showToast("ok");
+			if(selectedImage.size()>0){
+				user.user_avartars=selectedImage.get(0);
+			}
 			user.user_id = registePhoneNumber.getText().toString();
 			user.user_nick_name=registeNickName.getText().toString();
 			user.user_integral="0";
 			user.user_count_num="0";
-			
-			if(selectedImage.size()>0){
-				user.user_avartars=selectedImage.get(0);
-			}
 			String parameter = JsonUtil.ObjectToJson(user);
-			
 			pDlg.show();
-			
 			NetConnect task = new NetConnect(Config.SERVICE_URL+"/mobile/user/registe",new SuccessCallBack() {
 				@Override
 				public void onSuccess(String result) {
@@ -260,7 +264,7 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 					pDlg.dismiss();
 				}
 			}, parameter);
-			finish();
+			
 			break;
 		default:
 			errorText = "未知错误";
@@ -268,4 +272,5 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 		}
 		Toast.makeText(this, errorText, Toast.LENGTH_LONG).show();
 	}
+	
 }

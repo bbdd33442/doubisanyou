@@ -31,7 +31,7 @@ public class BoxMainActivity extends TabActivity {
 	private int[] tab_unsel_png = new int[] {
 			R.drawable.tea_knowledge_unselected, R.drawable.chat_unselected,
 			R.drawable.tea_say_unselected, R.drawable.set_unselected };
-	private static final boolean DEVELOPER_MODE = true;
+	private static final boolean DEVELOPER_MODE = false;
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
