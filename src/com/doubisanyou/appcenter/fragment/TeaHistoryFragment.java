@@ -6,10 +6,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,13 +21,22 @@ import android.widget.TextView;
 
 import com.doubisanyou.appcenter.R;
 import com.doubisanyou.appcenter.activity.HistorySecondActivity;
+import com.doubisanyou.appcenter.activity.SearchSecondActivity;
+import com.doubisanyou.appcenter.activity.SearchThirdActivity;
 import com.doubisanyou.appcenter.adapter.SimpleAdapter;
 import com.doubisanyou.appcenter.bean.TeaHistory;
+import com.doubisanyou.appcenter.bean.TeaKnowledge;
+import com.doubisanyou.appcenter.date.Config;
 import com.doubisanyou.appcenter.widget.PullToRefreshBase.OnRefreshListener;
 import com.doubisanyou.appcenter.widget.PullToRefreshListView;
+import com.doubisanyou.baseproject.network.NetConnect;
+import com.doubisanyou.baseproject.network.NetConnect.FailCallBack;
+import com.doubisanyou.baseproject.network.NetConnect.SuccessCallBack;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 public class TeaHistoryFragment extends Fragment {
-
+	Context context;
 	HashMap<String, Object> map;
 	ArrayList<HashMap<String, Object>> replyItem = new ArrayList<HashMap<String, Object>>();
 	private PullToRefreshListView mPullRefreshListView;
@@ -41,35 +50,62 @@ public class TeaHistoryFragment extends Fragment {
 
 	private int pagesize = 10;
 	private int pageNumber = 1;
-
+	ListView lv;
 	private TextView title;
+	private TextView info;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater,
-			final ViewGroup container, Bundle savedInstanceState) {
+			 ViewGroup container, Bundle savedInstanceState) {
 		super.onCreateView(inflater, container, savedInstanceState);
 		View chatView = inflater.inflate(R.layout.tea_history_list, container,
 				false);
-
+		context = container.getContext();
 		mPullRefreshListView = (PullToRefreshListView) chatView
 				.findViewById(R.id.task_list);
 		mPullRefreshListView.setOnRefreshListener(mOnrefreshListener);
 		mListView = mPullRefreshListView.getRefreshableView();
 		mPullRefreshListView.setUpRefreshEnabled(true);
 
-		ListView lv = mPullRefreshListView.getRefreshableView();
+		lv = mPullRefreshListView.getRefreshableView();
 		teaHistory.clear();
 		replyItem.clear();
-		TeaHistory tk = new TeaHistory();
-		tk.tea_history_title = "茶的起源";
-		teaHistory.add(tk);
+		
+		
+		NetConnect task = new NetConnect(Config.SERVICE_URL+"mobile/teahistory/getlist",new SuccessCallBack() {
+			@Override
+			public void onSuccess(String result) {
+				Gson gson = new Gson();
+				teaHistory = gson.fromJson(result,  
+		                new TypeToken<List<TeaHistory>>() {  
+		                }.getType()); 
+				iniList(teaHistory);
+			}
+		},new FailCallBack() {
+			@Override
+			public void onFail() {
+				
+			}
+		},"");
+
+	    
+//		TeaHistory tk = new TeaHistory();
+//		tk.tea_history_title = "茶的起源";
+//		teaHistory.add(tk);
+		
+		
 		//replyItem = new ArrayList<HashMap<String, Object>>();
-		for (int i = 0; i < teaHistory.size(); i++) {
+	
+		return chatView;
+	}
+	
+	void iniList(final List<TeaHistory> teahs){
+		for (int i = 0; i < teahs.size(); i++) {
 			map = new HashMap<String, Object>();
-			map.put("searchContent", teaHistory.get(i).tea_history_info);
+			map.put("searchContent", teaHistory.get(i).tea_history_title);
 			replyItem.add(map);
 		}
-		sla = new SimpleAdapter(container.getContext(), replyItem,
+		sla = new SimpleAdapter(context, replyItem,
 				R.layout.listitem_tea_history,
 				new String[] { "searchContent" },
 				new int[] { R.id.tea_history_content });
@@ -87,15 +123,15 @@ public class TeaHistoryFragment extends Fragment {
 		lv.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {// 重写选项被单击事件的处理方法
-				TeaHistory c = teaHistory.get(arg2-1);
-				Intent intent = new Intent(container.getContext(),
+				TeaHistory c = teahs.get(arg2-1);
+				Intent intent = new Intent(context,
 						HistorySecondActivity.class);
 				intent.putExtra(HistorySecondActivity.TEAHISTORY, c);
 				startActivity(intent);
 			}
 		});
-		return chatView;
 	}
+
 
 	OnRefreshListener mOnrefreshListener = new OnRefreshListener() {
 		public void onRefresh() {

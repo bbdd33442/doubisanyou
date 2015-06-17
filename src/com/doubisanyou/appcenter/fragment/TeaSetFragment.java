@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -19,15 +20,24 @@ import android.widget.TextView;
 
 import com.doubisanyou.appcenter.R;
 import com.doubisanyou.appcenter.activity.SetSecondActivity;
+import com.doubisanyou.appcenter.bean.TeaGeneral;
 import com.doubisanyou.appcenter.bean.TeaSet;
+import com.doubisanyou.appcenter.date.Config;
 import com.doubisanyou.appcenter.widget.PullToRefreshBase.OnRefreshListener;
 import com.doubisanyou.appcenter.widget.PullToRefreshListView;
+import com.doubisanyou.baseproject.network.NetConnect;
+import com.doubisanyou.baseproject.network.NetConnect.FailCallBack;
+import com.doubisanyou.baseproject.network.NetConnect.SuccessCallBack;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 public class TeaSetFragment extends Fragment {
+	Context context;
 	HashMap<String, Object> map;
 	ArrayList<HashMap<String, Object>> replyItem = new ArrayList<HashMap<String, Object>>();
 	private PullToRefreshListView mPullRefreshListView;
 	SimpleAdapter sla;
+	ListView lv;
 	private ListView mListView;
 	List<TeaSet> teaSet = new ArrayList<TeaSet>();;
 	private int mLoadingTpye = LOAGDING_LOADING_MORE;
@@ -46,31 +56,52 @@ public class TeaSetFragment extends Fragment {
 		super.onCreateView(inflater, container, savedInstanceState);
 		View chatView = inflater.inflate(R.layout.tea_set_list, container,
 				false);
-
+		context = container.getContext();
 		mPullRefreshListView = (PullToRefreshListView) chatView
 				.findViewById(R.id.task_list);
 		mPullRefreshListView.setOnRefreshListener(mOnrefreshListener);
 		mListView = mPullRefreshListView.getRefreshableView();
 		mPullRefreshListView.setUpRefreshEnabled(true);
 
-		ListView lv = mPullRefreshListView.getRefreshableView();
+		lv = mPullRefreshListView.getRefreshableView();
 		replyItem.clear();
 		teaSet.clear();
-		TeaSet tk = new TeaSet();
-		tk.tea_set_name = "紫砂壶";
-		teaSet.add(tk);
-		//replyItem = new ArrayList<HashMap<String, Object>>();
-		for (int i = 0; i < teaSet.size(); i++) {
+		// TeaSet tk = new TeaSet();
+		// tk.tea_set_name = "紫砂壶";
+		// teaSet.add(tk);
+
+		NetConnect task = new NetConnect(Config.SERVICE_URL
+				+ "mobile/teaset/getlist", new SuccessCallBack() {
+			@Override
+			public void onSuccess(String result) {
+				Gson gson = new Gson();
+				teaSet = gson.fromJson(result, new TypeToken<List<TeaSet>>() {
+				}.getType());
+				iniList(teaSet);
+			}
+		}, new FailCallBack() {
+			@Override
+			public void onFail() {
+
+			}
+		}, "");
+
+		// replyItem = new ArrayList<HashMap<String, Object>>();
+
+		return chatView;
+	}
+
+	void iniList(final List<TeaSet> ts) {
+		for (int i = 0; i < ts.size(); i++) {
 			map = new HashMap<String, Object>();
 			map.put("searchImage", R.drawable.zishahu);
-			map.put("searchContent", teaSet.get(i).tea_set_name);
+			map.put("searchContent", ts.get(i).tea_set_name);
 			replyItem.add(map);
 		}
 
-		sla = new SimpleAdapter(container.getContext(), replyItem,
-				R.layout.listitem_tea_set,
-				new String[] { "searchImage","searchContent" },
-				new int[] { R.id.tea_set_image,R.id.tea_set_content });
+		sla = new SimpleAdapter(context, replyItem, R.layout.listitem_tea_set,
+				new String[] { "searchImage", "searchContent" }, new int[] {
+						R.id.tea_set_image, R.id.tea_set_content });
 
 		lv.setAdapter(sla);
 
@@ -85,14 +116,12 @@ public class TeaSetFragment extends Fragment {
 		lv.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {// 重写选项被单击事件的处理方法
-				TeaSet c = teaSet.get(arg2-1);
-				Intent intent = new Intent(container.getContext(),
-						SetSecondActivity.class);
+				TeaSet c = ts.get(arg2 - 1);
+				Intent intent = new Intent(context, SetSecondActivity.class);
 				intent.putExtra(SetSecondActivity.TEASET, c);
 				startActivity(intent);
 			}
 		});
-		return chatView;
 	}
 
 	OnRefreshListener mOnrefreshListener = new OnRefreshListener() {

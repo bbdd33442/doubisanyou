@@ -164,7 +164,7 @@ public class SimpleAdapter extends android.widget.SimpleAdapter {
      */
     public void setViewImage(ImageView v, String value) {
    /* 	Bitmap bitmap = WebImageBuilder.returnBitMap(value);*/
-    	Bitmap bitmap = BitmapUtil.ReadBitmapById(context, Integer.parseInt(value));
+    	Bitmap bitmap = BitmapUtil.ReadBitmapById(context, R.drawable.green_tea);
     	((ImageView) v).setImageBitmap(bitmap);
     }
     

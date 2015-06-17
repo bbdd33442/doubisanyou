@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.doubisanyou.appcenter.R;
 import com.doubisanyou.appcenter.bean.TeaKnowledge;
+import com.doubisanyou.baseproject.utilCommon.TypeUtil;
 import com.doubisanyou.baseproject.utilsResource.BitmapUtil;
 import com.doubisanyou.baseproject.utilsResource.ImageLoader;
 import com.doubisanyou.baseproject.utilsResource.ImageLoader.Type;
@@ -37,8 +38,8 @@ public class SearchThirdActivity extends Activity {
 		TeaKnowledge tk = (TeaKnowledge) getIntent().getSerializableExtra(
 				TEAKNOWLEDGE);
 		pic = (ImageView) findViewById(R.id.tea_pic);
-		Bitmap bitmap = BitmapUtil.ReadBitmapById(getApplicationContext(), Integer.parseInt(tk.tea_knowledge_pic));
-		pic.setImageBitmap(bitmap);
+		/*Bitmap bitmap = BitmapUtil.ReadBitmapById(getApplicationContext(), Integer.parseInt(tk.tea_knowledge_pic));
+		pic.setImageBitmap(bitmap);*/
 		title = (TextView) this.findViewById(R.id.default_title);
 		title.setText(tk.tea_knowledge_name);
 
@@ -52,7 +53,7 @@ public class SearchThirdActivity extends Activity {
 		productArea.setText(tk.tea_knowledge_area);
 
 		type = (TextView) this.findViewById(R.id.tv04);
-		type.setText(tk.tea_knowledge_type);
+		type.setText(TypeUtil.returnType(Integer.parseInt(tk.tea_knowledge_type)));
 
 		introduce = (TextView) this.findViewById(R.id.bn);
 		introduce.setText(tk.tea_knowledge_introduce);
