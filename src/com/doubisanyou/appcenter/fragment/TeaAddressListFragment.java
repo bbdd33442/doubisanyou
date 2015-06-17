@@ -32,10 +32,11 @@ public class TeaAddressListFragment extends Fragment {
 			.getSimpleName();
 	private ExpandableListView mExpandableListView;
 	private TeaAddressListViewAdapter mTalvAdapter;
-
+	private ArrayList<AddressGroupEntity> addressGroupList;
+	private ArrayList<ArrayList<ContactEntity>> contactList;
 
 	@Override
-	public void onDestroyView() {		
+	public void onDestroyView() {
 		EventBus.getDefault().unregister(this);
 		super.onDestroyView();
 	}
@@ -111,16 +112,22 @@ public class TeaAddressListFragment extends Fragment {
 					}
 
 				});
+		addressGroupList = new ArrayList<AddressGroupEntity>();
+		contactList = new ArrayList<ArrayList<ContactEntity>>();
+		mTalvAdapter = new TeaAddressListViewAdapter(this.getActivity(),
+				addressGroupList, contactList);
+		mExpandableListView.setAdapter(mTalvAdapter);
 		return addressListView;
 	}
 
 	public void onEventMainThread(
 			EBEvents.GetAddressListEvent getAddressListEvent) {
 		// Toast.makeText(this, "text", Toast.LENGTH_SHORT).show();
-		ArrayList<AddressGroupEntity> addressGroupList = getAddressListEvent
-				.getAddressGroupList();
-		ArrayList<ArrayList<ContactEntity>> contactList = getAddressListEvent
-				.getContactList();
+		addressGroupList.clear();
+		contactList.clear();
+		addressGroupList.addAll(getAddressListEvent.getAddressGroupList());
+		contactList.addAll(getAddressListEvent.getContactList());
+		mTalvAdapter.notifyDataSetChanged();
 		/*
 		 * int groupCount = addressGroupList.size(); int contactCount =
 		 * contactList.size(); String[] groupArr = new String[groupCount];
@@ -138,8 +145,5 @@ public class TeaAddressListFragment extends Fragment {
 						+ mExpandableListView.getSelectedItemPosition()
 						+ "\t\tselectedPosition:"
 						+ mExpandableListView.getSelectedPosition());
-		mTalvAdapter = new TeaAddressListViewAdapter(this.getActivity(),
-				addressGroupList, contactList);
-		mExpandableListView.setAdapter(mTalvAdapter);
 	}
 }

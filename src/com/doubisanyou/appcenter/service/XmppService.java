@@ -64,6 +64,7 @@ import com.doubisanyou.appcenter.bean.ChatMsgViewEntity;
 import com.doubisanyou.appcenter.bean.ContactEntity;
 import com.doubisanyou.appcenter.bean.EBEvents;
 import com.doubisanyou.appcenter.bean.EBEvents.RequestLoginEvent;
+import com.doubisanyou.appcenter.bean.EBEvents.RequestLogoutEvent;
 import com.doubisanyou.appcenter.bean.EBEvents.RequestRegisterEvent;
 import com.doubisanyou.appcenter.bean.EBEvents.RequestSaveVCardEvent;
 import com.doubisanyou.appcenter.bean.EBEvents.RequestVCardEvent;
@@ -393,6 +394,14 @@ public class XmppService extends Service {
 		EventBus.getDefault().post(responseSaveVCardEvent);
 	}
 
+	/**
+	 * @Description 注销事件
+	 * @param requestLogoutEvent
+	 */
+	public void onEventBackgroundThread(RequestLogoutEvent requestLogoutEvent) {
+		doLogout();
+	}
+
 	private String getDatetime() {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		return sdf.format(new Date());
@@ -656,11 +665,15 @@ public class XmppService extends Service {
 				ContactEntity le = new ContactEntity();
 				le.setName(e.getName());
 				le.setGxqm(e.getUser());
-				item.add(le);
+				
 				Presence presence = roster.getPresence(e.getUser());
 				if (presence.isAvailable()) {
 					onlineCount++;
 				}
+				le.setOnline(presence.isAvailable());
+				VCard vCard = getUserVCard(e.getName());
+				le.setAvatar(vCard.getAvatar());
+				item.add(le);
 				// 保存通讯录
 				ContactModel cm = new ContactModel();
 				Log.i(TAG, "name:" + e.getName());
@@ -825,6 +838,13 @@ public class XmppService extends Service {
 			editor.commit();
 			initUserData(username);
 		}
+	}
+
+	private void doLogout() {
+		if (conn == null || !conn.isConnected()) {
+			return;
+		} else
+			conn.disconnect();
 	}
 
 	private void loadOfflineMsgs() {
@@ -1064,13 +1084,13 @@ public class XmppService extends Service {
 			respCode = 1;
 		} catch (NoResponseException e) {
 			e.printStackTrace();
-			respCode = 0;
+			respCode = 2;
 		} catch (XMPPErrorException e) {
 			e.printStackTrace();
 			respCode = 0;
 		} catch (NotConnectedException e) {
 			e.printStackTrace();
-			respCode = 0;
+			respCode = 3;
 		}
 		ResponseRegisterEvent respRegisterEvent = EBEvents
 				.instanceResponseRegisterEvent();

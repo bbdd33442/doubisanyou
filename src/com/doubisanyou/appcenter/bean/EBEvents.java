@@ -100,6 +100,11 @@ public class EBEvents {
 		return events.new ResponseSaveVCardEvent();
 	}
 
+	public static RequestLogoutEvent instanceRequestLogoutEvent() {
+		EBEvents events = new EBEvents();
+		return events.new RequestLogoutEvent();
+	}
+
 	/**
 	 * @author Blook
 	 * @Description 获取通信录
@@ -410,6 +415,8 @@ public class EBEvents {
 		public void setRespCode(int respCode) {
 			this.respCode = respCode;
 		}
+	}
 
+	public class RequestLogoutEvent {
 	}
 }

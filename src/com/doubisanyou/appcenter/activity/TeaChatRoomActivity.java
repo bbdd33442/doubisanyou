@@ -115,6 +115,11 @@ public class TeaChatRoomActivity extends Activity implements OnClickListener {
 		super.onStop();
 	}
 
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+	}
+
 	public void initView() {
 		mListView = (ListView) findViewById(R.id.listview);
 		mBtnSend = (Button) findViewById(R.id.btn_send);
