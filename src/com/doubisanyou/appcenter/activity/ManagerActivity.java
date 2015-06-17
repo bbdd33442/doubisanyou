@@ -1,7 +1,6 @@
 package com.doubisanyou.appcenter.activity;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 import org.jivesoftware.smackx.vcardtemp.packet.VCard;

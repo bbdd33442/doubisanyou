@@ -4,10 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.doubisanyou.appcenter.R;
@@ -46,16 +50,31 @@ public class TeaAddressListViewAdapter extends BaseExpandableListAdapter {
 		if (convertView == null) {
 			convertView = inflater.inflate(R.layout.address_list_subitem, null);
 		}
-		/*convertView.setTag(1, groupPos);
-		convertView.setTag(2, childPos);*/
+		/*
+		 * convertView.setTag(1, groupPos); convertView.setTag(2, childPos);
+		 */
 		PosBean pb = new PosBean();
 		pb.groupPos = groupPos;
 		pb.childPos = childPos;
 		convertView.setTag(pb);
 		TextView tv = (TextView) convertView
 				.findViewById(R.id.contact_nickname_tv);
+		
 		ContactEntity ce = (ContactEntity) getChild(groupPos, childPos);
+		byte[] avatar = ce.getAvatar();
+		if (avatar != null) {
+			ImageView iv = (ImageView) convertView
+					.findViewById(R.id.contact_avatar_iv);
+			Bitmap bm = BitmapFactory.decodeByteArray(ce.getAvatar(), 0,
+					ce.getAvatar().length);
+			iv.setImageBitmap(bm);
+		}
 		tv.setText(ce.getName());
+		if (ce.isOnline()) {
+			tv.setTextColor(Color.BLUE);
+		} else {
+			tv.setTextColor(Color.GRAY);
+		}
 		return convertView;
 	}
 

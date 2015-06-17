@@ -73,7 +73,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 			reqloginEvent.setUsername(username);
 			reqloginEvent.setPassword(password);
 			EventBus.getDefault().post(reqloginEvent);
-			// finish();
+//			finish();
 			break;
 		case R.id.btn_register:
 			Intent i = new Intent(this, RegisterActivity.class);
@@ -102,27 +102,32 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 
 	public void onEventMainThread(ResponseLoginEvent respLoginEvent) {
 		int respCode = respLoginEvent.getRespCode();
-		
+
 		String errorText;
 		switch (respCode) {
 		case 0:
 			errorText = "用户名或密码错误";
 			break;
 		case 1:
-			NetConnect task = new NetConnect(Config.SERVICE_URL+"/mobile/user/getuser?id="+username,new SuccessCallBack() {
-				@Override
-				public void onSuccess(String result) {	
-					User u = (User) JsonUtil.JsonToObject(result, User.class);
-					Config.setToken(getApplicationContext(), u.user_token);
-					Config.user = u;
-					finish();
-				}
-			},new FailCallBack() {
-				@Override
-				public void onFail() {
-					showToast("错误");
-				}
-			}, "");
+			NetConnect task = new NetConnect(Config.SERVICE_URL
+					+ "/mobile/user/getuser?id=" + username,
+					new SuccessCallBack() {
+						@Override
+						public void onSuccess(String result) {
+							User u = (User) JsonUtil.JsonToObject(result,
+									User.class);
+							Config.setToken(getApplicationContext(),
+									u.user_token);
+							Config.user = u;
+							finish();
+						}
+					}, new FailCallBack() {
+						@Override
+						public void onFail() {
+							showToast("错误");
+						}
+					}, "");
+//			finish();
 			return;
 		default:
 			errorText = "未知错误";
@@ -130,10 +135,11 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 		}
 		Toast.makeText(this, errorText, Toast.LENGTH_LONG).show();
 	}
-/*	public void onEventMainThread(ResponseVCardEvent responseVCardEvent){
-		responseVCardEvent.getvCard();
-		RequestVCardEvent requestVCardEvent = EBEvents.instanceRequestVCardEvent();
-		requestVCardEvent.setUsername(username);
-		EventBus.getDefault().post(requestVCardEvent);
-	}*/
+	/*
+	 * public void onEventMainThread(ResponseVCardEvent responseVCardEvent){
+	 * responseVCardEvent.getvCard(); RequestVCardEvent requestVCardEvent =
+	 * EBEvents.instanceRequestVCardEvent();
+	 * requestVCardEvent.setUsername(username);
+	 * EventBus.getDefault().post(requestVCardEvent); }
+	 */
 }
